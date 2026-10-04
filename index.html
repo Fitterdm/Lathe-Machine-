@@ -1,8 +1,48 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="gate">
 <head>
 <meta charset="utf-8"/>
+<!-- ===== Online-only gate: page stays hidden unless opened from the live address ===== -->
+<style id="gate-css">
+html.gate body>*:not(#lockscreen):not(noscript){display:none!important}
+#lockscreen{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:#0f172a;-webkit-user-select:none;user-select:none;font-family:'Noto Sans','Noto Sans Devanagari','Segoe UI',Roboto,Arial,sans-serif}
+#lockscreen .lock-card{max-width:420px;text-align:center;color:#e2e8f0;border:1px solid #334155;border-radius:16px;padding:28px 24px;background:#111c33}
+#lockscreen .lock-ico{font-size:40px;line-height:1}
+#lockscreen p{margin:14px 0 0;font-size:17px;line-height:1.55}
+#lockscreen p.mr{color:#cbd5e1}
+</style>
+<script>
+(function(){
+  // The page runs normally ONLY when it is opened over https from this exact host
+  // (and not inside someone else's frame). The check looks at the address, not at
+  // whether the phone is online, so the offline copy served by the service worker
+  // (still at https://fitterdm.github.io/...) keeps working.
+  var ALLOWED_HOST = 'fitterdm.github.io';
+  var ok = false;
+  try {
+    ok = location.protocol === 'https:' &&
+         location.hostname.toLowerCase() === ALLOWED_HOST &&
+         window.top === window.self;
+  } catch (e) { ok = false; }
+
+  if (ok) { document.documentElement.classList.remove('gate'); return; }
+
+  window.__LOCKED = true;
+  function lock(){
+    var b = document.body;
+    while (b.firstChild) b.removeChild(b.firstChild);
+    var d = document.createElement('div');
+    d.id = 'lockscreen';
+    d.innerHTML = '<div class="lock-card"><div class="lock-ico">\uD83D\uDD12</div>' +
+      '<p lang="en">This page can only be viewed online. Please scan the QR code to open it.</p><p class="mr" lang="mr">हे पृष्ठ फक्त ऑनलाइन पाहता येते. कृपया ते उघडण्यासाठी QR कोड स्कॅन करा.</p></div>';
+    b.appendChild(d);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lock);
+  else lock();
+})();
+</script>
+
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
 <meta content="#0f766e" name="theme-color"/>
 <meta content="ITI Fitter Trade QR Smart Learning - Center Lathe Machine Tiger Super Vigo" name="description"/>
@@ -318,23 +358,31 @@ body{background:linear-gradient(180deg,#ecfeff 0,#f8fafc 260px,#f8fafc 100%);col
 .mcq-feedback.wrong{color:#b91c1c;}
 
 </style>
-<!-- PWA: full-screen, offline -->
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Center Lathe">
-<style>
-/* ===== PWA: protection + full screen button ===== */
-input,textarea{-webkit-user-select:text!important;user-select:text!important;}
-html,body{-webkit-tap-highlight-color:transparent;}
-@media print{html,body{display:none!important}}
-.pwa-fab{position:fixed;left:14px;bottom:16px;z-index:1200;display:flex;flex-direction:column;gap:10px}
-.pwa-btn{border:0;border-radius:999px;padding:11px 16px;font:700 13px 'Noto Sans',Arial,sans-serif;color:#fff;background:#0f766e;box-shadow:0 8px 20px rgba(15,118,110,.35);cursor:pointer}
+
+<style id="protect-css">
+/* ===== Copy protection (the "Find a topic" box and language list stay usable) ===== */
+html,body,body *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select{-webkit-user-select:text!important;user-select:text!important}
+img{-webkit-user-drag:none;user-drag:none}
+
+/* ===== Printing blocked: print / "Save as PDF" produce a notice only ===== */
+@media print{
+  html{background:#fff!important}
+  body{display:none!important}
+  html::before{content:"Printing is disabled. / छपाई बंद आहे.";display:block;padding:40px;font:16px/1.5 sans-serif;color:#111}
+}
+
+/* ===== Floating full-screen button ===== */
+.fs-btn{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:1100;display:none;align-items:center;gap:7px;border:0;border-radius:999px;padding:10px 15px 10px 12px;background:#0f766e;color:#fff;font:700 13px/1 'Noto Sans','Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 8px 20px rgba(15,118,110,.3);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.fs-btn.show{display:inline-flex}
+.fs-btn:active{transform:scale(.97)}
+.fs-btn:focus-visible{outline:3px solid #fbbf24;outline-offset:2px}
+.fs-btn svg{width:16px;height:16px;flex:none}
+@media print{.fs-btn{display:none!important}}
 </style>
 </head>
 <body>
+<noscript><div id="lockscreen"><div class="lock-card"><div class="lock-ico">&#128274;</div><p lang="en">Please turn on JavaScript to view this page.</p><p class="mr" lang="mr">हे पृष्ठ पाहण्यासाठी JavaScript चालू करा.</p></div></div></noscript>
 <div class="wrap">
 <header class="hero">
 <div class="icon-drill">🛠️</div>
@@ -1538,63 +1586,130 @@ html,body{-webkit-tap-highlight-color:transparent;}
 </footer>
 </div>
 <script>
-/* ===== Content protection + full screen + install app + offline ===== */
-(function(){
- 'use strict';
- var isEditable=function(t){return t&&t.closest&&t.closest('input,textarea,select,[contenteditable="true"]')};
- var isStandalone=function(){return window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||window.navigator.standalone===true};
+  // ===== Content protection + full-screen button + offline registration =====
+  (function(){
+    if (window.__LOCKED) return;          // locked pages show nothing, so nothing to set up
 
- /* offline */
- if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+    var WATERMARK_TEXT = "Dinesh@Fitter";
 
- /* watermark */
- var WM='Dinesh@Fitter',wm=document.createElement('div');wm.className='protect-watermark';wm.setAttribute('aria-hidden','true');document.body.appendChild(wm);
- function paint(){wm.innerHTML='';var sx=300,w=innerWidth+sx,h=innerHeight,rows=[h*.38,h*.9];
-   rows.forEach(function(y){for(var x=-sx;x<w;x+=sx){var s=document.createElement('span');s.textContent=WM;s.style.left=x+'px';s.style.top=y+'px';wm.appendChild(s)}})
-   /* extra mark over the search box (same text, size, colour) */
-   var e=document.createElement('span');e.textContent=WM;e.style.left=Math.round(innerWidth*.37)+'px';e.style.top=Math.round(h*.572)+'px';wm.appendChild(e)}
- paint();addEventListener('resize',paint);
+    /* ---- watermark (unchanged) ---- */
+    var wm = document.createElement('div');
+    wm.className = 'protect-watermark';
+    wm.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(wm);
+    function paintWatermark(){
+      wm.innerHTML = '';
+      var stepX = 300;
+      var w = window.innerWidth + stepX;
+      var h = window.innerHeight;
+      var rows = [h * 0.38, h * 0.90];
+      for (var r = 0; r < rows.length; r++){
+        var y = rows[r];
+        for (var x = -stepX; x < w; x += stepX){
+          var s = document.createElement('span');
+          s.textContent = WATERMARK_TEXT;
+          s.style.left = x + 'px';
+          s.style.top = y + 'px';
+          wm.appendChild(s);
+        }
+      }
+    }
+    paintWatermark();
+    window.addEventListener('resize', paintWatermark);
 
- /* copy / select / right-click / long-press / save / print blocking (search box stays usable) */
- ['contextmenu','selectstart','dragstart','copy','cut'].forEach(function(ev){document.addEventListener(ev,function(e){if(!isEditable(e.target))e.preventDefault()})});
- document.addEventListener('keydown',function(e){
-   var k=(e.key||'').toLowerCase(),mod=e.ctrlKey||e.metaKey;
-   if(isEditable(e.target)&&!(mod&&(k==='s'||k==='p'||k==='u')))return;
-   if((mod&&['s','p','u','c','x','a'].indexOf(k)>-1)||e.key==='F12'||(mod&&e.shiftKey&&['i','j','c'].indexOf(k)>-1)){e.preventDefault();e.stopPropagation()}
- },true);
- addEventListener('beforeprint',function(){document.documentElement.style.display='none'});
- addEventListener('afterprint',function(){document.documentElement.style.display=''});
+    /* ---- copy / select / long-press / right-click / drag / save / print ---- */
+    function isField(t){
+      if (t && t.nodeType === 3) t = t.parentElement;
+      return !!(t && t.closest && t.closest('input,textarea,select,[contenteditable="true"]'));
+    }
+    var cap = true;
+    document.addEventListener('contextmenu', function(e){ e.preventDefault(); }, cap);   // right-click + long-press menu
+    document.addEventListener('selectstart', function(e){ if (!isField(e.target)) e.preventDefault(); }, cap);
+    document.addEventListener('dragstart',   function(e){ e.preventDefault(); }, cap);
+    ['copy','cut'].forEach(function(type){
+      document.addEventListener(type, function(e){
+        if (isField(e.target)) return;                       // typing in the search box stays normal
+        try { if (e.clipboardData) e.clipboardData.setData('text/plain', ''); } catch (x) {}
+        e.preventDefault();
+      }, cap);
+    });
+    // If a browser still manages to start a selection (e.g. Android "smart select"), drop it.
+    document.addEventListener('selectionchange', function(){
+      var a = document.activeElement;
+      if (a && /^(INPUT|TEXTAREA)$/.test(a.tagName)) return;
+      var sel = window.getSelection && window.getSelection();
+      if (sel && sel.rangeCount && !sel.isCollapsed) sel.removeAllRanges();
+    });
+    document.addEventListener('keydown', function(e){
+      var k = e.key ? e.key.toLowerCase() : '';
+      var mod = e.ctrlKey || e.metaKey;
+      var always = mod && ['s','p','u'].indexOf(k) !== -1;                         // save, print, view-source
+      var outsideField = mod && ['c','x','a'].indexOf(k) !== -1 && !isField(e.target);
+      var devtools = e.key === 'F12' ||
+        (mod && e.shiftKey && ['i','j','c'].indexOf(k) !== -1) ||
+        (e.metaKey && e.altKey && ['i','j','u'].indexOf(k) !== -1);
+      if (always || outsideField || devtools){
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, cap);
+    try { window.print = function(){}; } catch (x) {}
 
- /* buttons */
- var de=document.documentElement;
- var canFS=!!(de.requestFullscreen||de.webkitRequestFullscreen);
- var inFS=function(){return!!(document.fullscreenElement||document.webkitFullscreenElement)};
- var fab=document.createElement('div');fab.className='pwa-fab';
- var fs=document.createElement('button');fs.type='button';fs.className='pwa-btn';
- function paintFS(){fs.textContent=inFS()?'✕ Exit full screen / बाहेर पडा':'⛶ Full screen / पूर्ण स्क्रीन'}paintFS();
- fs.onclick=function(){try{if(inFS())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}};
- document.addEventListener('fullscreenchange',paintFS);document.addEventListener('webkitfullscreenchange',paintFS);
- /* first tap anywhere -> full screen (once per visit, Android Chrome etc.) */
- if(canFS&&!isStandalone()){
-   var armed=true;
-   var go=function(){
-     if(!armed)return;armed=false;
-     document.removeEventListener('click',go,true);document.removeEventListener('touchend',go,true);
-     try{if(!inFS())(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}
-   };
-   document.addEventListener('click',go,true);
-   document.addEventListener('touchend',go,true);
- }
+    /* ---- floating Full screen button (hidden where the browser has no fullscreen API, e.g. iPhone) ---- */
+    var de = document.documentElement;
+    var reqFs  = de.requestFullscreen  || de.webkitRequestFullscreen  || de.msRequestFullscreen;
+    var exitFs = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+    var fsOk = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+    if (reqFs && exitFs && fsOk){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'fs-btn show';
+      btn.innerHTML =
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="fs-lbl"></span>';
+      document.body.appendChild(btn);
+      var lbl = btn.querySelector('.fs-lbl');
+      var isFs = function(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); };
+      var sync = function(){
+        var on = isFs();
+        lbl.textContent = on ? 'Exit full screen' : 'Full screen';
+        btn.title = on ? 'पूर्ण स्क्रीनमधून बाहेर पडा / Exit full screen' : 'पूर्ण स्क्रीन / Full screen';
+        btn.setAttribute('aria-label', btn.title);
+      };
+      sync();
+      btn.addEventListener('click', function(){
+        try {
+          if (isFs()) { exitFs.call(document); }
+          else {
+            var p = reqFs.call(de, {navigationUI: 'hide'});
+            if (p && p.catch) p.catch(function(){});
+          }
+        } catch (x) {}
+      });
+      document.addEventListener('fullscreenchange', sync);
+      document.addEventListener('webkitfullscreenchange', sync);
+    }
 
- function sync(){fab.style.display=isStandalone()?'none':''}
- try{matchMedia('(display-mode: standalone)').addEventListener('change',sync)}catch(e){}
- if(canFS)fab.appendChild(fs);
- document.body.appendChild(fab);sync();
-})();
+    /* ---- offline: shared service worker at https://fitterdm.github.io/sw.js ---- */
+    if ('serviceWorker' in navigator && location.protocol === 'https:'){
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('/sw.js').then(function(){
+          return navigator.serviceWorker.ready;
+        }).then(function(reg){
+          // First visit (page not yet controlled): ask the worker to save this page + fonts now.
+          if (!navigator.serviceWorker.controller && reg.active){
+            reg.active.postMessage({type: 'CACHE_URL', url: location.href});
+          }
+        }).catch(function(){});
+      });
+    }
+  })();
 </script>
 
 <script>
 (function(){
+ if(window.__LOCKED) return;
  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
  const sections=[...$$('.card')];
  // Add student completion checkboxes to major content cards without changing source text.
@@ -1608,8 +1723,8 @@ html,body{-webkit-tap-highlight-color:transparent;}
    }
  });
  const boxes=[...$$('input[data-lesson]')];
- function load(){let done=JSON.parse(localStorage.getItem('fitterQRProgress_lathe')||'[]');boxes.forEach((b,i)=>{b.checked=done.includes(i);b.closest('.card').classList.toggle('completed',b.checked)});update()}
- function update(){let n=boxes.filter(b=>b.checked).length,p=boxes.length?Math.round(n*100/boxes.length):0;$('#progressText').textContent=p+'% complete';$('#progressBar').style.width=p+'%';localStorage.setItem('fitterQRProgress_lathe',JSON.stringify(boxes.map((b,i)=>b.checked?i:null).filter(x=>x!==null)))}
+ function load(){let done=JSON.parse(localStorage.getItem('fitterQRProgress')||'[]');boxes.forEach((b,i)=>{b.checked=done.includes(i);b.closest('.card').classList.toggle('completed',b.checked)});update()}
+ function update(){let n=boxes.filter(b=>b.checked).length,p=boxes.length?Math.round(n*100/boxes.length):0;$('#progressText').textContent=p+'% complete';$('#progressBar').style.width=p+'%';localStorage.setItem('fitterQRProgress',JSON.stringify(boxes.map((b,i)=>b.checked?i:null).filter(x=>x!==null)))}
  boxes.forEach(b=>b.addEventListener('change',()=>{b.closest('.card').classList.toggle('completed',b.checked);update()}));load();
  // Search
  $('#topicSearch').addEventListener('input',e=>{let q=e.target.value.trim().toLowerCase();sections.forEach(c=>c.classList.remove('search-hit'));if(!q)return;sections.forEach(c=>{if(c.textContent.toLowerCase().includes(q)){c.classList.add('search-hit');c.classList.remove('collapsed')}});const hit=sections.find(c=>c.classList.contains('search-hit'));if(hit){hit.classList.add('fade-in');hit.scrollIntoView({behavior:'smooth',block:'center'})}});
@@ -1617,7 +1732,7 @@ html,body{-webkit-tap-highlight-color:transparent;}
  $('#langSelect').addEventListener('change',e=>{document.body.classList.remove('english-only','marathi-only');if(e.target.value==='en')document.body.classList.add('english-only');if(e.target.value==='mr')document.body.classList.add('marathi-only')});
  // Navigation
  $$('.navbtn').forEach(b=>b.onclick=()=>{let t=$('#'+b.dataset.target);if(t){t.classList.remove('collapsed');t.classList.add('fade-in');t.scrollIntoView({behavior:'smooth',block:'start'})}$$('.navbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
- const resetBtn=$('#resetBtn'); if(resetBtn) resetBtn.onclick=()=>{if(confirm('Reset student progress? / प्रगती रीसेट करायची?')){localStorage.removeItem('fitterQRProgress_lathe');boxes.forEach(b=>b.checked=false);load()}};
+ const resetBtn=$('#resetBtn'); if(resetBtn) resetBtn.onclick=()=>{if(confirm('Reset student progress? / प्रगती रीसेट करायची?')){localStorage.removeItem('fitterQRProgress');boxes.forEach(b=>b.checked=false);load()}};
  // QR via public QR image service; URL is encoded and no data is sent except the page URL.
  // Back to top
  const bt=document.createElement('button');bt.className='backtop';bt.textContent='↑';bt.title='Back to top';bt.onclick=()=>scrollTo({top:0,behavior:'smooth'});document.body.appendChild(bt);
