@@ -1,5 +1,5 @@
 // Change this name (machine-v2, v3 ...) after editing a page to force an update
-const CACHE = 'machine-lathe-v1';
+const CACHE = 'machine-lathe-v4';
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {

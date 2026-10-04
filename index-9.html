@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<script>
+/* Online-only guard: a saved/downloaded copy (file:// or content://) or a copy hosted elsewhere shows only a message */
+(function(){
+ var h=location.hostname;
+ var ok=(location.protocol==='https:'&&h==='fitterdm.github.io')||h==='localhost'||h==='127.0.0.1';
+ if(ok)return;
+ try{window.stop();}catch(e){}
+ document.documentElement.innerHTML='<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open via QR</title></head><body style="margin:0;font-family:Arial,sans-serif;background:#0f766e;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px"><div><div style="font-size:48px">&#128274;</div><h2 style="margin:12px 0">This page can only be viewed online</h2><p>Please scan the QR code to open it.</p><h3 style="margin:18px 0 6px">&#2361;&#2375; &#2346;&#2366;&#2344; &#2347;&#2325;&#2381;&#2340; &#2321;&#2344;&#2354;&#2366;&#2311;&#2344; &#2346;&#2366;&#2361;&#2340;&#2366; &#2351;&#2375;&#2340;&#2375;</h3><p>&#2325;&#2371;&#2346;&#2351;&#2366; QR &#2325;&#2379;&#2337; &#2360;&#2381;&#2325;&#2366;&#2344; &#2325;&#2352;&#2366;.</p></div></body>';
+})();
+</script>
+<script>
+/* Install gate: the page content opens only inside the installed app */
+(function(){
+ var h=location.hostname;
+ if(h==='localhost'||h==='127.0.0.1')return;
+ var mm=function(q){try{return window.matchMedia(q).matches}catch(e){return false}};
+ var standalone=mm('(display-mode: standalone)')||mm('(display-mode: fullscreen)')||mm('(display-mode: minimal-ui)')||window.navigator.standalone===true;
+ if(standalone)return;
+ var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var deferred=null;
+ window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;});
+ var st=document.createElement('style');
+ st.textContent='html.need-install,html.need-install body{overflow:hidden!important;height:100%}'+
+  'html.need-install body>*:not(#installGate){display:none!important}'+
+  '#installGate{position:fixed;inset:0;z-index:2147483647;background:linear-gradient(160deg,#0f766e,#134e4a);color:#fff;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;font-family:"Noto Sans",Arial,sans-serif;-webkit-user-select:none;user-select:none}'+
+  '#installGate .box{max-width:420px;width:100%}'+
+  '#installGate h2{margin:10px 0 6px;font-size:21px;line-height:1.3}'+
+  '#installGate .mr{font-family:"Noto Sans Devanagari",sans-serif;margin:4px 0 14px;font-size:17px;font-weight:700;color:#fde68a}'+
+  '#installGate p{margin:6px 0;font-size:14.5px;line-height:1.55;opacity:.95}'+
+  '#installGate button{margin-top:16px;width:100%;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;background:#f59e0b;color:#422006;cursor:pointer}'+
+  '#installGate .help{margin-top:16px;background:rgba(255,255,255,.14);border-radius:12px;padding:12px;font-size:13.5px;text-align:left;line-height:1.6;display:none}';
+ document.head.appendChild(st);
+ document.documentElement.classList.add('need-install');
+ function build(){
+   var g=document.createElement('div');g.id='installGate';
+   g.innerHTML='<div class="box"><div style="font-size:52px">\uD83D\uDD12</div>'+
+    '<h2>Install the app to view this page</h2>'+
+    '<div class="mr">\u0939\u0947 \u092A\u093E\u0928 \u092A\u093E\u0939\u0923\u094D\u092F\u093E\u0938\u093E\u0920\u0940 \u0905\u0945\u092A \u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932 \u0915\u0930\u093E</div>'+
+    '<p>Tap the button, install, then open <b>Fitter Learn</b> from your home screen.</p>'+
+    '<button type="button" id="gateBtn">\u2B07\uFE0F Install app / \u0905\u0945\u092A \u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932</button>'+
+    '<div class="help" id="gateHelp"></div></div>';
+   document.body.appendChild(g);
+   var help=g.querySelector('#gateHelp');
+   function showHelp(html){help.innerHTML=html;help.style.display='block';}
+   function manual(){
+     showHelp(isIOS
+      ?'<b>iPhone:</b> tap <b>Share</b> (\u2B06\uFE0F) \u2192 <b>Add to Home Screen</b>, then open the new icon.<br><span style="color:#fde68a">Share \u2192 Add to Home Screen \u0928\u093F\u0935\u0921\u093E \u0906\u0923\u093F \u0928\u0935\u0940\u0928 \u0906\u092F\u0915\u0949\u0928 \u0909\u0918\u0921\u093E.</span>'
+      :'<b>Android:</b> open the browser menu (\u22EE) \u2192 <b>Install app</b> (or <b>Add to Home screen</b>), then open the new icon from your home screen.<br><span style="color:#fde68a">\u22EE \u0924\u094D\u092F\u093E\u0928\u0902\u0924\u0930 Install app \u0935\u093E\u092A\u0930\u093E, \u092E\u0917 \u0939\u094B\u092E \u0938\u094D\u0915\u094D\u0930\u0940\u0928\u0935\u0930\u0940\u0932 \u0906\u092F\u0915\u0949\u0928 \u0909\u0918\u0921\u093E.</span>');
+   }
+   function done(){
+     showHelp('\u2705 <b>Installed.</b> Now open <b>Fitter Learn</b> from your home screen.<br><span style="color:#fde68a">\u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932 \u091D\u093E\u0932\u0947. \u0906\u0924\u093E \u0939\u094B\u092E \u0938\u094D\u0915\u094D\u0930\u0940\u0928\u0935\u0930\u0942\u0928 \u0905\u0945\u092A \u0909\u0918\u0921\u093E.</span>');
+   }
+   g.querySelector('#gateBtn').onclick=function(){
+     if(deferred){
+       deferred.prompt();
+       deferred.userChoice.then(function(r){deferred=null;if(r&&r.outcome==='accepted')done();else manual();});
+     } else manual();
+   };
+   window.addEventListener('appinstalled',done);
+   if(isIOS)manual();
+ }
+ if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="Double-Wheel Bench/Pedestal Grinder — Info Sheet / माहिती पत्रक">
+<title>Double-Wheel Bench/Pedestal Grinder — Info Sheet / माहिती पत्रक</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMzIiIGZpbGw9IiMwZjc2NmUiLz48dGV4dCB4PSIzMiIgeT0iNDQiIGZvbnQtc2l6ZT0iMzQiIHRleHQtYW5jaG9yPSJtaWRkbGUiPvCfp788L3RleHQ+PC9zdmc+">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --hero1:#134e4a; --hero2:#0f766e; --hero3:#14b8a6;
+    --blue:#1d4ed8; --blue-light:#eff6ff;
+    --green:#15803d; --green-light:#f0fdf4; --purple:#7c3aed; --purple-light:#f5f3ff;
+    --indigo:#4338ca; --indigo-light:#eef2ff;
+    --red:#dc2626; --red-light:#fef2f2; --ink:#1f2937; --mr:#7c2d12;
+    --amber:#d97706; --amber-dark:#92400e;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; font-family:'Noto Sans','Segoe UI',Roboto,Arial,sans-serif; color:var(--ink);
+    background:linear-gradient(180deg,#f8fafc,#f8fafc 400px);
+  }
+  .mr-text{
+    font-family:'Noto Sans Devanagari','Noto Sans',sans-serif;
+    color:var(--mr); font-size:14.5px; line-height:1.75; font-weight:500;
+  }
+  .mr-sub2{font-family:'Noto Sans Devanagari','Noto Sans',sans-serif;font-weight:600;font-size:13px;opacity:.85;}
+  .en-text{font-size:14.5px; line-height:1.6;}
+  .wrap{max-width:840px;margin:0 auto;padding:20px 16px 60px;}
+  header.hero{
+    background:linear-gradient(135deg,var(--hero1),var(--hero2) 55%,var(--hero3));
+    color:#fff;border-radius:18px;padding:26px 22px;box-shadow:0 8px 24px rgba(0,0,0,.18);
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  header.hero .tag{
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);
+    padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  }
+  header.hero h1{margin:8px 0 2px;font-size:21px;line-height:1.25;}
+  header.hero h1.mr{font-size:18px;font-family:'Noto Sans Devanagari',sans-serif;font-weight:700;margin:0 0 8px;}
+  header.hero p{margin:2px 0;opacity:.95;font-size:13.5px;}
+  header.hero p.mr{font-family:'Noto Sans Devanagari',sans-serif;}
+  .icon-drill{font-size:44px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));}
+
+  section{margin-top:22px;}
+  .card{
+    border-radius:16px; padding:18px 20px; border:1px solid rgba(0,0,0,.06);
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  h2{font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:8px;}
+  h2 .mr-sub{font-size:15px;font-family:'Noto Sans Devanagari',sans-serif;font-weight:600;opacity:.9;margin-left:2px;}
+  .section-intro-line{height:1px;background:currentColor;opacity:.15;margin:6px 0 14px;}
+
+  .manufacturer{background:var(--blue-light);border-left:6px solid var(--blue);}
+  .manufacturer h2{color:var(--blue);}
+  .manufacturer .row{margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #bfdbfe;}
+  .manufacturer .row:last-child{border-bottom:none;margin-bottom:0;}
+  .manufacturer .row b{color:var(--blue);}
+  .note{
+    margin-top:10px;background:#fff7ed;border:1px dashed #fdba74;color:#9a3412;
+    font-size:12.5px;padding:10px 12px;border-radius:8px;line-height:1.6;
+  }
+  .note .mr-text{color:#7c2d12;font-size:12.5px;margin-top:6px;}
+
+  .photos{background:#f8fafc;border-left:6px solid #64748b;}
+  .photos h2{color:#334155;}
+  .photo-block{margin-bottom:16px;}
+  .photo-block:last-child{margin-bottom:0;}
+  .photo-block img{width:100%;height:auto;border-radius:10px;display:block;border:1px solid #e2e8f0;}
+  .photo-cap{margin-top:6px;text-align:center;}
+  .photo-cap .en-text{font-size:12.5px;color:#475569;}
+  .photo-cap .mr-text{font-size:12px;}
+
+  .specs{background:var(--green-light);border-left:6px solid var(--green);}
+  .specs h2{color:var(--green);}
+  table.spec-table{width:100%;border-collapse:collapse;font-size:14px;}
+  table.spec-table tr{border-bottom:1px solid #d1fae5;}
+  table.spec-table tr:nth-child(even){background:#ecfdf5;}
+  table.spec-table td{padding:8px 8px;vertical-align:top;}
+  table.spec-table td.label{font-weight:600;color:var(--green);width:48%;}
+  table.spec-table td.label .mr-text{color:#166534;font-size:13px;margin-top:2px;}
+  table.spec-table td.value{font-weight:600;}
+
+  .working{background:var(--purple-light);border-left:6px solid var(--purple);}
+  .working h2{color:var(--purple);}
+  .working ol{margin:0;padding-left:20px;}
+  .working li{margin-bottom:12px;}
+  .working li .mr-text{margin-top:3px;}
+
+  .components{background:var(--indigo-light);border-left:6px solid var(--indigo);}
+  .components h2{color:var(--indigo);}
+  .comp-item{padding:10px 0;border-bottom:1px dashed #c7d2fe;}
+  .comp-item:last-child{border-bottom:none;}
+  .comp-title{font-weight:700;color:var(--indigo);margin-bottom:3px;font-size:14.5px;}
+
+  .uses{background:#fffbeb;border-left:6px solid var(--amber);}
+  .uses h2{color:var(--amber-dark);}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    background:#fef3c7;color:#92400e;padding:6px 12px;border-radius:999px;
+    font-size:13px;font-weight:600;border:1px solid #fde68a;
+  }
+  .chip .mr-text{display:inline;color:#7c2d12;font-size:12.5px;font-weight:600;margin-left:4px;}
+
+  .safety{background:var(--red-light);border:2px solid #fecaca;border-left:6px solid var(--red);}
+  .safety h2{color:var(--red);}
+  .safety ul{margin:0;padding-left:0;list-style:none;}
+  .safety li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed #fecaca;}
+  .safety li:last-child{border-bottom:none;}
+  .safety li::before{content:"⚠";position:absolute;left:0;top:8px;color:var(--red);font-size:16px;}
+  .safety li .mr-text{margin-top:3px;}
+
+  .op-block{background:#f0f9ff;border-left:6px solid #0284c7;}
+  .op-block h2{color:#0369a1;}
+  .op-item{padding:10px 0;border-bottom:1px dashed #bae6fd;}
+  .op-item:last-child{border-bottom:none;}
+  .op-title{font-weight:700;color:#0369a1;margin-bottom:3px;font-size:14.5px;}
+
+  .formula-block{background:#fefce8;border-left:6px solid #ca8a04;}
+  .formula-block h2{color:#854d0e;}
+  .formula-box{background:#fff;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:14.5px;font-weight:700;color:#854d0e;}
+
+  .info-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px;}
+  .info-table th{background:#f1f5f9;text-align:left;padding:7px 8px;font-size:12.5px;color:#334155;border-bottom:2px solid #cbd5e1;}
+  .info-table td{padding:7px 8px;vertical-align:top;border-bottom:1px solid #e2e8f0;}
+  .info-table tr:nth-child(even) td{background:#f8fafc;}
+
+  .dos-donts{background:#f0fdf4;border-left:6px solid #16a34a;}
+  .dos-donts h2{color:#15803d;}
+  .dd-col{margin-bottom:14px;}
+  .dd-col:last-child{margin-bottom:0;}
+  .dd-head{font-weight:700;font-size:14px;margin-bottom:6px;}
+  .dd-head.do{color:#15803d;}
+  .dd-head.dont{color:#dc2626;}
+  .dd-item{padding:5px 0 5px 24px;position:relative;font-size:13.5px;border-bottom:1px dashed #e2e8f0;}
+  .dd-item:last-child{border-bottom:none;}
+  .dd-item.do::before{content:"✔";position:absolute;left:0;color:#16a34a;}
+  .dd-item.dont::before{content:"✘";position:absolute;left:0;color:#dc2626;}
+
+  .viva{background:#faf5ff;border-left:6px solid #9333ea;}
+  .viva h2{color:#7e22ce;}
+  .viva-item{padding:8px 0;border-bottom:1px dashed #e9d5ff;}
+  .viva-item:last-child{border-bottom:none;}
+  .viva-q{font-weight:700;color:#7e22ce;font-size:13.5px;}
+  .viva-a{font-size:13.5px;margin-top:3px;}
+
+  .mcq-section{background:#fff1f2;border-left:6px solid #e11d48;}
+  .mcq-section h2{color:#be123c;}
+  .mcq-item{padding:9px 0;border-bottom:1px dashed #fecdd3;}
+  .mcq-item:last-child{border-bottom:none;}
+  .mcq-q{font-weight:700;font-size:13.5px;margin-bottom:4px;}
+  .mcq-opts{font-size:13px;margin-left:12px;}
+  .mcq-opts div{margin-bottom:2px;}
+  .mcq-ans{font-size:12.5px;color:#15803d;font-weight:700;margin-top:4px;}
+
+  .circuit-block{background:#f5f3ff;border-left:6px solid #6d28d9;}
+  .circuit-block h2{color:#5b21b6;}
+  .circuit-block svg{width:100%;height:auto;background:#fff;border-radius:8px;border:1px solid #ddd6fe;}
+
+  footer{text-align:center;font-size:12px;color:#94a3b8;margin-top:24px;}
+  footer .mr{font-family:'Noto Sans Devanagari',sans-serif;display:block;margin-top:4px;}
+
+  /* ===== Content protection ===== */
+  html, body {
+    -webkit-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    -webkit-touch-callout: none;
+  }
+  img, svg, canvas {
+    -webkit-user-drag: none; user-drag: none;
+    pointer-events: none;
+  }
+  .protect-watermark{
+    position:fixed; inset:0; width:100vw; height:100vh;
+    pointer-events:none; overflow:hidden; z-index:99999;
+  }
+  .protect-watermark span{
+    position:absolute; color:rgba(15,23,42,0.11);
+    font-size:19px; font-weight:700; white-space:nowrap;
+    transform:rotate(-28deg); font-family:'Noto Sans',sans-serif;
+  }
+
+
+/* ===== QR SMART LEARNING REDESIGN ===== */
+:root{--brand:#0f766e;--brand2:#115e59;--accent:#f59e0b;--ink:#0f172a;--muted:#64748b;--soft:#f0fdfa;--line:#dbe4ea;--danger:#b91c1c;--card-radius:18px}
+body{background:linear-gradient(180deg,#ecfeff 0,#f8fafc 260px,#f8fafc 100%);color:var(--ink)}
+.wrap{max-width:980px!important;padding:14px 14px 40px!important}
+.hero{position:relative;border-radius:24px!important;padding:24px!important;box-shadow:0 12px 30px rgba(15,118,110,.16);overflow:hidden}
+.hero:after{content:'QR SMART LEARNING';position:absolute;right:-20px;bottom:8px;font-size:46px;font-weight:900;opacity:.06;transform:rotate(-10deg);pointer-events:none}
+.smartbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:8px;margin:10px 0;box-shadow:0 5px 18px rgba(15,23,42,.08)}
+.smartbar .navrow{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.smartbar .navrow::-webkit-scrollbar{display:none}
+.navbtn{flex:0 0 auto;border:0;border-radius:11px;background:#f1f5f9;color:#334155;padding:9px 12px;font-weight:700;font-size:13px;cursor:pointer}.navbtn.active,.navbtn:hover{background:var(--brand);color:white}
+.student-tools{display:grid;grid-template-columns:1.3fr .8fr .8fr;gap:10px;margin:12px 0}
+.toolbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.toolbox label{display:block;font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:5px}.toolbox input,.toolbox select{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;border-radius:10px;padding:10px;background:#fff;font-size:14px}
+.progressbox{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:16px;padding:13px}.progressbox small{opacity:.85}.progressline{height:8px;background:rgba(255,255,255,.25);border-radius:10px;overflow:hidden;margin-top:8px}.progressline i{display:block;height:100%;width:0;background:#fbbf24;border-radius:10px;transition:.3s}
+.learning-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}.map-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px;text-decoration:none;color:inherit;box-shadow:0 3px 12px rgba(15,23,42,.04);transition:.2s}.map-card:hover{transform:translateY(-2px);border-color:#99f6e4}.map-card b{display:block;font-size:14px}.map-card span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+.qrpanel{display:grid;grid-template-columns:1fr 180px;gap:18px;align-items:center;background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;border-radius:18px;padding:16px;margin:12px 0}.qrbox{background:white;border-radius:14px;padding:10px;text-align:center;border:1px solid #e5e7eb;min-height:150px}.qrbox img{max-width:150px}.qr-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.actionbtn{border:0;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer;background:var(--brand);color:#fff}.actionbtn.secondary{background:#e2e8f0;color:#334155}.actionbtn.warn{background:#f59e0b;color:#422006}
+.lesson-chip{display:inline-flex;align-items:center;gap:5px;background:#ccfbf1;color:#115e59;border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;margin:2px}.checkrow{display:flex;gap:8px;align-items:center;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:11px;padding:9px;margin-top:8px}.checkrow input{accent-color:var(--brand);width:18px;height:18px}.completed{outline:2px solid #5eead4;outline-offset:2px}
+.search-hit{box-shadow:0 0 0 3px #fbbf24!important}
+.quickquiz{background:#eff6ff;border:1px solid #bfdbfe;border-radius:18px;padding:16px;margin:12px 0}.score{font-weight:900;color:var(--brand);margin-top:8px}
+.backtop{position:fixed;right:16px;bottom:16px;z-index:1100;width:44px;height:44px;border:0;border-radius:50%;background:var(--brand);color:#fff;font-size:20px;box-shadow:0 8px 20px rgba(15,118,110,.3);cursor:pointer}
+.print-only{display:none}
+@media(max-width:720px){.student-tools{grid-template-columns:1fr 1fr}.student-tools .wide{grid-column:1/-1}.learning-map{grid-template-columns:1fr 1fr}.qrpanel{grid-template-columns:1fr}.qrbox{max-width:180px;margin:auto}.hero{padding:18px!important}.hero h1{font-size:25px!important}}
+@media(max-width:430px){.student-tools,.learning-map{grid-template-columns:1fr}.student-tools .wide{grid-column:auto}}
+@media print{body{background:#fff}.smartbar,.student-tools,.qrpanel,.backtop{display:none!important}.card{break-inside:avoid}.print-only{display:block}.wrap{max-width:none!important}}
+
+/* ===== Instructor badge ===== */
+.instructor-badge{
+  display:inline-block; margin:8px 0 10px; padding:9px 14px;
+  background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.4);
+  border-radius:12px; backdrop-filter:blur(2px);
+}
+.instructor-badge .instr-name{
+  font-weight:800; font-size:15.5px; color:#fde047;
+  text-shadow:0 1px 2px rgba(0,0,0,.35); margin-bottom:2px;
+}
+.instructor-badge .instr-line{font-weight:700; font-size:12.5px; line-height:1.55; text-shadow:0 1px 2px rgba(0,0,0,.3);}
+.instructor-badge .instr-role{color:#7dd3fc;}
+.instructor-badge .instr-inst{color:#fca5a5;}
+.instructor-badge .instr-trade{color:#86efac;}
+.instructor-badge .instr-qual{color:#e9d5ff;}
+
+/* ===== Colorful section cards (rectangular banners, bold body tint) ===== */
+.card{position:relative; border-radius:14px; box-shadow:0 6px 18px rgba(15,23,42,.08); overflow:hidden;}
+.card h2{
+  display:block; width:calc(100% + 40px); box-sizing:border-box;
+  margin:-18px -20px 14px -20px; padding:13px 20px;
+  border-radius:0; font-size:15.5px; color:#fff;
+}
+.card h2 .mr-sub{opacity:.92; display:block; margin-top:2px; margin-left:0;}
+
+.manufacturer{background:linear-gradient(135deg,#dbeafe,#bfdbfe); border-left:none;}
+.manufacturer h2{background:linear-gradient(90deg,#1d4ed8,#3b82f6);}
+
+.photos{background:linear-gradient(135deg,#f1f5f9,#e2e8f0); border-left:none;}
+.photos h2{background:linear-gradient(90deg,#334155,#64748b);}
+
+.specs{background:linear-gradient(135deg,#dcfce7,#bbf7d0); border-left:none;}
+.specs h2{background:linear-gradient(90deg,#15803d,#22c55e);}
+
+.working{background:linear-gradient(135deg,#ede9fe,#ddd6fe); border-left:none;}
+.working h2{background:linear-gradient(90deg,#7c3aed,#a78bfa);}
+
+.components{background:linear-gradient(135deg,#e0e7ff,#c7d2fe); border-left:none;}
+.components h2{background:linear-gradient(90deg,#4338ca,#6366f1);}
+
+.op-block{background:linear-gradient(135deg,#e0f2fe,#bae6fd); border-left:none;}
+.op-block h2{background:linear-gradient(90deg,#0284c7,#38bdf8);}
+
+.formula-block{background:linear-gradient(135deg,#fef9c3,#fde68a); border-left:none;}
+.formula-block h2{background:linear-gradient(90deg,#ca8a04,#eab308);}
+.formula-block h2 .mr-sub{color:#fff;}
+
+.uses{background:linear-gradient(135deg,#fef3c7,#fde68a); border-left:none;}
+.uses h2{background:linear-gradient(90deg,#d97706,#f59e0b);}
+
+.safety{background:linear-gradient(135deg,#fee2e2,#fecaca); border-left:none; border:1px solid rgba(0,0,0,.06);}
+.safety h2{background:linear-gradient(90deg,#dc2626,#ef4444);}
+
+.dos-donts{background:linear-gradient(135deg,#dcfce7,#bbf7d0); border-left:none;}
+.dos-donts h2{background:linear-gradient(90deg,#16a34a,#4ade80);}
+
+.viva{background:linear-gradient(135deg,#f3e8ff,#e9d5ff); border-left:none;}
+.viva h2{background:linear-gradient(90deg,#9333ea,#c084fc);}
+
+.mcq-section{background:linear-gradient(135deg,#ffe4e6,#fecdd3); border-left:none;}
+.mcq-section h2{background:linear-gradient(90deg,#e11d48,#fb7185);}
+
+.circuit-block{background:linear-gradient(135deg,#ede9fe,#ddd6fe); border-left:none;}
+.circuit-block h2{background:linear-gradient(90deg,#6d28d9,#8b5cf6);}
+
+/* ===== Icon badges ===== */
+.icon-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:30px; height:30px; border-radius:50%;
+  background:rgba(255,255,255,.9); box-shadow:0 1px 4px rgba(0,0,0,.18);
+  font-size:16px; vertical-align:middle; margin-right:8px; flex:0 0 auto;
+}
+
+/* ===== Collapsible sections ===== */
+.card h2{cursor:pointer; position:relative; padding-right:44px;}
+.card h2::after{
+  content:'▾'; position:absolute; right:16px; top:50%; transform:translateY(-50%);
+  font-size:16px; opacity:.85; transition:transform .2s;
+}
+.card.collapsed h2::after{transform:translateY(-50%) rotate(-90deg);}
+.card.collapsed > *:not(h2){display:none !important;}
+
+/* ===== Fade-in on scroll ===== */
+.card{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease;}
+.card.fade-in{opacity:1; transform:translateY(0);}
+
+/* ===== Photo lightbox ===== */
+.photo-block img{cursor:zoom-in; pointer-events:auto !important;}
+.lightbox-overlay{
+  display:none; position:fixed; inset:0; z-index:5000; background:rgba(15,23,42,.92);
+  align-items:center; justify-content:center; padding:24px; cursor:zoom-out;
+}
+.lightbox-overlay.open{display:flex;}
+.lightbox-overlay img{max-width:100%; max-height:90vh; border-radius:10px; box-shadow:0 10px 40px rgba(0,0,0,.5); pointer-events:none;}
+.lightbox-close{position:fixed; top:18px; right:20px; z-index:5001; background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.4); border-radius:50%; width:38px; height:38px; font-size:20px; cursor:pointer; display:none;}
+.lightbox-overlay.open ~ .lightbox-close, .lightbox-close.open{display:block;}
+
+/* ===== Interactive MCQs ===== */
+.mcq-score-bar{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  background:rgba(255,255,255,.85); border-radius:10px; padding:8px 14px; margin-bottom:12px;
+  font-weight:800; font-size:13.5px; color:#9f1239; flex-wrap:wrap;
+}
+.mcq-score-bar button{border:0; background:#e11d48; color:#fff; border-radius:8px; padding:6px 12px; font-weight:700; font-size:12.5px; cursor:pointer;}
+.mcq-opt{
+  display:block; width:100%; text-align:left; background:#fff; border:1.5px solid #fecdd3;
+  border-radius:9px; padding:8px 12px; margin-bottom:6px; cursor:pointer; font-size:13px;
+  font-family:inherit; color:inherit; transition:.15s;
+}
+.mcq-opt:hover{border-color:#fb7185;}
+.mcq-item.answered .mcq-opt{cursor:default;}
+.mcq-item.answered .mcq-opt:hover{border-color:#fecdd3;}
+.mcq-opt.opt-correct{background:#dcfce7; border-color:#16a34a; color:#14532d;}
+.mcq-opt.opt-wrong{background:#fee2e2; border-color:#dc2626; color:#7f1d1d;}
+.mcq-feedback{font-size:12.5px; font-weight:700; margin-top:2px;}
+.mcq-feedback.correct{color:#15803d;}
+.mcq-feedback.wrong{color:#b91c1c;}
+
+</style>
+<!-- PWA: full-screen, offline -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Grinder">
+<style>
+/* ===== PWA: protection + full screen button ===== */
+input,textarea{-webkit-user-select:text!important;user-select:text!important;}
+html,body{-webkit-tap-highlight-color:transparent;}
+@media print{html,body{display:none!important}}
+.pwa-fab{position:fixed;left:14px;bottom:16px;z-index:1200;display:flex;flex-direction:column;gap:10px}
+.pwa-btn{border:0;border-radius:999px;padding:11px 16px;font:700 13px 'Noto Sans',Arial,sans-serif;color:#fff;background:#0f766e;box-shadow:0 8px 20px rgba(15,118,110,.35);cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="icon-drill">🧿</div>
+    <div>
+      <span class="tag">Machine Info • Scan &amp; Learn / माहिती स्कॅन करा</span>
+      <h1>Double‑Wheel Bench / Pedestal Grinder</h1>
+      <h1 class="mr">डबल-व्हील बेंच / पेडेस्टल ग्राइंडर</h1>
+      <div class="instructor-badge">
+        <div class="instr-name">👨‍🏫 Dinesh Shivaji Mule</div>
+        <div class="instr-line instr-role">Craft Instructor</div>
+        <div class="instr-line instr-inst">Government Industrial Training Institute Bhoom</div>
+        <div class="instr-line instr-trade">Trade: Fitter</div>
+        <div class="instr-line instr-qual">[B.E., D.M.E. – Mechanical]</div>
+      </div>
+      <p>Heavy-duty double-ended grinder for sharpening, deburring &amp; rough grinding of tools</p>
+      <p class="mr">टूल्स धार लावणे, बर्ऱ्स काढणे व रफ ग्राइंडिंगसाठी हेवी-ड्युटी डबल-एंडेड ग्राइंडर</p>
+    </div>
+  </header>
+
+  <div class="smartbar" aria-label="Student navigation">
+    <div class="navrow">
+      <button class="navbtn active" data-target="top">🏠 Home</button>
+      <button class="navbtn" data-target="machine-info">📘 Machine Info</button>
+      <button class="navbtn" data-target="safety">🦺 Safety</button>
+      <button class="navbtn" data-target="operations">⚙️ Operations</button>
+      <button class="navbtn" data-target="setting">🔧 Setting</button>
+      <button class="navbtn" data-target="revision">📝 Revision</button>
+    </div>
+  </div>
+  <section class="student-tools" id="top">
+    <div class="toolbox wide"><label>🔎 Find a topic / विषय शोधा</label><input id="topicSearch" placeholder="e.g. safety, RPM…" type="search"></div>
+    <div class="progressbox"><small>Student progress</small><div><b id="progressText">0% complete</b></div><div class="progressline"><i id="progressBar"></i></div></div>
+    <div class="toolbox"><label>🌐 Language</label><select id="langSelect"><option value="both">English + मराठी</option><option value="en">English only</option><option value="mr">फक्त मराठी</option></select></div>
+  </section>
+  <section class="learning-map" aria-label="Learning map">
+    <a class="map-card" href="#machine-info"><b>1️⃣ Know the Machine</b><span>Parts • specifications • controls</span></a>
+    <a class="map-card" href="#safety"><b>2️⃣ Work Safely</b><span>PPE • Do's &amp; Don'ts</span></a>
+    <a class="map-card" href="#operations"><b>3️⃣ Learn Operations</b><span>Setting • tools • operations</span></a>
+    <a class="map-card" href="#revision"><b>4️⃣ Test Yourself</b><span>Viva • MCQs</span></a>
+  </section>
+
+  <div class="print-only"><h2><span class="icon-badge">ITI</span> Fitter Trade — QR Smart Learning</h2><p>Double‑Wheel Bench / Pedestal Grinder</p></div>
+
+  <section class="card manufacturer" id="machine-info">
+    <h2><span class="icon-badge">🏭</span> Manufacturer Details <span class="mr-sub">/ उत्पादक तपशील</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="row"><b>Brand (nameplate) / ब्रँड (नेमप्लेट):</b> “Shree” Bench/Pedestal Grinder <span class="mr-text">— “श्री” बेंच/पेडेस्टल ग्राइंडर</span></div>
+    <div class="row"><b>Type / प्रकार:</b> Double‑ended, floor/pedestal‑mounted grinder <span class="mr-text">— डबल-एंडेड, फ्लोर/पेडेस्टल माउंटेड ग्राइंडर</span></div>
+    <div class="row"><b>Category / प्रकार:</b> General workshop grinding machine <span class="mr-text">— सर्वसाधारण वर्कशॉप ग्राइंडिंग मशीन</span></div>
+    <div class="row"><b>Country of Origin / उत्पत्ती देश:</b> India (typical for this class of machine) <span class="mr-text">— भारत (या प्रकारच्या मशीनसाठी सामान्यतः)</span></div>
+    <div class="note">
+      ℹ️ The nameplate on this unit is partly worn/hard to read in the photo. The specifications below are the
+      <b>typical/representative values</b> for this common class of Indian‑made double‑wheel pedestal grinder used
+      in ITI &amp; polytechnic workshops. Please cross‑check the exact Volts/Amps/RPM figures on your machine's
+      nameplate and update this sheet for full accuracy.
+      <div class="mr-text">
+        ℹ️ या मशीनची नेमप्लेट फोटोत काही प्रमाणात झिजलेली/वाचण्यास कठीण आहे. खालील स्पेसिफिकेशन्स ही आयटीआय व
+        पॉलिटेक्निक वर्कशॉपमध्ये वापरल्या जाणाऱ्या या प्रकारच्या भारतीय बनावटीच्या डबल-व्हील पेडेस्टल ग्राइंडरची
+        <b>सर्वसाधारण/प्रातिनिधिक मूल्ये</b> आहेत. कृपया तुमच्या मशीनच्या नेमप्लेटवरील नेमके व्होल्ट/अ‍ॅम्प/आरपीएम
+        आकडे तपासून ही माहिती अद्ययावत करा.
+      </div>
+    </div>
+  </section>
+
+
+  <section class="card specs" id="specs">
+    <h2><span class="icon-badge">📐</span> Technical Specifications <span class="mr-sub">/ तांत्रिक तपशील</span></h2>
+    <div class="section-intro-line"></div>
+    <table class="spec-table">
+      <tr><td class="label">Type<div class="mr-text">प्रकार</div></td><td class="value">Double‑ended pedestal / bench grinder</td></tr>
+      <tr><td class="label">Motor Power<div class="mr-text">मोटर पॉवर</div></td><td class="value">0.5 HP – 1 HP</td></tr>
+      <tr><td class="label">Power Supply<div class="mr-text">पॉवर सप्लाय</div></td><td class="value">Single‑phase / 3‑phase, 220–440 V, 50 Hz</td></tr>
+      <tr><td class="label">No‑Load Speed<div class="mr-text">नो-लोड स्पीड</div></td><td class="value">≈ 2800 – 3000 RPM</td></tr>
+      <tr><td class="label">Grinding Wheel Diameter<div class="mr-text">ग्राइंडिंग व्हील व्यास</div></td><td class="value">150 – 200 mm (one coarse + one fine)</td></tr>
+      <tr><td class="label">Wheel Arrangement<div class="mr-text">व्हील मांडणी</div></td><td class="value">Two wheels, one on each end of motor shaft</td></tr>
+      <tr><td class="label">Mounting<div class="mr-text">माउंटिंग</div></td><td class="value">Fixed on wooden/metal pedestal stand</td></tr>
+      <tr><td class="label">Controls<div class="mr-text">नियंत्रण</div></td><td class="value">Rotary ON–OFF selector switch on base</td></tr>
+      <tr><td class="label">Safety Fittings<div class="mr-text">सुरक्षा साधने</div></td><td class="value">Wheel guards, spark arrestors, tool rests, eye shields</td></tr>
+      <tr><td class="label">Approx. Weight<div class="mr-text">अंदाजे वजन</div></td><td class="value">15 – 25 kg (grinder head only)</td></tr>
+    </table>
+  </section>
+
+  <section class="card working" id="principle">
+    <h2><span class="icon-badge">⚙️</span> Working Principle <span class="mr-sub">/ कार्यपद्धती</span></h2>
+    <div class="section-intro-line"></div>
+    <ol>
+      <li>
+        <div class="en-text">An electric induction motor is mounted centrally, with its shaft extending out on both sides.</div>
+        <div class="mr-text">इलेक्ट्रिक इंडक्शन मोटर मध्यभागी बसवलेली असते व तिचा शाफ्ट दोन्ही बाजूंनी बाहेर आलेला असतो.</div>
+      </li>
+      <li>
+        <div class="en-text">An abrasive grinding wheel is fixed on each end of the shaft — a coarse wheel on one side (rough grinding) and a fine wheel on the other (finishing/sharpening).</div>
+        <div class="mr-text">शाफ्टच्या प्रत्येक टोकाला एक अ‍ॅब्रेसिव्ह ग्राइंडिंग व्हील बसवलेले असते — एका बाजूला खरखरीत (रफ ग्राइंडिंगसाठी) व दुसऱ्या बाजूला बारीक व्हील (फिनिशिंग/धार लावण्यासाठी).</div>
+      </li>
+      <li>
+        <div class="en-text">When switched ON, the motor spins both wheels at high speed (2800–3000 RPM).</div>
+        <div class="mr-text">मशीन सुरू केल्यावर मोटर दोन्ही व्हील्स उच्च वेगाने (२८००–३००० आरपीएम) फिरवते.</div>
+      </li>
+      <li>
+        <div class="en-text">The operator rests the tool/workpiece on the adjustable tool rest and gently presses it against the rotating wheel.</div>
+        <div class="mr-text">ऑपरेटर टूल/वर्कपीस अ‍ॅडजस्टेबल टूल रेस्टवर ठेवून हळुवारपणे फिरणाऱ्या व्हीलवर दाबतो.</div>
+      </li>
+      <li>
+        <div class="en-text">The abrasive grains on the wheel shear off tiny particles of material, sharpening, shaping, or deburring the workpiece.</div>
+        <div class="mr-text">व्हीलवरील अ‍ॅब्रेसिव्ह कण मटेरियलचे छोटे कण कापतात, त्यामुळे वर्कपीसला धार येते, आकार मिळतो किंवा बर्ऱ्स निघून जातात.</div>
+      </li>
+      <li>
+        <div class="en-text">A spark guard and wheel guard direct sparks/debris safely away from the operator.</div>
+        <div class="mr-text">स्पार्क गार्ड व व्हील गार्ड ठिणग्या/कचरा ऑपरेटरपासून सुरक्षितपणे दूर वळवतात.</div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="card uses" id="uses">
+    <h2><span class="icon-badge">🎯</span> Uses / Applications <span class="mr-sub">/ उपयोग</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="chip-row">
+      <span class="chip">Sharpening chisels &amp; lathe tools<span class="mr-text">/ छिन्नी व लेथ टूल्सना धार लावणे</span></span>
+      <span class="chip">Sharpening drill bits<span class="mr-text">/ ड्रिल बिट्सना धार लावणे</span></span>
+      <span class="chip">Deburring metal parts<span class="mr-text">/ धातूच्या भागांचे बर्ऱ्स काढणे</span></span>
+      <span class="chip">Removing rust / scale<span class="mr-text">/ गंज व स्केल काढणे</span></span>
+      <span class="chip">Rough grinding of welds<span class="mr-text">/ वेल्ड्सचे रफ ग्राइंडिंग</span></span>
+      <span class="chip">Shaping small components<span class="mr-text">/ लहान भागांना आकार देणे</span></span>
+      <span class="chip">Tool rooms &amp; workshops<span class="mr-text">/ टूल रूम व वर्कशॉप्स</span></span>
+      <span class="chip">ITI / Engineering labs<span class="mr-text">/ आयटीआय / इंजिनिअरिंग लॅब</span></span>
+      <span class="chip">Maintenance departments<span class="mr-text">/ मेंटेनन्स विभाग</span></span>
+    </div>
+  </section>
+
+  <section class="card safety" id="safety">
+    <h2><span class="icon-badge">🚨</span> Safety Precautions <span class="mr-sub">/ सुरक्षा खबरदारी</span></h2>
+    <div class="section-intro-line"></div>
+    <ul>
+      <li>
+        <div class="en-text">Always wear safety goggles or a face shield — sparks and grit can cause eye injury.</div>
+        <div class="mr-text">नेहमी सेफ्टी गॉगल्स किंवा फेस शील्ड वापरा — ठिणग्या व कणांमुळे डोळ्यांना इजा होऊ शकते.</div>
+      </li>
+      <li>
+        <div class="en-text">Stand slightly to the side of the wheel, never directly in front of it, in case the wheel bursts.</div>
+        <div class="mr-text">व्हीलच्या थोडे बाजूला उभे रहा, समोर उभे राहू नका — व्हील फुटल्यास इजा टाळण्यासाठी.</div>
+      </li>
+      <li>
+        <div class="en-text">Keep the tool rest adjusted close to the wheel (gap of 3 mm or less) to prevent the job from jamming.</div>
+        <div class="mr-text">टूल रेस्ट व्हीलच्या जवळ (३ मिमी किंवा कमी अंतरावर) ठेवा जेणेकरून जॉब अडकणार नाही.</div>
+      </li>
+      <li>
+        <div class="en-text">Let the wheel reach full running speed before touching the workpiece to it.</div>
+        <div class="mr-text">वर्कपीस व्हीलला लावण्यापूर्वी व्हील पूर्ण वेगाने फिरू द्या.</div>
+      </li>
+      <li>
+        <div class="en-text">Never grind on the side face of the wheel — grind only on the face/periphery it is designed for.</div>
+        <div class="mr-text">व्हीलच्या बाजूच्या पृष्ठभागावर कधीही ग्राइंड करू नका — फक्त त्यासाठी बनवलेल्या पुढील पृष्ठभागावरच ग्राइंड करा.</div>
+      </li>
+      <li>
+        <div class="en-text">Do not wear loose clothing, neckties, or gloves that could get caught in the rotating wheel.</div>
+        <div class="mr-text">सैल कपडे, टाय किंवा हातमोजे घालू नका — ते फिरणाऱ्या व्हीलमध्ये अडकू शकतात.</div>
+      </li>
+      <li>
+        <div class="en-text">Inspect the wheel regularly for cracks or chips; replace immediately if damaged.</div>
+        <div class="mr-text">व्हीलला भेगा किंवा तुकडे पडले आहेत का हे नियमितपणे तपासा; खराब झाल्यास लगेच बदला.</div>
+      </li>
+      <li>
+        <div class="en-text">Do not apply excessive pressure or force the workpiece against the wheel.</div>
+        <div class="mr-text">वर्कपीसवर जास्त दाब देऊ नका किंवा जबरदस्तीने व्हीलवर दाबू नका.</div>
+      </li>
+      <li>
+        <div class="en-text">If unusual vibration, noise, or sparking pattern occurs, switch off immediately and report it.</div>
+        <div class="mr-text">असामान्य कंपन, आवाज किंवा ठिणग्यांचा प्रकार आढळल्यास लगेच मशीन बंद करा व कळवा.</div>
+      </li>
+      <li>
+        <div class="en-text">Ensure the wheel guard and spark arrestor are always in place before operating.</div>
+        <div class="mr-text">मशीन चालवण्यापूर्वी व्हील गार्ड व स्पार्क अरेस्टर योग्य जागी असल्याची खात्री करा.</div>
+      </li>
+      <li>
+        <div class="en-text">Never leave the grinder running unattended.</div>
+        <div class="mr-text">ग्राइंडर कधीही चालू ठेवून लक्ष न देता सोडून जाऊ नका.</div>
+      </li>
+      <li>
+        <div class="en-text">Keep the floor around the grinder clean and free of grinding dust/oil to avoid slipping.</div>
+        <div class="mr-text">घसरण टाळण्यासाठी ग्राइंडरभोवतीचा जमिनीचा भाग स्वच्छ व धूळ/तेलमुक्त ठेवा.</div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="card op-block" id="identification">
+    <h2><span class="icon-badge">🆔</span> Machine Identification <span class="mr-sub">/ मशीन ओळख</span></h2>
+    <div class="section-intro-line"></div>
+    <table class="info-table">
+      <thead><tr><th>Field<br><span class='mr-text' style='font-size:11px;'>तपशील</span></th><th>Value<br><span class='mr-text' style='font-size:11px;'>मूल्य</span></th></tr></thead>
+      <tbody>
+<tr><td>Machine Name</td><td>Double-Wheel Bench/Pedestal Grinder <span class='mr-text'>/ डबल-व्हील बेंच/पेडेस्टल ग्राइंडर</span></td></tr>
+<tr><td>Machine Type</td><td>Double-ended, floor/pedestal-mounted grinder <span class='mr-text'>/ डबल-एंडेड, फ्लोर/पेडेस्टल माउंटेड ग्राइंडर</span></td></tr>
+<tr><td>Brand (nameplate)</td><td>“Shree” Bench/Pedestal Grinder <span class='mr-text'>/ “श्री” बेंच/पेडेस्टल ग्राइंडर</span></td></tr>
+<tr><td>No-Load Speed</td><td>≈ 2800 – 3000 RPM</td></tr>
+<tr><td>Location / Lab</td><td>As per institute workshop record <span class='mr-text'>/ संस्थेच्या वर्कशॉप नोंदीप्रमाणे</span></td></tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section class="card components" id="parts-more">
+    <h2><span class="icon-badge">🧩</span> Parts Explained <span class="mr-sub">/ भाग स्पष्टीकरण</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Grinding Wheel <span class="mr-sub2">/ ग्राइंडिंग व्हील</span></div>
+      <div class="en-text">The abrasive disc that does the actual cutting; one coarse wheel (rough grinding) and one fine wheel (finishing/sharpening) are fitted, one on each end of the shaft.</div>
+      <div class="mr-text">प्रत्यक्ष कापण्याचे काम करणारी अ‍ॅब्रेसिव्ह डिस्क; शाफ्टच्या प्रत्येक टोकाला एक खरखरीत व्हील (रफ ग्राइंडिंग) व एक बारीक व्हील (फिनिशिंग/धार लावणे) बसवलेले असते.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Wheel Guard <span class="mr-sub2">/ व्हील गार्ड</span></div>
+      <div class="en-text">A metal cover enclosing most of the wheel, exposing only the working face, to contain fragments if the wheel ever bursts.</div>
+      <div class="mr-text">व्हीलचा बहुतांश भाग झाकणारे धातूचे कव्हर, फक्त कार्यरत पृष्ठभाग उघडा ठेवते, व्हील फुटल्यास तुकडे रोखण्यासाठी.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Tool Rest <span class="mr-sub2">/ टूल रेस्ट</span></div>
+      <div class="en-text">An adjustable metal platform in front of each wheel that supports the tool/workpiece and keeps it steady while grinding.</div>
+      <div class="mr-text">प्रत्येक व्हीलसमोरील अ‍ॅडजस्टेबल धातूचा प्लॅटफॉर्म जो टूल/वर्कपीसला आधार देतो व ग्राइंडिंग करताना स्थिर ठेवतो.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Spark Arrestor / Eye Shield <span class="mr-sub2">/ स्पार्क अरेस्टर / आय शील्ड</span></div>
+      <div class="en-text">A transparent guard mounted above the tool rest that deflects sparks and grit away from the operator's face and eyes.</div>
+      <div class="mr-text">टूल रेस्टवर बसवलेला पारदर्शक गार्ड जो ठिणग्या व कण ऑपरेटरच्या चेहऱ्यापासून व डोळ्यांपासून दूर वळवतो.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Spindle <span class="mr-sub2">/ स्पिंडल</span></div>
+      <div class="en-text">The motor shaft extending on both sides, on which the grinding wheels are directly mounted and rotated.</div>
+      <div class="mr-text">दोन्ही बाजूंनी वाढलेला मोटर शाफ्ट, ज्यावर ग्राइंडिंग व्हील्स थेट बसवून फिरवले जातात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Motor <span class="mr-sub2">/ मोटर</span></div>
+      <div class="en-text">The electric induction motor mounted centrally inside the pedestal/base that drives the spindle and both wheels.</div>
+      <div class="mr-text">पेडेस्टल/बेसमध्ये मध्यभागी बसवलेली इलेक्ट्रिक इंडक्शन मोटर जी स्पिंडल व दोन्ही व्हील्स चालवते.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Pedestal / Base <span class="mr-sub2">/ पेडेस्टल / बेस</span></div>
+      <div class="en-text">The stand (wooden or metal) that supports the whole grinder at a comfortable working height and keeps it stable.</div>
+      <div class="mr-text">संपूर्ण ग्राइंडरला आरामदायक कामाच्या उंचीवर आधार देणारा व स्थिर ठेवणारा स्टँड (लाकडी किंवा धातूचा).</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🎛️</span> Machine Controls <span class="mr-sub">/ मशीन नियंत्रणे</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">ON–OFF Rotary Switch <span class="mr-sub2">/ ON–OFF रोटरी स्विच</span></div>
+      <div class="en-text">A rotary selector switch on the base that starts and stops the motor; always confirm it is OFF before connecting power.</div>
+      <div class="mr-text">बेसवरील रोटरी सिलेक्टर स्विच जो मोटर सुरू व बंद करतो; पॉवर जोडण्यापूर्वी तो बंद आहे याची नेहमी खात्री करा.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Tool Rest Adjustment Screw <span class="mr-sub2">/ टूल रेस्ट अ‍ॅडजस्टमेंट स्क्रू</span></div>
+      <div class="en-text">Loosens to slide the tool rest closer to the wheel as it wears down, keeping the gap at 3 mm or less.</div>
+      <div class="mr-text">व्हील झिजल्यावर टूल रेस्ट व्हीलजवळ सरकवण्यासाठी सैल केला जातो, अंतर ३ मिमी किंवा कमी ठेवण्यासाठी.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Wheel Guard Adjustment Bolts <span class="mr-sub2">/ व्हील गार्ड अ‍ॅडजस्टमेंट बोल्ट</span></div>
+      <div class="en-text">Allow the guard position to be adjusted as the wheel diameter reduces with wear, keeping maximum coverage.</div>
+      <div class="mr-text">व्हील झिजून व्यास कमी झाल्यावर गार्डची स्थिती अ‍ॅडजस्ट करण्यासाठी, जास्तीत जास्त कव्हरेज ठेवण्यासाठी.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block" id="wheel-spec">
+    <h2><span class="icon-badge">📋</span> Grinding Wheel Specification &amp; Marking System <span class="mr-sub">/ ग्राइंडिंग व्हील स्पेसिफिकेशन व मार्किंग सिस्टम</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Abrasive Type <span class="mr-sub2">/ अ‍ॅब्रेसिव्ह प्रकार</span></div>
+      <div class="en-text">Aluminium Oxide (A) — for grinding steel and ferrous metals; Silicon Carbide (C) — for grinding cast iron, non-ferrous metals &amp; carbide tools.</div>
+      <div class="mr-text">अ‍ॅल्युमिनियम ऑक्साइड (A) — स्टील व फेरस धातू ग्राइंडिंगसाठी; सिलिकॉन कार्बाइड (C) — कास्ट आयर्न, नॉन-फेरस धातू व कार्बाइड टूल्ससाठी.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Grain/Grit Size <span class="mr-sub2">/ ग्रेन/ग्रिट साइज</span></div>
+      <div class="en-text">A number (e.g. 36, 60, 120) indicating abrasive particle size — lower number = coarser grain for rapid stock removal; higher number = finer grain for smooth finish.</div>
+      <div class="mr-text">अ‍ॅब्रेसिव्ह कणांचा आकार दर्शवणारा आकडा (उदा. 36, 60, 120) — कमी आकडा = जलद मटेरियल काढण्यासाठी खरखरीत कण; जास्त आकडा = गुळगुळीत फिनिशसाठी बारीक कण.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Grade (Hardness) <span class="mr-sub2">/ ग्रेड (कठिणता)</span></div>
+      <div class="en-text">A letter (A soft to Z hard) showing how strongly the bond holds abrasive grains — soft grade releases dull grains faster, hard grade holds them longer.</div>
+      <div class="mr-text">अक्षर (A मऊ ते Z कठीण) जे बॉण्ड अ‍ॅब्रेसिव्ह कण किती घट्ट धरतो हे दाखवते — मऊ ग्रेड बोथट कण लवकर सोडते, कठीण ग्रेड जास्त काळ धरते.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Structure <span class="mr-sub2">/ स्ट्रक्चर</span></div>
+      <div class="en-text">A number showing the spacing/density of grains in the wheel — open structure resists clogging, dense structure suits fine finishing.</div>
+      <div class="mr-text">व्हीलमधील कणांचे अंतर/घनता दाखवणारा आकडा — ओपन स्ट्रक्चर जॅमिंग टाळते, दाट स्ट्रक्चर बारीक फिनिशिंगसाठी योग्य.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Bond Type <span class="mr-sub2">/ बॉण्ड प्रकार</span></div>
+      <div class="en-text">The material holding abrasive grains together — commonly Vitrified (V, most common, rigid) or Resinoid (B, more flexible, used for higher speeds).</div>
+      <div class="mr-text">अ‍ॅब्रेसिव्ह कणांना एकत्र धरणारे मटेरियल — सामान्यतः व्हिट्रिफाइड (V, सर्वात सामान्य, कडक) किंवा रेझिनॉइड (B, अधिक लवचिक, जास्त वेगासाठी वापरतात).</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">✅</span> Wheel Selection Criteria <span class="mr-sub">/ व्हील निवड निकष</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">For Hard Materials <span class="mr-sub2">/ कठीण मटेरियलसाठी</span></div>
+      <div class="en-text">Use a softer-grade wheel — grains dull quickly and the softer bond releases them sooner, exposing fresh sharp grains.</div>
+      <div class="mr-text">मऊ-ग्रेड व्हील वापरा — कण लवकर बोथट होतात व मऊ बॉण्ड त्यांना लवकर सोडतो, ताजे तीक्ष्ण कण उघड होतात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">For Soft Materials <span class="mr-sub2">/ मऊ मटेरियलसाठी</span></div>
+      <div class="en-text">Use a harder-grade wheel — grains stay sharp longer since soft material doesn't dull them as quickly.</div>
+      <div class="mr-text">कठीण-ग्रेड व्हील वापरा — मऊ मटेरियल कण लवकर बोथट करत नसल्याने कण जास्त काळ तीक्ष्ण राहतात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">For Rough/Rapid Stock Removal <span class="mr-sub2">/ रफ/जलद मटेरियल काढण्यासाठी</span></div>
+      <div class="en-text">Choose a coarse grain size for faster cutting action, accepting a rougher surface finish.</div>
+      <div class="mr-text">जलद कापण्यासाठी खरखरीत ग्रेन साइज निवडा, खरखरीत पृष्ठभाग फिनिशसह.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">For Fine Finishing / Sharpening <span class="mr-sub2">/ फाइन फिनिशिंग/धार लावण्यासाठी</span></div>
+      <div class="en-text">Choose a fine grain size for a smooth, precise cutting edge.</div>
+      <div class="mr-text">गुळगुळीत, अचूक कटिंग एजसाठी बारीक ग्रेन साइज निवडा.</div>
+    </div>
+
+  </section>
+
+  <section class="card formula-block" id="calculations">
+    <h2><span class="icon-badge">🧮</span> Peripheral Speed Calculation <span class="mr-sub">/ पेरिफेरल स्पीड गणना</span></h2>
+    <div class="section-intro-line"></div>
+    <div style="margin-bottom:14px;">
+      <div class="en-text" style="font-weight:600;">Peripheral (Surface) Speed</div>
+      <div class="mr-text">पेरिफेरल (सरफेस) स्पीड</div>
+      <div class="formula-box">V = (π × D × N) / 1000</div>
+      <div class="en-text" style="font-size:13px;color:#78716c;">V = surface speed (m/min), D = wheel diameter (mm), N = spindle RPM. Must never exceed the maximum safe speed marked on the wheel.</div>
+      <div class="mr-text" style="font-size:12.5px;">V = सरफेस स्पीड (मी/मिनिट), D = व्हील व्यास (मिमी), N = स्पिंडल आरपीएम. व्हीलवर नमूद कमाल सुरक्षित स्पीडपेक्षा कधीही जास्त नसावा.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block" id="operations">
+    <h2><span class="icon-badge">⚙️</span> Grinding Operations <span class="mr-sub">/ ग्राइंडिंग ऑपरेशन्स</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Off-Hand Grinding <span class="mr-sub2">/ ऑफ-हँड ग्राइंडिंग</span></div>
+      <div class="en-text">The operator holds the tool/workpiece freehand against the wheel, guided only by the tool rest — used for general-purpose shaping and cleanup.</div>
+      <div class="mr-text">ऑपरेटर टूल/वर्कपीस फक्त टूल रेस्टच्या आधाराने हाताने व्हीलवर धरतो — सर्वसाधारण आकार देण्यासाठी व साफसफाईसाठी वापरतात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Tool Sharpening <span class="mr-sub2">/ टूल शार्पनिंग</span></div>
+      <div class="en-text">Single-point lathe tools, chisels, and drill bits are ground to restore their cutting edge angle and remove wear/damage.</div>
+      <div class="mr-text">सिंगल-पॉइंट लेथ टूल्स, छिन्नी व ड्रिल बिट्स त्यांचा कटिंग एज कोन पुन्हा मिळवण्यासाठी व झीज/नुकसान काढण्यासाठी ग्राइंड केले जातात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Deburring <span class="mr-sub2">/ डिबरिंग</span></div>
+      <div class="en-text">Sharp burrs and edges left over from cutting, drilling, or welding are ground smooth on the coarse wheel.</div>
+      <div class="mr-text">कटिंग, ड्रिलिंग किंवा वेल्डिंगनंतर राहिलेले तीक्ष्ण बर्ऱ्स व कडा खरखरीत व्हीलवर गुळगुळीत केल्या जातात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Rough Grinding <span class="mr-sub2">/ रफ ग्राइंडिंग</span></div>
+      <div class="en-text">Fast material removal on the coarse wheel to quickly bring a workpiece close to its final shape or size.</div>
+      <div class="mr-text">वर्कपीसला जलदपणे अंतिम आकार/मापाजवळ आणण्यासाठी खरखरीत व्हीलवर जलद मटेरियल काढणे.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Finish Grinding <span class="mr-sub2">/ फिनिश ग्राइंडिंग</span></div>
+      <div class="en-text">Light, careful passes on the fine wheel to achieve a smooth surface and precise cutting edge.</div>
+      <div class="mr-text">गुळगुळीत पृष्ठभाग व अचूक कटिंग एज मिळवण्यासाठी बारीक व्हीलवर हलके, काळजीपूर्वक पास.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🔩</span> Wheel Truing &amp; Dressing <span class="mr-sub">/ व्हील ट्रूइंग व ड्रेसिंग</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Truing <span class="mr-sub2">/ ट्रूइंग</span></div>
+      <div class="en-text">Restores the wheel's true round shape and concentricity with the spindle axis using a diamond or star-wheel dresser — done when the wheel runs out-of-round.</div>
+      <div class="mr-text">डायमंड किंवा स्टार-व्हील ड्रेसर वापरून व्हीलचा खरा गोल आकार व स्पिंडल अक्षाशी एककेंद्रीपणा पुन्हा मिळवते — व्हील गोल फिरत नसल्यास केले जाते.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Dressing <span class="mr-sub2">/ ड्रेसिंग</span></div>
+      <div class="en-text">Removes the glazed (dull, clogged) outer layer of abrasive to expose fresh sharp grains and restore free, cool cutting.</div>
+      <div class="mr-text">अ‍ॅब्रेसिव्हचा ग्लेझ्ड (बोथट, जॅम झालेला) बाह्य थर काढून ताजे तीक्ष्ण कण उघड करते व मुक्त, थंड कापणे पुन्हा मिळवते.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">When to Dress a Wheel <span class="mr-sub2">/ व्हील कधी ड्रेस करावे</span></div>
+      <div class="en-text">When the wheel glazes (looks shiny, stops cutting well), loads up with soft material, or vibrates/runs unevenly.</div>
+      <div class="mr-text">व्हील ग्लेझ झाल्यावर (चमकदार दिसते, नीट कापत नाही), मऊ मटेरियलने भरल्यावर, किंवा कंपन/असमान फिरल्यावर.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block" id="setting">
+    <h2><span class="icon-badge">🔧</span> Wheel Mounting Procedure <span class="mr-sub">/ व्हील माउंटिंग प्रक्रिया</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Step 1 — Ring Test <span class="mr-sub2">/ पायरी 1 — रिंग टेस्ट</span></div>
+      <div class="en-text">Before mounting, tap the wheel gently with a light non-metallic object and listen for a clear ringing sound — a dull thud indicates a crack, and the wheel must not be used.</div>
+      <div class="mr-text">बसवण्यापूर्वी, हलक्या नॉन-मेटलिक वस्तूने व्हीलला हलके टॅप करा व स्पष्ट रिंगिंग आवाज ऐका — बोथट आवाज तडा दर्शवतो, अशी व्हील वापरू नये.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Step 2 — Check Flanges &amp; Blotters <span class="mr-sub2">/ पायरी 2 — फ्लँज व ब्लॉटर तपासा</span></div>
+      <div class="en-text">Use matching-diameter flanges on both sides with paper/cardboard blotters between flange and wheel to distribute clamping pressure evenly.</div>
+      <div class="mr-text">दोन्ही बाजूंना समान-व्यासाचे फ्लँज वापरा व फ्लँज-व्हीलदरम्यान पेपर/कार्डबोर्ड ब्लॉटर ठेवा जेणेकरून क्लॅम्पिंग दाब समान वितरित होतो.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Step 3 — Tighten to Correct Torque <span class="mr-sub2">/ पायरी 3 — योग्य टॉर्कने घट्ट करा</span></div>
+      <div class="en-text">Tighten the spindle nut just enough to hold the wheel firmly — overtightening can crack the wheel.</div>
+      <div class="mr-text">व्हील घट्ट धरण्यासाठी पुरेसे स्पिंडल नट घट्ट करा — जास्त घट्ट केल्यास व्हीलला तडा जाऊ शकतो.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Step 4 — Test Run <span class="mr-sub2">/ पायरी 4 — टेस्ट रन</span></div>
+      <div class="en-text">Stand to the side, run the wheel at operating speed for at least one minute before grinding, to check for vibration or imbalance.</div>
+      <div class="mr-text">बाजूला उभे राहून, ग्राइंडिंगपूर्वी किमान एक मिनिट व्हील ऑपरेटिंग स्पीडवर चालवा, कंपन किंवा असंतुलन तपासण्यासाठी.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">📏</span> Measuring &amp; Checking Instruments <span class="mr-sub">/ मोजमाप व तपासणी साधने</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item">
+      <div class="op-title">Steel Rule <span class="mr-sub2">/ स्टील रूल</span></div>
+      <div class="en-text">Used for quick length/size checks of the ground workpiece.</div>
+      <div class="mr-text">ग्राइंड केलेल्या वर्कपीसची लांबी/माप जलद तपासण्यासाठी वापरतात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Try Square <span class="mr-sub2">/ ट्राय स्क्वेअर</span></div>
+      <div class="en-text">Used to check that a ground surface or edge is square (90°) to a reference face.</div>
+      <div class="mr-text">ग्राइंड केलेला पृष्ठभाग किंवा कड संदर्भ पृष्ठभागाशी चौरस (90°) आहे का तपासण्यासाठी वापरतात.</div>
+    </div>
+    <div class="op-item">
+      <div class="op-title">Ring Test Hammer/Mallet <span class="mr-sub2">/ रिंग टेस्ट हॅमर/मॅलेट</span></div>
+      <div class="en-text">A light non-metallic mallet used specifically to sound-test a wheel for hidden cracks before mounting.</div>
+      <div class="mr-text">बसवण्यापूर्वी व्हीलमधील लपलेले तडे आवाजाने तपासण्यासाठी वापरला जाणारा हलका नॉन-मेटलिक मॅलेट.</div>
+    </div>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🛠️</span> Maintenance Schedule <span class="mr-sub">/ देखभाल वेळापत्रक</span></h2>
+    <div class="section-intro-line"></div>
+    <table class="info-table">
+      <thead><tr><th>Frequency<br><span class='mr-text' style='font-size:11px;'>वारंवारता</span></th><th>Task (EN)<br><span class='mr-text' style='font-size:11px;'>Task (MR)</span></th></tr></thead>
+      <tbody>
+<tr><td>Daily / दैनंदिन</td><td>Clean dust and grit from the base, guards, and tool rests</td><td>बेस, गार्ड्स व टूल रेस्टवरील धूळ व कण साफ करा</td></tr>
+<tr><td>Daily / दैनंदिन</td><td>Check tool rest gap and tighten if loose</td><td>टूल रेस्ट अंतर तपासा व सैल असल्यास घट्ट करा</td></tr>
+<tr><td>Weekly / साप्ताहिक</td><td>Inspect wheels for glazing, loading, or chips; dress if needed</td><td>व्हील्समध्ये ग्लेझिंग, लोडिंग किंवा तुकडे आहेत का तपासा; गरज असल्यास ड्रेस करा</td></tr>
+<tr><td>Weekly / साप्ताहिक</td><td>Check motor bearings for noise/heat</td><td>मोटर बेअरिंगमध्ये आवाज/उष्णता आहे का तपासा</td></tr>
+<tr><td>Monthly / मासिक</td><td>Check electrical wiring, earthing, and switch condition</td><td>इलेक्ट्रिकल वायरिंग, अर्थिंग व स्विचची स्थिती तपासा</td></tr>
+<tr><td>Yearly / वार्षिक</td><td>Full inspection and wheel replacement schedule review by a qualified technician</td><td>पात्र तंत्रज्ञाकडून संपूर्ण तपासणी व व्हील बदलण्याच्या वेळापत्रकाचा आढावा</td></tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🔍</span> Troubleshooting <span class="mr-sub">/ समस्यानिवारण</span></h2>
+    <div class="section-intro-line"></div>
+    <table class="info-table">
+      <thead><tr><th>Problem<br><span class='mr-text' style='font-size:11px;'>समस्या</span></th><th>Likely Cause<br><span class='mr-text' style='font-size:11px;'>संभाव्य कारण</span></th><th>Remedy<br><span class='mr-text' style='font-size:11px;'>उपाय</span></th></tr></thead>
+      <tbody>
+<tr><td>Wheel glazing (shiny, won't cut) <span class='mr-text'>/ व्हील ग्लेझिंग (चमकदार, कापत नाही)</span></td><td>Wheel too hard for the material, wrong speed <span class='mr-text'>/ मटेरियलसाठी व्हील खूप कठीण, चुकीचा स्पीड</span></td><td>Dress the wheel; consider a softer grade <span class='mr-text'>/ व्हील ड्रेस करा; मऊ ग्रेड विचारात घ्या</span></td></tr>
+<tr><td>Wheel loading (clogged with material) <span class='mr-text'>/ व्हील लोडिंग (मटेरियलने भरलेले)</span></td><td>Grinding soft/gummy material, wheel too fine <span class='mr-text'>/ मऊ/चिकट मटेरियल ग्राइंड करणे, व्हील खूप बारीक</span></td><td>Dress the wheel; use a coarser or more open-structure wheel <span class='mr-text'>/ व्हील ड्रेस करा; खरखरीत किंवा जास्त ओपन-स्ट्रक्चर व्हील वापरा</span></td></tr>
+<tr><td>Chatter/vibration <span class='mr-text'>/ चॅटर/कंपन</span></td><td>Wheel out of round, loose mounting, worn bearings <span class='mr-text'>/ व्हील गोल नाही, सैल माउंटिंग, झिजलेले बेअरिंग</span></td><td>True the wheel, check mounting torque, inspect bearings <span class='mr-text'>/ व्हील ट्रू करा, माउंटिंग टॉर्क तपासा, बेअरिंग तपासा</span></td></tr>
+<tr><td>Job overheating/discoloring <span class='mr-text'>/ जॉब जास्त गरम होणे/रंग बदलणे</span></td><td>Excess pressure, dull wheel, no cooling pause <span class='mr-text'>/ जास्त दाब, बोथट व्हील, थंड होण्यासाठी विश्रांती नाही</span></td><td>Reduce pressure, dress wheel, dip job in water periodically <span class='mr-text'>/ दाब कमी करा, व्हील ड्रेस करा, अधूनमधून जॉब पाण्यात बुडवा</span></td></tr>
+<tr><td>Wheel burst risk <span class='mr-text'>/ व्हील फुटण्याचा धोका</span></td><td>Cracked wheel used, overspeed, side pressure applied <span class='mr-text'>/ तडा गेलेला व्हील वापरला, ओव्हरस्पीड, बाजूचा दाब दिला</span></td><td>Always ring-test before mounting; never exceed rated speed; never grind on the side <span class='mr-text'>/ बसवण्यापूर्वी नेहमी रिंग-टेस्ट करा; रेटेड स्पीडपेक्षा जास्त कधीही जाऊ नका; बाजूला कधीही ग्राइंड करू नका</span></td></tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section class="card dos-donts">
+    <h2><span class="icon-badge">✅</span> Dos and Don'ts <span class="mr-sub">/ करा आणि करू नका</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="dd-col">
+      <div class="dd-head do">✔ DO / करा</div>
+<div class="dd-item do"><span class="en-text">Ring-test a new wheel before mounting</span> <span class="mr-text">— बसवण्यापूर्वी नवीन व्हीलची रिंग-टेस्ट करा</span></div>
+<div class="dd-item do"><span class="en-text">Wear safety goggles or a face shield at all times</span> <span class="mr-text">— नेहमी सेफ्टी गॉगल्स किंवा फेस शील्ड घाला</span></div>
+<div class="dd-item do"><span class="en-text">Keep the tool rest adjusted close to the wheel</span> <span class="mr-text">— टूल रेस्ट व्हीलजवळ अ‍ॅडजस्ट ठेवा</span></div>
+<div class="dd-item do"><span class="en-text">Let the wheel run up to full speed before grinding</span> <span class="mr-text">— ग्राइंडिंगपूर्वी व्हील पूर्ण वेगाने फिरू द्या</span></div>
+<div class="dd-item do"><span class="en-text">Dress the wheel regularly to keep it cutting freely</span> <span class="mr-text">— व्हील मुक्तपणे कापण्यासाठी नियमित ड्रेस करा</span></div>
+    </div>
+    <div class="dd-col">
+      <div class="dd-head dont">✘ DON'T / करू नका</div>
+<div class="dd-item dont"><span class="en-text">Don't stand directly in front of the wheel when starting it</span> <span class="mr-text">— व्हील सुरू करताना त्याच्यासमोर थेट उभे राहू नका</span></div>
+<div class="dd-item dont"><span class="en-text">Don't grind on the side face of the wheel</span> <span class="mr-text">— व्हीलच्या बाजूच्या पृष्ठभागावर ग्राइंड करू नका</span></div>
+<div class="dd-item dont"><span class="en-text">Don't use a wheel with cracks or chips</span> <span class="mr-text">— तडे किंवा तुकडे असलेला व्हील वापरू नका</span></div>
+<div class="dd-item dont"><span class="en-text">Don't force the workpiece against the wheel</span> <span class="mr-text">— वर्कपीसला व्हीलवर जबरदस्तीने दाबू नका</span></div>
+<div class="dd-item dont"><span class="en-text">Don't leave the machine running unattended</span> <span class="mr-text">— मशीन लक्ष न देता चालू ठेवू नका</span></div>
+    </div>
+
+  </section>
+
+  <section class="card viva" id="revision">
+    <h2><span class="icon-badge">❓</span> Viva Questions <span class="mr-sub">/ व्हायवा प्रश्न</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="viva-item">
+      <div class="viva-q">Q: Why must a grinding wheel be ring-tested before mounting? <span class="mr-sub2">/ बसवण्यापूर्वी ग्राइंडिंग व्हीलची रिंग-टेस्ट का करावी?</span></div>
+      <div class="viva-a en-text"><b>A:</b> To check for hidden cracks — a dull thud instead of a clear ring means the wheel is cracked and must not be used.</div>
+      <div class="viva-a mr-text">लपलेले तडे तपासण्यासाठी — स्पष्ट रिंगऐवजी बोथट आवाज म्हणजे व्हीलला तडा आहे व तो वापरू नये.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What is the difference between truing and dressing? <span class="mr-sub2">/ ट्रूइंग व ड्रेसिंगमध्ये फरक काय आहे?</span></div>
+      <div class="viva-a en-text"><b>A:</b> Truing restores the wheel's round shape/concentricity; dressing removes the glazed layer to expose fresh sharp grains.</div>
+      <div class="viva-a mr-text">ट्रूइंग व्हीलचा गोल आकार/एककेंद्रीपणा पुन्हा मिळवते; ड्रेसिंग ग्लेझ्ड थर काढून ताजे तीक्ष्ण कण उघड करते.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What does the letter in a wheel's grade marking indicate? <span class="mr-sub2">/ व्हीलच्या ग्रेड मार्किंगमधील अक्षर काय दर्शवते?</span></div>
+      <div class="viva-a en-text"><b>A:</b> The hardness of the bond — how strongly it holds the abrasive grains (A soft to Z hard).</div>
+      <div class="viva-a mr-text">बॉण्डची कठिणता — तो अ‍ॅब्रेसिव्ह कण किती घट्ट धरतो (A मऊ ते Z कठीण).</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: Why should the tool rest gap be kept small? <span class="mr-sub2">/ टूल रेस्टचे अंतर लहान का ठेवावे?</span></div>
+      <div class="viva-a en-text"><b>A:</b> To prevent the workpiece from being pulled into the gap and jamming against the wheel.</div>
+      <div class="viva-a mr-text">वर्कपीस अंतरात ओढले जाऊन व्हीलवर जॅम होण्यापासून रोखण्यासाठी.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What is the formula for peripheral (surface) speed? <span class="mr-sub2">/ पेरिफेरल (सरफेस) स्पीडचे सूत्र काय आहे?</span></div>
+      <div class="viva-a en-text"><b>A:</b> V = (π × D × N) / 1000</div>
+      <div class="viva-a mr-text">V = (π × D × N) / 1000</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What causes wheel glazing? <span class="mr-sub2">/ व्हील ग्लेझिंग कशामुळे होते?</span></div>
+      <div class="viva-a en-text"><b>A:</b> Using too hard a wheel for the material, or running at the wrong speed, so grains dull without releasing.</div>
+      <div class="viva-a mr-text">मटेरियलसाठी खूप कठीण व्हील वापरणे, किंवा चुकीच्या स्पीडवर चालवणे, त्यामुळे कण सुटल्याशिवाय बोथट होतात.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: Why should you never grind on the side of the wheel? <span class="mr-sub2">/ व्हीलच्या बाजूला कधीही ग्राइंड का करू नये?</span></div>
+      <div class="viva-a en-text"><b>A:</b> The wheel is only designed to take load on its periphery/face; side pressure can crack or shatter it.</div>
+      <div class="viva-a mr-text">व्हील फक्त त्याच्या परिघावर/पृष्ठभागावर भार सहन करण्यासाठी बनवलेला असतो; बाजूच्या दाबामुळे तो तडकू किंवा फुटू शकतो.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What abrasive is used for grinding cast iron and carbide tools? <span class="mr-sub2">/ कास्ट आयर्न व कार्बाइड टूल्स ग्राइंड करण्यासाठी कोणता अ‍ॅब्रेसिव्ह वापरतात?</span></div>
+      <div class="viva-a en-text"><b>A:</b> Silicon Carbide (C).</div>
+      <div class="viva-a mr-text">सिलिकॉन कार्बाइड (C).</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What should be checked before switching on the grinder? <span class="mr-sub2">/ ग्राइंडर सुरू करण्यापूर्वी काय तपासावे?</span></div>
+      <div class="viva-a en-text"><b>A:</b> That the wheel guard and spark arrestor/eye shield are in place, and the tool rest gap is correct.</div>
+      <div class="viva-a mr-text">व्हील गार्ड व स्पार्क अरेस्टर/आय शील्ड जागी आहेत का, व टूल रेस्टचे अंतर योग्य आहे का.</div>
+    </div>
+    <div class="viva-item">
+      <div class="viva-q">Q: What is the purpose of the spark arrestor? <span class="mr-sub2">/ स्पार्क अरेस्टरचा उद्देश काय आहे?</span></div>
+      <div class="viva-a en-text"><b>A:</b> It deflects sparks and grit away from the operator's face and eyes.</div>
+      <div class="viva-a mr-text">ठिणग्या व कण ऑपरेटरच्या चेहऱ्यापासून व डोळ्यांपासून दूर वळवतो.</div>
+    </div>
+
+  </section>
+
+  <section class="card mcq-section" id="mcq">
+    <h2><span class="icon-badge">📝</span> MCQ Questions (30) <span class="mr-sub">/ बहुपर्यायी प्रश्न (30)</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="mcq-score-bar">
+      <span>📊 Score: <span class="mcq-score-val">0</span> / <span class="mcq-score-total">0</span></span>
+      <button type="button" class="mcq-reset-btn">↺ Reset Quiz / रीसेट</button>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">1. What is the no-load speed of this grinder? <span class="mr-sub2">/ या ग्राइंडरचा नो-लोड स्पीड किती आहे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) 1000-1500 RPM <span class='mr-text' style='font-size:12px;'>/ 1000-1500 RPM</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) 2800-3000 RPM <span class='mr-text' style='font-size:12px;'>/ 2800-3000 RPM</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) 5000-6000 RPM <span class='mr-text' style='font-size:12px;'>/ 5000-6000 RPM</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) 500 RPM <span class='mr-text' style='font-size:12px;'>/ 500 RPM</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">2. How many grinding wheels does this machine have? <span class="mr-sub2">/ या मशीनला किती ग्राइंडिंग व्हील्स आहेत?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) One <span class='mr-text' style='font-size:12px;'>/ एक</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Two (coarse &amp; fine) <span class='mr-text' style='font-size:12px;'>/ दोन (खरखरीत व बारीक)</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Three <span class='mr-text' style='font-size:12px;'>/ तीन</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Four <span class='mr-text' style='font-size:12px;'>/ चार</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">3. What test checks a wheel for hidden cracks before mounting? <span class="mr-sub2">/ बसवण्यापूर्वी व्हीलमधील लपलेले तडे कोणती चाचणी तपासते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Ring test <span class='mr-text' style='font-size:12px;'>/ रिंग टेस्ट</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Speed test <span class='mr-text' style='font-size:12px;'>/ स्पीड टेस्ट</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Colour test <span class='mr-text' style='font-size:12px;'>/ रंग टेस्ट</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Weight test <span class='mr-text' style='font-size:12px;'>/ वजन टेस्ट</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">4. A dull thud sound during the ring test means: <span class="mr-sub2">/ रिंग टेस्टमध्ये बोथट आवाज म्हणजे काय?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Wheel is fine <span class='mr-text' style='font-size:12px;'>/ व्हील ठीक आहे</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Wheel is cracked, don't use <span class='mr-text' style='font-size:12px;'>/ व्हीलला तडा आहे, वापरू नका</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Wheel is too fine <span class='mr-text' style='font-size:12px;'>/ व्हील खूप बारीक आहे</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Wheel needs oiling <span class='mr-text' style='font-size:12px;'>/ व्हीलला तेल लावा</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">5. What is placed between the flange and the wheel when mounting? <span class="mr-sub2">/ माउंटिंग करताना फ्लँज व व्हीलदरम्यान काय ठेवतात?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Rubber pad <span class='mr-text' style='font-size:12px;'>/ रबर पॅड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Paper/cardboard blotter <span class='mr-text' style='font-size:12px;'>/ पेपर/कार्डबोर्ड ब्लॉटर</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Metal washer only <span class='mr-text' style='font-size:12px;'>/ फक्त मेटल वॉशर</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Nothing <span class='mr-text' style='font-size:12px;'>/ काहीही नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">6. What does truing restore? <span class="mr-sub2">/ ट्रूइंग काय पुन्हा मिळवते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Wheel colour <span class='mr-text' style='font-size:12px;'>/ व्हीलचा रंग</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Wheel's round shape/concentricity <span class='mr-text' style='font-size:12px;'>/ व्हीलचा गोल आकार/एककेंद्रीपणा</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Motor speed <span class='mr-text' style='font-size:12px;'>/ मोटर स्पीड</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Wheel grade <span class='mr-text' style='font-size:12px;'>/ व्हील ग्रेड</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">7. What does dressing a wheel do? <span class="mr-sub2">/ व्हील ड्रेस केल्याने काय होते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Paints the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलला रंग देते</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Removes the glazed layer to expose sharp grains <span class='mr-text' style='font-size:12px;'>/ ग्लेझ्ड थर काढून तीक्ष्ण कण उघड करते</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Increases wheel diameter <span class='mr-text' style='font-size:12px;'>/ व्हील व्यास वाढवते</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Cools the motor <span class='mr-text' style='font-size:12px;'>/ मोटर थंड करते</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">8. Which abrasive is best for grinding steel? <span class="mr-sub2">/ स्टील ग्राइंडिंगसाठी कोणता अ‍ॅब्रेसिव्ह सर्वोत्तम आहे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Aluminium Oxide <span class='mr-text' style='font-size:12px;'>/ अ‍ॅल्युमिनियम ऑक्साइड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Silicon Carbide <span class='mr-text' style='font-size:12px;'>/ सिलिकॉन कार्बाइड</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Diamond only <span class='mr-text' style='font-size:12px;'>/ फक्त डायमंड</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) None needed <span class='mr-text' style='font-size:12px;'>/ काहीही गरज नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">9. Which abrasive is best for cast iron and carbide tools? <span class="mr-sub2">/ कास्ट आयर्न व कार्बाइड टूल्ससाठी कोणता अ‍ॅब्रेसिव्ह सर्वोत्तम आहे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Aluminium Oxide <span class='mr-text' style='font-size:12px;'>/ अ‍ॅल्युमिनियम ऑक्साइड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Silicon Carbide <span class='mr-text' style='font-size:12px;'>/ सिलिकॉन कार्बाइड</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Copper <span class='mr-text' style='font-size:12px;'>/ तांबे</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Aluminium <span class='mr-text' style='font-size:12px;'>/ अ‍ॅल्युमिनियम</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">10. A lower grit number means: <span class="mr-sub2">/ कमी ग्रिट क्रमांक म्हणजे काय?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Finer grain <span class='mr-text' style='font-size:12px;'>/ बारीक कण</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Coarser grain <span class='mr-text' style='font-size:12px;'>/ खरखरीत कण</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) No abrasive <span class='mr-text' style='font-size:12px;'>/ अ‍ॅब्रेसिव्ह नाही</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Higher speed <span class='mr-text' style='font-size:12px;'>/ जास्त स्पीड</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">11. What should the maximum tool rest gap be? <span class="mr-sub2">/ टूल रेस्टचे कमाल अंतर किती असावे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) 10 mm <span class='mr-text' style='font-size:12px;'>/ 10 मिमी</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) 3 mm or less <span class='mr-text' style='font-size:12px;'>/ 3 मिमी किंवा कमी</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) 25 mm <span class='mr-text' style='font-size:12px;'>/ 25 मिमी</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) 50 mm <span class='mr-text' style='font-size:12px;'>/ 50 मिमी</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">12. What formula gives the wheel's peripheral speed? <span class="mr-sub2">/ व्हीलचा पेरिफेरल स्पीड कोणते सूत्र देते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) V = πDN/1000 <span class='mr-text' style='font-size:12px;'>/ V = πDN/1000</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) V = D/N <span class='mr-text' style='font-size:12px;'>/ V = D/N</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) V = N/D <span class='mr-text' style='font-size:12px;'>/ V = N/D</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) V = 1000/πDN <span class='mr-text' style='font-size:12px;'>/ V = 1000/πDN</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">13. Where should the operator stand when starting the grinder? <span class="mr-sub2">/ ग्राइंडर सुरू करताना ऑपरेटरने कुठे उभे राहावे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Directly in front of the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलच्या थेट समोर</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Slightly to the side <span class='mr-text' style='font-size:12px;'>/ थोडे बाजूला</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Behind the motor <span class='mr-text' style='font-size:12px;'>/ मोटरच्या मागे</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) On top of the base <span class='mr-text' style='font-size:12px;'>/ बेसच्या वर</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">14. Why should you never grind on the side of the wheel? <span class="mr-sub2">/ व्हीलच्या बाजूला कधीही ग्राइंड का करू नये?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) It's slower <span class='mr-text' style='font-size:12px;'>/ ते हळू आहे</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) It can crack/shatter the wheel <span class='mr-text' style='font-size:12px;'>/ व्हील तडकू/फुटू शकतो</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) It uses more electricity <span class='mr-text' style='font-size:12px;'>/ जास्त वीज वापरते</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) It's not allowed by law only <span class='mr-text' style='font-size:12px;'>/ फक्त कायद्याने परवानगी नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">15. What must be worn while grinding? <span class="mr-sub2">/ ग्राइंडिंग करताना काय घालावे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Safety goggles/face shield <span class='mr-text' style='font-size:12px;'>/ सेफ्टी गॉगल्स/फेस शील्ड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Loose gloves <span class='mr-text' style='font-size:12px;'>/ सैल हातमोजे</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) A necktie <span class='mr-text' style='font-size:12px;'>/ नेकटाय</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Sandals <span class='mr-text' style='font-size:12px;'>/ सँडल्स</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">16. What indicates a wheel needs dressing? <span class="mr-sub2">/ व्हीलला ड्रेसिंगची गरज असल्याचे काय दर्शवते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) It looks shiny/glazed and stops cutting well <span class='mr-text' style='font-size:12px;'>/ ते चमकदार/ग्लेझ्ड दिसते व नीट कापत नाही</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) It is brand new <span class='mr-text' style='font-size:12px;'>/ ते अगदी नवीन आहे</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) It is the correct grade <span class='mr-text' style='font-size:12px;'>/ ते योग्य ग्रेड आहे</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) It is coloured blue <span class='mr-text' style='font-size:12px;'>/ ते निळ्या रंगाचे आहे</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">17. What is off-hand grinding? <span class="mr-sub2">/ ऑफ-हँड ग्राइंडिंग म्हणजे काय?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Grinding without a tool rest <span class='mr-text' style='font-size:12px;'>/ टूल रेस्टशिवाय ग्राइंडिंग</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Freehand grinding guided by the tool rest <span class='mr-text' style='font-size:12px;'>/ टूल रेस्टच्या आधाराने हाताने ग्राइंडिंग</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Grinding with both hands off the tool <span class='mr-text' style='font-size:12px;'>/ टूलवरून दोन्ही हात काढून ग्राइंडिंग</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Automatic grinding <span class='mr-text' style='font-size:12px;'>/ स्वयंचलित ग्राइंडिंग</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">18. What is deburring? <span class="mr-sub2">/ डिबरिंग म्हणजे काय?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Adding material to a part <span class='mr-text' style='font-size:12px;'>/ भागाला मटेरियल जोडणे</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Removing sharp burrs/edges left from cutting or welding <span class='mr-text' style='font-size:12px;'>/ कटिंग किंवा वेल्डिंगनंतरचे तीक्ष्ण बर्ऱ्स/कडा काढणे</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Painting a surface <span class='mr-text' style='font-size:12px;'>/ पृष्ठभागाला रंग देणे</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Measuring a part <span class='mr-text' style='font-size:12px;'>/ भाग मोजणे</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">19. What should be done if the wheel vibrates excessively? <span class="mr-sub2">/ व्हील जास्त कंपन करत असल्यास काय करावे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Continue grinding <span class='mr-text' style='font-size:12px;'>/ ग्राइंडिंग चालू ठेवा</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Stop and check truing/mounting/bearings <span class='mr-text' style='font-size:12px;'>/ थांबून ट्रूइंग/माउंटिंग/बेअरिंग तपासा</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Increase pressure <span class='mr-text' style='font-size:12px;'>/ दाब वाढवा</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Ignore it <span class='mr-text' style='font-size:12px;'>/ दुर्लक्ष करा</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">20. What material is the wheel guard made of and why? <span class="mr-sub2">/ व्हील गार्ड कशाचा बनलेला असतो व का?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Plastic, for looks <span class='mr-text' style='font-size:12px;'>/ प्लास्टिक, दिसण्यासाठी</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Metal, to contain fragments if the wheel bursts <span class='mr-text' style='font-size:12px;'>/ धातू, व्हील फुटल्यास तुकडे रोखण्यासाठी</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Wood, for insulation <span class='mr-text' style='font-size:12px;'>/ लाकूड, इन्सुलेशनसाठी</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Rubber, for grip <span class='mr-text' style='font-size:12px;'>/ रबर, पकडीसाठी</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">21. What is the safe practice for a new job on the grinder? <span class="mr-sub2">/ ग्राइंडरवर नवीन जॉबसाठी सुरक्षित पद्धत काय आहे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Press hard immediately <span class='mr-text' style='font-size:12px;'>/ लगेच जोरात दाबा</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Let the wheel reach full speed before touching the job to it <span class='mr-text' style='font-size:12px;'>/ जॉब लावण्यापूर्वी व्हील पूर्ण वेगाने फिरू द्या</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Start with side grinding <span class='mr-text' style='font-size:12px;'>/ बाजूच्या ग्राइंडिंगने सुरुवात करा</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Skip the tool rest <span class='mr-text' style='font-size:12px;'>/ टूल रेस्ट वगळा</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">22. What happens if a wheel is overtightened during mounting? <span class="mr-sub2">/ माउंटिंग करताना व्हील जास्त घट्ट केल्यास काय होते?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) It grinds faster <span class='mr-text' style='font-size:12px;'>/ ते जलद ग्राइंड करते</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) It can crack the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलला तडा जाऊ शकतो</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) It becomes softer <span class='mr-text' style='font-size:12px;'>/ ते मऊ होते</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Nothing happens <span class='mr-text' style='font-size:12px;'>/ काहीही होत नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">23. Which grade wheel is chosen for hard materials? <span class="mr-sub2">/ कठीण मटेरियलसाठी कोणता ग्रेड व्हील निवडतात?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Softer grade <span class='mr-text' style='font-size:12px;'>/ मऊ ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Harder grade <span class='mr-text' style='font-size:12px;'>/ कठीण ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Any grade <span class='mr-text' style='font-size:12px;'>/ कोणताही ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) No wheel needed <span class='mr-text' style='font-size:12px;'>/ व्हीलची गरज नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">24. Which grade wheel is chosen for soft materials? <span class="mr-sub2">/ मऊ मटेरियलसाठी कोणता ग्रेड व्हील निवडतात?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Softer grade <span class='mr-text' style='font-size:12px;'>/ मऊ ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Harder grade <span class='mr-text' style='font-size:12px;'>/ कठीण ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Any grade <span class='mr-text' style='font-size:12px;'>/ कोणताही ग्रेड</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) No wheel needed <span class='mr-text' style='font-size:12px;'>/ व्हीलची गरज नाही</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">25. What is the bond type most commonly used in grinding wheels? <span class="mr-sub2">/ ग्राइंडिंग व्हील्समध्ये सर्वात सामान्यपणे कोणता बॉण्ड प्रकार वापरतात?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Vitrified (V) <span class='mr-text' style='font-size:12px;'>/ व्हिट्रिफाइड (V)</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Rubber <span class='mr-text' style='font-size:12px;'>/ रबर</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Wood <span class='mr-text' style='font-size:12px;'>/ लाकूड</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Plastic only <span class='mr-text' style='font-size:12px;'>/ फक्त प्लास्टिक</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">26. What should you check regularly on the tool rest? <span class="mr-sub2">/ टूल रेस्टवर नियमित काय तपासावे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Colour <span class='mr-text' style='font-size:12px;'>/ रंग</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Gap to the wheel and tightness <span class='mr-text' style='font-size:12px;'>/ व्हीलपासूनचे अंतर व घट्टपणा</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Weight <span class='mr-text' style='font-size:12px;'>/ वजन</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Brand <span class='mr-text' style='font-size:12px;'>/ ब्रँड</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="0">
+      <div class="mcq-q">27. What should never be left running unattended? <span class="mr-sub2">/ काय कधीही लक्ष न देता चालू ठेवू नये?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) The grinder <span class='mr-text' style='font-size:12px;'>/ ग्राइंडर</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) The lights <span class='mr-text' style='font-size:12px;'>/ दिवे</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) The clock <span class='mr-text' style='font-size:12px;'>/ घड्याळ</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) The door <span class='mr-text' style='font-size:12px;'>/ दार</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">28. What is the recommended action if a job overheats and discolours? <span class="mr-sub2">/ जॉब जास्त गरम होऊन रंग बदलल्यास कोणती कृती योग्य आहे?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Keep grinding at same pressure <span class='mr-text' style='font-size:12px;'>/ तेवढ्याच दाबाने ग्राइंडिंग चालू ठेवा</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Reduce pressure and cool the job periodically <span class='mr-text' style='font-size:12px;'>/ दाब कमी करा व अधूनमधून जॉब थंड करा</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Increase speed <span class='mr-text' style='font-size:12px;'>/ स्पीड वाढवा</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Ignore it <span class='mr-text' style='font-size:12px;'>/ दुर्लक्ष करा</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">29. Structure in a wheel's marking refers to: <span class="mr-sub2">/ व्हीलच्या मार्किंगमधील स्ट्रक्चर म्हणजे काय?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) Colour of the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलचा रंग</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) Spacing/density of grains <span class='mr-text' style='font-size:12px;'>/ कणांचे अंतर/घनता</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) Weight of the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलचे वजन</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) Price of the wheel <span class='mr-text' style='font-size:12px;'>/ व्हीलची किंमत</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+    <div class="mcq-item" data-answer="1">
+      <div class="mcq-q">30. How long should a newly mounted wheel be test-run before use? <span class="mr-sub2">/ नवीन बसवलेला व्हील वापरण्यापूर्वी किती वेळ टेस्ट-रन करावा?</span></div>
+      <div class="mcq-opts">
+<button type="button" class="mcq-opt" data-idx="0">A) No test needed <span class='mr-text' style='font-size:12px;'>/ चाचणीची गरज नाही</span></button>
+<button type="button" class="mcq-opt" data-idx="1">B) At least one minute at operating speed <span class='mr-text' style='font-size:12px;'>/ किमान एक मिनिट ऑपरेटिंग स्पीडवर</span></button>
+<button type="button" class="mcq-opt" data-idx="2">C) 10 seconds only <span class='mr-text' style='font-size:12px;'>/ फक्त 10 सेकंद</span></button>
+<button type="button" class="mcq-opt" data-idx="3">D) One full day <span class='mr-text' style='font-size:12px;'>/ एक पूर्ण दिवस</span></button>
+      </div>
+      <div class="mcq-feedback"></div>
+    </div>
+
+  </section>
+
+  <footer>
+    Generated info sheet for workshop/lab use • Verify nameplate data periodically for accuracy
+    <span class="mr">वर्कशॉप/लॅब वापरासाठी तयार केलेली माहिती पत्रक • अचूकतेसाठी नेमप्लेटवरील माहिती वेळोवेळी तपासा</span>
+  </footer>
+
+</div>
+
+<script>
+/* ===== Content protection + full screen + install app + offline ===== */
+(function(){
+ 'use strict';
+ var isEditable=function(t){return t&&t.closest&&t.closest('input,textarea,select,[contenteditable="true"]')};
+ var isStandalone=function(){return window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||window.navigator.standalone===true};
+
+ /* offline */
+ if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+
+ /* watermark */
+ var WM='Dinesh@Fitter',wm=document.createElement('div');wm.className='protect-watermark';wm.setAttribute('aria-hidden','true');document.body.appendChild(wm);
+ function paint(){wm.innerHTML='';var sx=300,w=innerWidth+sx,h=innerHeight,rows=[h*.38,h*.9];
+   rows.forEach(function(y){for(var x=-sx;x<w;x+=sx){var s=document.createElement('span');s.textContent=WM;s.style.left=x+'px';s.style.top=y+'px';wm.appendChild(s)}})
+   /* extra mark over the search box (same text, size, colour) */
+   var e=document.createElement('span');e.textContent=WM;e.style.left=Math.round(innerWidth*.37)+'px';e.style.top=Math.round(h*.572)+'px';wm.appendChild(e)}
+ paint();addEventListener('resize',paint);
+
+ /* copy / select / right-click / long-press / save / print blocking (search box stays usable) */
+ ['contextmenu','selectstart','dragstart','copy','cut'].forEach(function(ev){document.addEventListener(ev,function(e){if(!isEditable(e.target))e.preventDefault()})});
+ document.addEventListener('keydown',function(e){
+   var k=(e.key||'').toLowerCase(),mod=e.ctrlKey||e.metaKey;
+   if(isEditable(e.target)&&!(mod&&(k==='s'||k==='p'||k==='u')))return;
+   if((mod&&['s','p','u','c','x','a'].indexOf(k)>-1)||e.key==='F12'||(mod&&e.shiftKey&&['i','j','c'].indexOf(k)>-1)){e.preventDefault();e.stopPropagation()}
+ },true);
+ addEventListener('beforeprint',function(){document.documentElement.style.display='none'});
+ addEventListener('afterprint',function(){document.documentElement.style.display=''});
+
+ /* buttons */
+ var de=document.documentElement;
+ var canFS=!!(de.requestFullscreen||de.webkitRequestFullscreen);
+ var inFS=function(){return!!(document.fullscreenElement||document.webkitFullscreenElement)};
+ var fab=document.createElement('div');fab.className='pwa-fab';
+ var fs=document.createElement('button');fs.type='button';fs.className='pwa-btn';
+ function paintFS(){fs.textContent=inFS()?'✕ Exit full screen / बाहेर पडा':'⛶ Full screen / पूर्ण स्क्रीन'}paintFS();
+ fs.onclick=function(){try{if(inFS())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}};
+ document.addEventListener('fullscreenchange',paintFS);document.addEventListener('webkitfullscreenchange',paintFS);
+ /* first tap anywhere -> full screen (once per visit, Android Chrome etc.) */
+ if(canFS&&!isStandalone()){
+   var armed=true;
+   var go=function(){
+     if(!armed)return;armed=false;
+     document.removeEventListener('click',go,true);document.removeEventListener('touchend',go,true);
+     try{if(!inFS())(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}
+   };
+   document.addEventListener('click',go,true);
+   document.addEventListener('touchend',go,true);
+ }
+
+ function sync(){fab.style.display=isStandalone()?'none':''}
+ try{matchMedia('(display-mode: standalone)').addEventListener('change',sync)}catch(e){}
+ if(canFS)fab.appendChild(fs);
+ document.body.appendChild(fab);sync();
+})();
+</script>
+
+<script>
+(function(){
+ const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+ const sections=[...$$('.card')];
+ sections.forEach((card,i)=>{
+   if(!card.querySelector('.checkrow')){
+     const title=card.querySelector('h2'); if(!title) return;
+     const row=document.createElement('label'); row.className='checkrow';
+     const cb=document.createElement('input'); cb.type='checkbox'; cb.dataset.lesson=i;
+     const span=document.createElement('span'); span.textContent='Mark this lesson as completed / हा धडा पूर्ण झाला म्हणून चिन्हांकित करा';
+     row.append(cb,span); card.appendChild(row);
+   }
+ });
+ const boxes=[...$$('input[data-lesson]')];
+ function load(){let done=JSON.parse(localStorage.getItem('fitterQRProgress_grinding')||'[]');boxes.forEach((b,i)=>{b.checked=done.includes(i);b.closest('.card').classList.toggle('completed',b.checked)});update()}
+ function update(){let n=boxes.filter(b=>b.checked).length,p=boxes.length?Math.round(n*100/boxes.length):0;$('#progressText').textContent=p+'% complete';$('#progressBar').style.width=p+'%';localStorage.setItem('fitterQRProgress_grinding',JSON.stringify(boxes.map((b,i)=>b.checked?i:null).filter(x=>x!==null)))}
+ boxes.forEach(b=>b.addEventListener('change',()=>{b.closest('.card').classList.toggle('completed',b.checked);update()}));load();
+ $('#topicSearch').addEventListener('input',e=>{let q=e.target.value.trim().toLowerCase();sections.forEach(c=>c.classList.remove('search-hit'));if(!q)return;sections.forEach(c=>{if(c.textContent.toLowerCase().includes(q)){c.classList.add('search-hit');c.classList.remove('collapsed')}});const hit=sections.find(c=>c.classList.contains('search-hit'));if(hit){hit.classList.add('fade-in');hit.scrollIntoView({behavior:'smooth',block:'center'})}});
+ $('#langSelect').addEventListener('change',e=>{document.body.classList.remove('english-only','marathi-only');if(e.target.value==='en')document.body.classList.add('english-only');if(e.target.value==='mr')document.body.classList.add('marathi-only')});
+ $$('.navbtn').forEach(b=>b.onclick=()=>{let t=$('#'+b.dataset.target);if(t){t.classList.remove('collapsed');t.classList.add('fade-in');t.scrollIntoView({behavior:'smooth',block:'start'})}$$('.navbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+ const resetBtn=$('#resetBtn');if(resetBtn)resetBtn.onclick=()=>{if(confirm('Reset student progress? / प्रगती रीसेट करायची?')){localStorage.removeItem('fitterQRProgress_grinding');boxes.forEach(b=>b.checked=false);load()}};
+ const bt=document.createElement('button');bt.className='backtop';bt.textContent='↑';bt.title='Back to top';bt.onclick=()=>scrollTo({top:0,behavior:'smooth'});document.body.appendChild(bt);
+
+ // ----- Collapsible sections: click a banner to expand/collapse -----
+ sections.forEach(card=>{
+   const h2=card.querySelector('h2');
+   if(!h2) return;
+   h2.addEventListener('click', (e)=>{
+     card.classList.toggle('collapsed');
+   });
+ });
+
+ // ----- Fade-in on scroll (scroll-position based, with safety fallback) -----
+ function revealVisible(){
+   const vh=window.innerHeight;
+   sections.forEach(c=>{
+     if(c.classList.contains('fade-in')) return;
+     const r=c.getBoundingClientRect();
+     if(r.top < vh*1.3 && r.bottom > -100){ c.classList.add('fade-in'); }
+   });
+ }
+ revealVisible();
+ window.addEventListener('scroll', revealVisible, {passive:true});
+ window.addEventListener('resize', revealVisible);
+ setTimeout(revealVisible, 400);
+ setTimeout(revealVisible, 1200);
+ // Final safety net: guarantee every section is visible no matter what.
+ setTimeout(()=>{ sections.forEach(c=>c.classList.add('fade-in')); }, 4000);
+
+ // ----- Photo lightbox -----
+ const lb=document.createElement('div'); lb.className='lightbox-overlay';
+ const lbImg=document.createElement('img'); lb.appendChild(lbImg);
+ document.body.appendChild(lb);
+ const lbClose=document.createElement('button'); lbClose.className='lightbox-close'; lbClose.textContent='✕'; lbClose.title='Close';
+ document.body.appendChild(lbClose);
+ function openLightbox(src){ lbImg.src=src; lb.classList.add('open'); lbClose.classList.add('open'); }
+ function closeLightbox(){ lb.classList.remove('open'); lbClose.classList.remove('open'); }
+ $$('.photo-block img').forEach(img=>{ img.addEventListener('click', ()=>openLightbox(img.src)); });
+ lb.addEventListener('click', closeLightbox);
+ lbClose.addEventListener('click', closeLightbox);
+ document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLightbox(); });
+
+ // ----- Interactive MCQs with running score -----
+ $$('.mcq-section').forEach(sec=>{
+   const items=[...sec.querySelectorAll('.mcq-item')];
+   const scoreValEl=sec.querySelector('.mcq-score-val');
+   const scoreTotalEl=sec.querySelector('.mcq-score-total');
+   const resetBtn2=sec.querySelector('.mcq-reset-btn');
+   let score=0, attempted=0;
+   if(scoreTotalEl) scoreTotalEl.textContent=items.length;
+   function refreshScore(){ if(scoreValEl) scoreValEl.textContent=score; }
+   items.forEach(item=>{
+     const correctIdx=parseInt(item.dataset.answer,10);
+     const opts=[...item.querySelectorAll('.mcq-opt')];
+     const fb=item.querySelector('.mcq-feedback');
+     opts.forEach((opt,idx)=>{
+       opt.addEventListener('click', ()=>{
+         if(item.classList.contains('answered')) return;
+         item.classList.add('answered'); attempted++;
+         if(idx===correctIdx){
+           opt.classList.add('opt-correct'); score++;
+           if(fb){ fb.textContent='✔ Correct! / बरोबर!'; fb.classList.add('correct'); }
+         } else {
+           opt.classList.add('opt-wrong');
+           opts[correctIdx].classList.add('opt-correct');
+           if(fb){ fb.textContent='✘ Incorrect — correct answer highlighted / चूक — योग्य उत्तर हिरव्यात दाखवले आहे'; fb.classList.add('wrong'); }
+         }
+         refreshScore();
+       });
+     });
+   });
+   if(resetBtn2){
+     resetBtn2.addEventListener('click', ()=>{
+       score=0; attempted=0; refreshScore();
+       items.forEach(item=>{
+         item.classList.remove('answered');
+         item.querySelectorAll('.mcq-opt').forEach(o=>o.classList.remove('opt-correct','opt-wrong'));
+         const fb=item.querySelector('.mcq-feedback'); if(fb){ fb.textContent=''; fb.classList.remove('correct','wrong'); }
+       });
+     });
+   }
+ });
+})();
+</script>
+<style>
+body.english-only .mr,body.english-only .mr-text,body.english-only .mr-sub,body.english-only .mr-sub2{display:none!important}
+body.marathi-only h1:not(.mr),body.marathi-only .tag,body.marathi-only .hero p:not(.mr){display:none!important}
+body.marathi-only .mr{display:block!important}.mr-text,.mr-sub,.mr-sub2{font-family:'Noto Sans Devanagari',sans-serif}
+</style>
+
+</body>
+</html>

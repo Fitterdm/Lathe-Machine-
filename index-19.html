@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<script>
+/* Online-only guard: a saved/downloaded copy (file:// or content://) or a copy hosted elsewhere shows only a message */
+(function(){
+ var h=location.hostname;
+ var ok=(location.protocol==='https:'&&h==='fitterdm.github.io')||h==='localhost'||h==='127.0.0.1';
+ if(ok)return;
+ try{window.stop();}catch(e){}
+ document.documentElement.innerHTML='<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Open via QR</title></head><body style="margin:0;font-family:Arial,sans-serif;background:#0f766e;color:#fff;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;padding:24px"><div><div style="font-size:48px">&#128274;</div><h2 style="margin:12px 0">This page can only be viewed online</h2><p>Please scan the QR code to open it.</p><h3 style="margin:18px 0 6px">&#2361;&#2375; &#2346;&#2366;&#2344; &#2347;&#2325;&#2381;&#2340; &#2321;&#2344;&#2354;&#2366;&#2311;&#2344; &#2346;&#2366;&#2361;&#2340;&#2366; &#2351;&#2375;&#2340;&#2375;</h3><p>&#2325;&#2371;&#2346;&#2351;&#2366; QR &#2325;&#2379;&#2337; &#2360;&#2381;&#2325;&#2366;&#2344; &#2325;&#2352;&#2366;.</p></div></body>';
+})();
+</script>
+<script>
+/* Install gate: the page content opens only inside the installed app */
+(function(){
+ var h=location.hostname;
+ if(h==='localhost'||h==='127.0.0.1')return;
+ var mm=function(q){try{return window.matchMedia(q).matches}catch(e){return false}};
+ var standalone=mm('(display-mode: standalone)')||mm('(display-mode: fullscreen)')||mm('(display-mode: minimal-ui)')||window.navigator.standalone===true;
+ if(standalone)return;
+ var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ var deferred=null;
+ window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferred=e;});
+ var st=document.createElement('style');
+ st.textContent='html.need-install,html.need-install body{overflow:hidden!important;height:100%}'+
+  'html.need-install body>*:not(#installGate){display:none!important}'+
+  '#installGate{position:fixed;inset:0;z-index:2147483647;background:linear-gradient(160deg,#0f766e,#134e4a);color:#fff;display:flex;align-items:center;justify-content:center;padding:22px;text-align:center;font-family:"Noto Sans",Arial,sans-serif;-webkit-user-select:none;user-select:none}'+
+  '#installGate .box{max-width:420px;width:100%}'+
+  '#installGate h2{margin:10px 0 6px;font-size:21px;line-height:1.3}'+
+  '#installGate .mr{font-family:"Noto Sans Devanagari",sans-serif;margin:4px 0 14px;font-size:17px;font-weight:700;color:#fde68a}'+
+  '#installGate p{margin:6px 0;font-size:14.5px;line-height:1.55;opacity:.95}'+
+  '#installGate button{margin-top:16px;width:100%;border:0;border-radius:14px;padding:15px;font-size:17px;font-weight:800;background:#f59e0b;color:#422006;cursor:pointer}'+
+  '#installGate .help{margin-top:16px;background:rgba(255,255,255,.14);border-radius:12px;padding:12px;font-size:13.5px;text-align:left;line-height:1.6;display:none}';
+ document.head.appendChild(st);
+ document.documentElement.classList.add('need-install');
+ function build(){
+   var g=document.createElement('div');g.id='installGate';
+   g.innerHTML='<div class="box"><div style="font-size:52px">\uD83D\uDD12</div>'+
+    '<h2>Install the app to view this page</h2>'+
+    '<div class="mr">\u0939\u0947 \u092A\u093E\u0928 \u092A\u093E\u0939\u0923\u094D\u092F\u093E\u0938\u093E\u0920\u0940 \u0905\u0945\u092A \u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932 \u0915\u0930\u093E</div>'+
+    '<p>Tap the button, install, then open <b>Fitter Learn</b> from your home screen.</p>'+
+    '<button type="button" id="gateBtn">\u2B07\uFE0F Install app / \u0905\u0945\u092A \u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932</button>'+
+    '<div class="help" id="gateHelp"></div></div>';
+   document.body.appendChild(g);
+   var help=g.querySelector('#gateHelp');
+   function showHelp(html){help.innerHTML=html;help.style.display='block';}
+   function manual(){
+     showHelp(isIOS
+      ?'<b>iPhone:</b> tap <b>Share</b> (\u2B06\uFE0F) \u2192 <b>Add to Home Screen</b>, then open the new icon.<br><span style="color:#fde68a">Share \u2192 Add to Home Screen \u0928\u093F\u0935\u0921\u093E \u0906\u0923\u093F \u0928\u0935\u0940\u0928 \u0906\u092F\u0915\u0949\u0928 \u0909\u0918\u0921\u093E.</span>'
+      :'<b>Android:</b> open the browser menu (\u22EE) \u2192 <b>Install app</b> (or <b>Add to Home screen</b>), then open the new icon from your home screen.<br><span style="color:#fde68a">\u22EE \u0924\u094D\u092F\u093E\u0928\u0902\u0924\u0930 Install app \u0935\u093E\u092A\u0930\u093E, \u092E\u0917 \u0939\u094B\u092E \u0938\u094D\u0915\u094D\u0930\u0940\u0928\u0935\u0930\u0940\u0932 \u0906\u092F\u0915\u0949\u0928 \u0909\u0918\u0921\u093E.</span>');
+   }
+   function done(){
+     showHelp('\u2705 <b>Installed.</b> Now open <b>Fitter Learn</b> from your home screen.<br><span style="color:#fde68a">\u0907\u0928\u094D\u0938\u094D\u091F\u0949\u0932 \u091D\u093E\u0932\u0947. \u0906\u0924\u093E \u0939\u094B\u092E \u0938\u094D\u0915\u094D\u0930\u0940\u0928\u0935\u0930\u0942\u0928 \u0905\u0945\u092A \u0909\u0918\u0921\u093E.</span>');
+   }
+   g.querySelector('#gateBtn').onclick=function(){
+     if(deferred){
+       deferred.prompt();
+       deferred.userChoice.then(function(r){deferred=null;if(r&&r.outcome==='accepted')done();else manual();});
+     } else manual();
+   };
+   window.addEventListener('appinstalled',done);
+   if(isIOS)manual();
+ }
+ if(document.body)build();else document.addEventListener('DOMContentLoaded',build);
+})();
+</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<meta name="description" content="PS-20 Pillar Drilling Machine — Info Sheet / माहिती पत्रक">
+<title>PS-20 Pillar Drilling Machine — Info Sheet / माहिती पत्रक</title>
+<!-- PWA: installable, full-screen, offline -->
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fitter Learn">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0f766e;--brand2:#115e59;--accent:#f59e0b;--ink:#0f172a;--muted:#64748b;--line:#dbe4ea;--mr:#7c2d12;--amber-dark:#92400e}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Noto Sans','Segoe UI',Roboto,Arial,sans-serif;color:var(--ink);background:linear-gradient(180deg,#ecfeff 0,#f8fafc 260px,#f8fafc 100%)}
+.mr-text{font-family:'Noto Sans Devanagari','Noto Sans',sans-serif;color:var(--mr);font-size:14.5px;line-height:1.75;font-weight:500}
+.mr-sub2{font-family:'Noto Sans Devanagari','Noto Sans',sans-serif;font-weight:600;font-size:13px;opacity:.85}
+.en-text{font-size:14.5px;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:14px 14px 40px}
+header.hero{background:linear-gradient(135deg,#b45309,#d97706 55%,#f59e0b);color:#fff;border-radius:24px;padding:24px;box-shadow:0 12px 30px rgba(15,118,110,.16);display:flex;align-items:center;gap:18px;flex-wrap:wrap;position:relative;overflow:hidden}
+header.hero:after{content:'QR SMART LEARNING';position:absolute;right:-20px;bottom:8px;font-size:46px;font-weight:900;opacity:.06;transform:rotate(-10deg);pointer-events:none}
+header.hero .tag{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+header.hero h1{margin:8px 0 2px;font-size:25px;line-height:1.25}
+header.hero h1.mr{font-size:18px;font-family:'Noto Sans Devanagari',sans-serif;font-weight:700;margin:0 0 8px}
+header.hero p{margin:2px 0;opacity:.95;font-size:13.5px}
+header.hero p.mr{font-family:'Noto Sans Devanagari',sans-serif}
+.icon-drill{font-size:44px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
+.instructor-badge{display:inline-block;margin:8px 0 10px;padding:9px 14px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);border-radius:12px}
+.instr-name{font-weight:800;font-size:15.5px;color:#fde047;text-shadow:0 1px 2px rgba(0,0,0,.35);margin-bottom:2px}
+.instr-line{font-weight:700;font-size:12.5px;line-height:1.55;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+.instr-role{color:#7dd3fc}.instr-inst{color:#fca5a5}.instr-trade{color:#86efac}.instr-qual{color:#e9d5ff}
+
+.smartbar{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px;padding:8px;margin:10px 0;box-shadow:0 5px 18px rgba(15,23,42,.08)}
+.navrow{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none}.navrow::-webkit-scrollbar{display:none}
+.navbtn{flex:0 0 auto;border:0;border-radius:11px;background:#f1f5f9;color:#334155;padding:9px 12px;font-weight:700;font-size:13px;cursor:pointer}
+.navbtn.active,.navbtn:hover{background:var(--brand);color:#fff}
+.student-tools{display:grid;grid-template-columns:1.3fr .8fr .8fr;gap:10px;margin:12px 0}
+.toolbox{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}
+.toolbox label{display:block;font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;margin-bottom:5px}
+.toolbox input,.toolbox select{width:100%;border:1px solid #cbd5e1;border-radius:10px;padding:10px;background:#fff;font-size:16px}
+.progressbox{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:16px;padding:13px}
+.progressbox small{opacity:.85}
+.progressline{height:8px;background:rgba(255,255,255,.25);border-radius:10px;overflow:hidden;margin-top:8px}
+.progressline i{display:block;height:100%;width:0;background:#fbbf24;border-radius:10px;transition:.3s}
+.learning-map{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+.map-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:13px;text-decoration:none;color:inherit;box-shadow:0 3px 12px rgba(15,23,42,.04);transition:.2s}
+.map-card:hover{transform:translateY(-2px);border-color:#99f6e4}
+.map-card b{display:block;font-size:14px}.map-card span{display:block;font-size:11px;color:var(--muted);margin-top:4px}
+
+section{margin-top:22px}
+.card{position:relative;border-radius:14px;padding:18px 20px;border:1px solid rgba(0,0,0,.06);box-shadow:0 6px 18px rgba(15,23,42,.08);overflow:hidden;opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
+.card.fade-in{opacity:1;transform:none}
+.card h2{display:block;width:calc(100% + 40px);margin:-18px -20px 14px -20px;padding:13px 44px 13px 20px;font-size:15.5px;color:#fff;cursor:pointer;position:relative}
+.card h2::after{content:'▾';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:16px;opacity:.85;transition:transform .2s}
+.card.collapsed h2::after{transform:translateY(-50%) rotate(-90deg)}
+.card.collapsed>*:not(h2){display:none!important}
+.card h2 .mr-sub{display:block;margin-top:2px;font-size:15px;font-family:'Noto Sans Devanagari',sans-serif;font-weight:600;opacity:.92}
+.section-intro-line{height:1px;background:currentColor;opacity:.15;margin:6px 0 14px}
+.icon-badge{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(0,0,0,.18);font-size:16px;vertical-align:middle;margin-right:8px}
+.completed{outline:2px solid #5eead4;outline-offset:2px}
+.search-hit{box-shadow:0 0 0 3px #fbbf24!important}
+.checkrow{display:flex;gap:8px;align-items:center;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:11px;padding:9px;margin-top:8px;font-size:13px}
+.checkrow input{accent-color:var(--brand);width:18px;height:18px}
+
+.manufacturer{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}.manufacturer h2{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
+.manufacturer .row{margin-bottom:10px;padding-bottom:8px;border-bottom:1px dashed #93c5fd}.manufacturer .row:last-child{border-bottom:none;margin-bottom:0}.manufacturer .row b{color:#1d4ed8}
+.specs{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}.specs h2{background:linear-gradient(90deg,#15803d,#22c55e)}
+table.spec-table{width:100%;border-collapse:collapse;font-size:14px}
+table.spec-table tr{border-bottom:1px solid #d1fae5}table.spec-table tr:nth-child(even){background:rgba(255,255,255,.5)}
+table.spec-table td{padding:8px;vertical-align:top}
+table.spec-table td.label{font-weight:600;color:#15803d;width:48%}
+table.spec-table td.label .mr-text{color:#166534;font-size:13px;margin-top:2px}
+table.spec-table td.value{font-weight:600}
+.working{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}.working h2{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+.working ol{margin:0;padding-left:20px}.working li{margin-bottom:12px}.working li .mr-text{margin-top:3px}
+.components{background:linear-gradient(135deg,#e0e7ff,#c7d2fe)}.components h2{background:linear-gradient(90deg,#4338ca,#6366f1)}
+.op-block{background:linear-gradient(135deg,#e0f2fe,#bae6fd)}.op-block h2{background:linear-gradient(90deg,#0284c7,#38bdf8)}
+.op-item{padding:10px 0;border-bottom:1px dashed #7dd3fc}.op-item:last-child{border-bottom:none}
+.op-title{font-weight:700;color:#0369a1;margin-bottom:3px;font-size:14.5px}
+.components .op-item{border-bottom-color:#a5b4fc}.components .op-title{color:#4338ca}
+.formula-block{background:linear-gradient(135deg,#fef9c3,#fde68a)}.formula-block h2{background:linear-gradient(90deg,#ca8a04,#eab308)}
+.formula-box{background:#fff;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin:8px 0;font-family:monospace;font-size:14.5px;font-weight:700;color:#854d0e}
+.uses{background:linear-gradient(135deg,#fef3c7,#fde68a)}.uses h2{background:linear-gradient(90deg,#d97706,#f59e0b)}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:#fff7d6;color:#92400e;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid #fde68a}
+.chip .mr-text{display:inline;color:#7c2d12;font-size:12.5px;font-weight:600;margin-left:4px}
+.safety{background:linear-gradient(135deg,#fee2e2,#fecaca)}.safety h2{background:linear-gradient(90deg,#dc2626,#ef4444)}
+.safety ul{margin:0;padding:0;list-style:none}
+.safety li{padding:8px 0 8px 30px;position:relative;border-bottom:1px dashed #fca5a5}.safety li:last-child{border-bottom:none}
+.safety li::before{content:"⚠";position:absolute;left:0;top:8px;color:#dc2626;font-size:16px}
+.safety li .mr-text{margin-top:3px}
+.info-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+.info-table th{background:rgba(255,255,255,.7);text-align:left;padding:7px 8px;font-size:12.5px;color:#334155;border-bottom:2px solid #cbd5e1}
+.info-table td{padding:7px 8px;vertical-align:top;border-bottom:1px solid rgba(100,116,139,.25)}
+.info-table .mr-text{font-size:12.5px}
+.table-scroll{overflow-x:auto}
+.dos-donts{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}.dos-donts h2{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.dd-col{margin-bottom:14px}.dd-col:last-child{margin-bottom:0}
+.dd-head{font-weight:700;font-size:14px;margin-bottom:6px}.dd-head.do{color:#15803d}.dd-head.dont{color:#dc2626}
+.dd-item{padding:5px 0 5px 24px;position:relative;font-size:13.5px;border-bottom:1px dashed #86efac}.dd-item:last-child{border-bottom:none}
+.dd-item.do::before{content:"✔";position:absolute;left:0;color:#16a34a}.dd-item.dont::before{content:"✘";position:absolute;left:0;color:#dc2626}
+.viva{background:linear-gradient(135deg,#f3e8ff,#e9d5ff)}.viva h2{background:linear-gradient(90deg,#9333ea,#c084fc)}
+.viva-item{padding:8px 0;border-bottom:1px dashed #d8b4fe}.viva-item:last-child{border-bottom:none}
+.viva-q{font-weight:700;color:#7e22ce;font-size:13.5px}.viva-a{font-size:13.5px;margin-top:3px}
+.mcq-section{background:linear-gradient(135deg,#ffe4e6,#fecdd3)}.mcq-section h2{background:linear-gradient(90deg,#e11d48,#fb7185)}
+.mcq-score-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;background:rgba(255,255,255,.85);border-radius:10px;padding:8px 14px;margin-bottom:12px;font-weight:800;font-size:13.5px;color:#9f1239;flex-wrap:wrap}
+.mcq-score-bar button{border:0;background:#e11d48;color:#fff;border-radius:8px;padding:6px 12px;font-weight:700;font-size:12.5px;cursor:pointer}
+.mcq-item{padding:9px 0;border-bottom:1px dashed #fda4af}.mcq-item:last-child{border-bottom:none}
+.mcq-q{font-weight:700;font-size:13.5px;margin-bottom:6px}
+.mcq-opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #fecdd3;border-radius:9px;padding:8px 12px;margin-bottom:6px;cursor:pointer;font-size:13px;font-family:inherit;color:inherit;transition:.15s}
+.mcq-opt:hover{border-color:#fb7185}
+.mcq-item.answered .mcq-opt{cursor:default}
+.mcq-opt.opt-correct{background:#dcfce7;border-color:#16a34a;color:#14532d}
+.mcq-opt.opt-wrong{background:#fee2e2;border-color:#dc2626;color:#7f1d1d}
+.mcq-feedback{font-size:12.5px;font-weight:700;margin-top:2px}.mcq-feedback.correct{color:#15803d}.mcq-feedback.wrong{color:#b91c1c}
+
+footer{text-align:center;font-size:12px;color:#94a3b8;margin-top:24px}
+footer .mr{font-family:'Noto Sans Devanagari',sans-serif;display:block;margin-top:4px}
+.backtop{position:fixed;right:16px;bottom:16px;z-index:1100;width:44px;height:44px;border:0;border-radius:50%;background:var(--brand);color:#fff;font-size:20px;box-shadow:0 8px 20px rgba(15,118,110,.3);cursor:pointer}
+.print-only{display:none}
+
+/* ===== Content protection ===== */
+html,body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+input,textarea{-webkit-user-select:text!important;user-select:text!important}
+img,svg,canvas{-webkit-user-drag:none;pointer-events:none}
+.protect-watermark{position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;overflow:hidden;z-index:99999}
+.protect-watermark span{position:absolute;color:rgba(15,23,42,.11);font-size:19px;font-weight:700;white-space:nowrap;transform:rotate(-28deg)}
+@media print{html,body{display:none!important}}
+
+/* ===== PWA buttons ===== */
+.pwa-fab{position:fixed;left:14px;bottom:16px;z-index:1200;display:flex;flex-direction:column;gap:10px}
+.pwa-btn{border:0;border-radius:999px;padding:11px 16px;font:700 13px 'Noto Sans',Arial,sans-serif;color:#fff;background:#0f766e;box-shadow:0 8px 20px rgba(15,118,110,.35);cursor:pointer}
+
+@media(max-width:720px){.student-tools{grid-template-columns:1fr 1fr}.student-tools .wide{grid-column:1/-1}.learning-map{grid-template-columns:1fr 1fr}header.hero{padding:18px}header.hero h1{font-size:22px}}
+@media(max-width:430px){.student-tools,.learning-map{grid-template-columns:1fr}.student-tools .wide{grid-column:auto}}
+
+/* language switch */
+body.english-only .mr,body.english-only .mr-text,body.english-only .mr-sub,body.english-only .mr-sub2{display:none!important}
+body.marathi-only h1:not(.mr),body.marathi-only .tag,body.marathi-only header.hero p:not(.mr){display:none!important}
+body.marathi-only .mr{display:block!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="icon-drill">🛠️</div>
+    <div>
+      <span class="tag">Machine Info • Scan &amp; Learn / माहिती स्कॅन करा</span>
+      <h1>Pillar Drilling Machine — PS‑20</h1>
+      <h1 class="mr">पिलर ड्रिलिंग मशीन — PS-20</h1>
+      <div class="instructor-badge">
+        <div class="instr-name">👨‍🏫 Dinesh Shivaji Mule</div>
+        <div class="instr-line instr-role">Craft Instructor</div>
+        <div class="instr-line instr-inst">Government Industrial Training Institute Bhoom</div>
+        <div class="instr-line instr-trade">Trade: Fitter</div>
+        <div class="instr-line instr-qual">[B.E., D.M.E. – Mechanical]</div>
+      </div>
+      <p>Belt-driven bench/pillar type drill press for precision hole drilling in metal</p>
+      <p class="mr">धातूमध्ये अचूक छिद्र पाडण्यासाठी बेल्ट-चलित पिलर टाईप ड्रिल मशीन</p>
+    </div>
+  </header>
+
+  <div class="smartbar" aria-label="Student navigation">
+    <div class="navrow">
+      <button class="navbtn active" data-target="top">🏠 Home</button>
+      <button class="navbtn" data-target="machine-info">📘 Machine Info</button>
+      <button class="navbtn" data-target="safety">🦺 Safety</button>
+      <button class="navbtn" data-target="operations">⚙️ Operations</button>
+      <button class="navbtn" data-target="setting">🔧 Setting</button>
+      <button class="navbtn" data-target="revision">📝 Revision</button>
+    </div>
+  </div>
+  <section class="student-tools" id="top">
+    <div class="toolbox wide"><label>🔎 Find a topic / विषय शोधा</label><input id="topicSearch" placeholder="e.g. safety, RPM…" type="search"></div>
+    <div class="progressbox"><small>Student progress</small><div><b id="progressText">0% complete</b></div><div class="progressline"><i id="progressBar"></i></div></div>
+    <div class="toolbox"><label>🌐 Language</label><select id="langSelect"><option value="both">English + मराठी</option><option value="en">English only</option><option value="mr">फक्त मराठी</option></select></div>
+  </section>
+  <section class="learning-map" aria-label="Learning map">
+    <a class="map-card" href="#machine-info"><b>1️⃣ Know the Machine</b><span>Parts • specifications • controls</span></a>
+    <a class="map-card" href="#safety"><b>2️⃣ Work Safely</b><span>PPE • Do's &amp; Don'ts</span></a>
+    <a class="map-card" href="#operations"><b>3️⃣ Learn Operations</b><span>Setting • tools • operations</span></a>
+    <a class="map-card" href="#revision"><b>4️⃣ Test Yourself</b><span>Viva • MCQs</span></a>
+  </section>
+
+  <div class="print-only"><h2>Fitter Trade — QR Smart Learning</h2><p>Pillar Drilling Machine — PS‑20</p></div>
+
+  <section class="card manufacturer" id="machine-info">
+    <h2><span class="icon-badge">🏭</span> Manufacturer Details <span class="mr-sub">/ उत्पादक तपशील</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="row"><b>Company / कंपनी:</b> P. Parmar Machine Tools <span class="mr-text">— पी. परमार मशीन टूल्स</span></div>
+    <div class="row"><b>Location / ठिकाण:</b> Bhavnagar, Gujarat, India <span class="mr-text">— भावनगर, गुजरात, भारत</span></div>
+    <div class="row"><b>Established / स्थापना:</b> 1972 (by Mr. P.D. Parmar) <span class="mr-text">— १९७२ (श्री. पी.डी. परमार यांच्याद्वारे)</span></div>
+    <div class="row"><b>Currently run by / सध्या चालवतात:</b> Mr. B.P. Parmar &amp; Mr. H.P. Parmar <span class="mr-text">— श्री. बी.पी. परमार व श्री. एच.पी. परमार</span></div>
+    <div class="row"><b>Model / मॉडेल:</b> PS‑20 Pillar Drill Machine <span class="mr-text">— PS-20 पिलर ड्रिल मशीन</span></div>
+    <div class="row"><b>Country of Origin / उत्पत्ती देश:</b> India <span class="mr-text">— भारत</span></div>
+  </section>
+
+  <section class="card specs" id="specs">
+    <h2><span class="icon-badge">📐</span> Technical Specifications <span class="mr-sub">/ तांत्रिक तपशील</span></h2>
+    <div class="section-intro-line"></div>
+    <table class="spec-table">
+      <tr><td class="label">Drilling Capacity (Mild Steel)<div class="mr-text">ड्रिलिंग क्षमता (माइल्ड स्टील)</div></td><td class="value">20 mm</td></tr>
+      <tr><td class="label">Motor Power<div class="mr-text">मोटर पॉवर</div></td><td class="value">1 HP, 1440 RPM, 3‑Phase, 440 V</td></tr>
+      <tr><td class="label">Number of Spindle Speeds<div class="mr-text">स्पिंडल गतीचे टप्पे</div></td><td class="value">8‑step (80 – 3500 RPM)</td></tr>
+      <tr><td class="label">Spindle Travel<div class="mr-text">स्पिंडल प्रवास</div></td><td class="value">130 mm</td></tr>
+      <tr><td class="label">Spindle Nose Taper<div class="mr-text">स्पिंडल नोज टेपर</div></td><td class="value">MT‑2 (Morse Taper 2)</td></tr>
+      <tr><td class="label">Machine / Drive Type<div class="mr-text">मशीन / ड्राईव्ह प्रकार</div></td><td class="value">Belt drive (V‑belt, A‑44″)</td></tr>
+      <tr><td class="label">Table Size<div class="mr-text">टेबल आकार</div></td><td class="value">260 × 260 mm</td></tr>
+      <tr><td class="label">Table Travel<div class="mr-text">टेबल प्रवास</div></td><td class="value">200 mm</td></tr>
+      <tr><td class="label">Spindle Nose to Table (max)<div class="mr-text">स्पिंडल नोज ते टेबल (कमाल)</div></td><td class="value">650 mm</td></tr>
+      <tr><td class="label">Spindle Nose to Base (max)<div class="mr-text">स्पिंडल नोज ते बेस (कमाल)</div></td><td class="value">900 mm</td></tr>
+      <tr><td class="label">Pillar Diameter / Length<div class="mr-text">पिलर व्यास / लांबी</div></td><td class="value">74.30 mm / 1170 mm</td></tr>
+      <tr><td class="label">Base Size<div class="mr-text">बेस आकार</div></td><td class="value">470 × 320 mm</td></tr>
+      <tr><td class="label">Approx. Weight<div class="mr-text">अंदाजे वजन</div></td><td class="value">110 kg</td></tr>
+      <tr><td class="label">Power Source<div class="mr-text">पॉवर सोर्स</div></td><td class="value">3‑Phase Electric Supply</td></tr>
+    </table>
+  </section>
+
+  <section class="card working" id="principle">
+    <h2><span class="icon-badge">⚙️</span> Working Principle <span class="mr-sub">/ कार्यपद्धती</span></h2>
+    <div class="section-intro-line"></div>
+    <ol>
+      <li><div class="en-text">The electric motor spins a step‑pulley connected by a V‑belt to the spindle, giving 8 selectable speeds.</div><div class="mr-text">इलेक्ट्रिक मोटर व्ही-बेल्टद्वारे स्पिंडलला जोडलेल्या स्टेप-पुलीला फिरवते, ज्यामुळे ८ वेगवेगळे स्पीड निवडता येतात.</div></li>
+      <li><div class="en-text">A drill bit/chuck is fitted into the spindle's MT‑2 taper nose.</div><div class="mr-text">स्पिंडलच्या MT-2 टेपर नोजमध्ये ड्रिल बिट/चक बसवले जाते.</div></li>
+      <li><div class="en-text">The workpiece is firmly clamped in a vice sitting on the adjustable table.</div><div class="mr-text">वर्कपीस अ‍ॅडजस्टेबल टेबलवरील वाइसमध्ये घट्ट पकडले जाते.</div></li>
+      <li><div class="en-text">Turning the hand feed lever (rack &amp; pinion) lowers the rotating spindle steadily onto the workpiece.</div><div class="mr-text">हँड फीड लिव्हर (रॅक व पिनियन) फिरवल्याने फिरणारा स्पिंडल हळूहळू वर्कपीसवर खाली येतो.</div></li>
+      <li><div class="en-text">The rotating drill bit cuts/removes material to bore a hole; table height and column position can be adjusted for different job sizes.</div><div class="mr-text">फिरणारे ड्रिल बिट मटेरियल कापून/काढून छिद्र पाडते; वेगवेगळ्या कामांसाठी टेबलची उंची व कॉलमची स्थिती अ‍ॅडजस्ट करता येते.</div></li>
+      <li><div class="en-text">After drilling, the spindle is raised back and the machine switched off.</div><div class="mr-text">ड्रिलिंग झाल्यावर स्पिंडल पुन्हा वर उचलले जाते आणि मशीन बंद केले जाते.</div></li>
+    </ol>
+  </section>
+
+  <section class="card uses" id="uses">
+    <h2><span class="icon-badge">🎯</span> Uses / Applications <span class="mr-sub">/ उपयोग</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="chip-row">
+      <span class="chip">Drilling holes<span class="mr-text">/ छिद्र पाडणे</span></span>
+      <span class="chip">Reaming<span class="mr-text">/ रीमिंग</span></span>
+      <span class="chip">Counter‑sinking<span class="mr-text">/ काउंटर-सिंकिंग</span></span>
+      <span class="chip">Counter‑boring<span class="mr-text">/ काउंटर-बोअरिंग</span></span>
+      <span class="chip">Light tapping<span class="mr-text">/ हलके टॅपिंग</span></span>
+      <span class="chip">MS / SS / Aluminium / Brass / CI<span class="mr-text">/ माइल्ड स्टील, एसएस, अ‍ॅल्युमिनियम, पितळ, कास्ट आयर्न</span></span>
+      <span class="chip">Fabrication units<span class="mr-text">/ फॅब्रिकेशन युनिट्स</span></span>
+      <span class="chip">Tool rooms<span class="mr-text">/ टूल रूम्स</span></span>
+      <span class="chip">Maintenance shops<span class="mr-text">/ मेंटेनन्स शॉप्स</span></span>
+      <span class="chip">Automobile industry<span class="mr-text">/ ऑटोमोबाइल उद्योग</span></span>
+      <span class="chip">Railway workshops<span class="mr-text">/ रेल्वे वर्कशॉप्स</span></span>
+      <span class="chip">ITI / Engineering labs<span class="mr-text">/ आयटीआय / इंजिनिअरिंग लॅब</span></span>
+    </div>
+  </section>
+
+  <section class="card safety" id="safety">
+    <h2><span class="icon-badge">🚨</span> Safety Precautions <span class="mr-sub">/ सुरक्षा खबरदारी</span></h2>
+    <div class="section-intro-line"></div>
+    <ul>
+      <li><div class="en-text">Always wear safety goggles/face shield to protect eyes from metal chips.</div><div class="mr-text">धातूच्या तुकड्यांपासून डोळ्यांच्या संरक्षणासाठी नेहमी सेफ्टी गॉगल्स/फेस शील्ड वापरा.</div></li>
+      <li><div class="en-text">Do not wear loose clothing, ties, or gloves — they can get caught in the rotating chuck/spindle. Tie back long hair.</div><div class="mr-text">सैल कपडे, टाय किंवा हातमोजे घालू नका — ते फिरणाऱ्या चक/स्पिंडलमध्ये अडकू शकतात. लांब केस बांधून ठेवा.</div></li>
+      <li><div class="en-text">Always clamp the workpiece firmly in a vice or fixture — never hold it by hand.</div><div class="mr-text">वर्कपीस नेहमी वाइस किंवा फिक्श्चरमध्ये घट्ट पकडा — कधीही हाताने धरू नका.</div></li>
+      <li><div class="en-text">Remove the chuck key immediately after tightening/loosening the drill bit.</div><div class="mr-text">ड्रिल बिट घट्ट/सैल केल्यानंतर लगेच चक की काढून टाका.</div></li>
+      <li><div class="en-text">Select the correct spindle speed for the drill size and material before switching ON.</div><div class="mr-text">मशीन सुरू करण्यापूर्वी ड्रिल आकार व मटेरियलनुसार योग्य स्पिंडल स्पीड निवडा.</div></li>
+      <li><div class="en-text">Never touch the rotating chuck, spindle, or drill bit.</div><div class="mr-text">फिरणाऱ्या चक, स्पिंडल किंवा ड्रिल बिटला कधीही स्पर्श करू नका.</div></li>
+      <li><div class="en-text">Clear chips with a brush, never with bare hands or by blowing.</div><div class="mr-text">चिप्स ब्रशने साफ करा, कधीही उघड्या हाताने किंवा फुंकून साफ करू नका.</div></li>
+      <li><div class="en-text">Switch OFF and wait for the spindle to stop completely before making adjustments.</div><div class="mr-text">कोणतेही समायोजन करण्यापूर्वी मशीन बंद करा आणि स्पिंडल पूर्णपणे थांबेपर्यंत थांबा.</div></li>
+      <li><div class="en-text">Check the machine's earthing/grounding connection before starting work.</div><div class="mr-text">काम सुरू करण्यापूर्वी मशीनचे अर्थिंग/ग्राउंडिंग कनेक्शन तपासा.</div></li>
+      <li><div class="en-text">Do not attempt to drill beyond the machine's rated capacity (20 mm in mild steel).</div><div class="mr-text">मशीनच्या क्षमतेपेक्षा जास्त (माइल्ड स्टीलमध्ये २० मिमी) ड्रिलिंग करण्याचा प्रयत्न करू नका.</div></li>
+      <li><div class="en-text">Keep the work area clean, dry, and well lit; report any fault immediately to the instructor/supervisor.</div><div class="mr-text">कामाची जागा स्वच्छ, कोरडी व चांगली उजेड असलेली ठेवा; कोणताही बिघाड झाल्यास लगेच शिक्षक/पर्यवेक्षकांना सांगा.</div></li>
+      <li><div class="en-text">Never leave the machine running unattended.</div><div class="mr-text">मशीन कधीही चालू ठेवून लक्ष न देता सोडून जाऊ नका.</div></li>
+    </ul>
+  </section>
+
+  <section class="card op-block" id="identification">
+    <h2><span class="icon-badge">🆔</span> Machine Identification <span class="mr-sub">/ मशीन ओळख</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="table-scroll"><table class="info-table">
+      <thead><tr><th>Field<br><span class="mr-text">तपशील</span></th><th>Value<br><span class="mr-text">मूल्य</span></th></tr></thead>
+      <tbody>
+        <tr><td>Machine Name</td><td>PS-20 Pillar Drilling Machine <span class="mr-text">/ PS-20 पिलर ड्रिलिंग मशीन</span></td></tr>
+        <tr><td>Manufacturer</td><td>P. Parmar Machine Tools, Bhavnagar <span class="mr-text">/ पी. परमार मशीन टूल्स, भावनगर</span></td></tr>
+        <tr><td>Drilling Capacity</td><td>20 mm (Mild Steel)</td></tr>
+        <tr><td>Spindle Nose Taper</td><td>MT-2 (Morse Taper 2)</td></tr>
+        <tr><td>Location / Lab</td><td>As per institute workshop record <span class="mr-text">/ संस्थेच्या वर्कशॉप नोंदीप्रमाणे</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card components" id="parts-more">
+    <h2><span class="icon-badge">🧩</span> More Parts Explained <span class="mr-sub">/ आणखी भाग स्पष्टीकरण</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Spindle <span class="mr-sub2">/ स्पिंडल</span></div><div class="en-text">The rotating shaft ending in an MT-2 taper nose that holds the drill chuck or taper-shank drill directly.</div><div class="mr-text">MT-2 टेपर नोजमध्ये संपणारा फिरणारा शाफ्ट जो ड्रिल चक किंवा टेपर-शँक ड्रिल थेट धरतो.</div></div>
+    <div class="op-item"><div class="op-title">Quill <span class="mr-sub2">/ क्विल</span></div><div class="en-text">The sliding sleeve around the spindle that moves it up/down when the rack-and-pinion feed lever is turned.</div><div class="mr-text">स्पिंडलभोवतीचे सरकणारे स्लीव्ह जे रॅक-अँड-पिनियन फीड लिव्हर फिरवल्यावर त्याला वर/खाली हलवते.</div></div>
+    <div class="op-item"><div class="op-title">Column (Pillar) <span class="mr-sub2">/ कॉलम (पिलर)</span></div><div class="en-text">The single round vertical post (74.30 mm dia., 1170 mm long) connecting base to head; the table clamps onto it and slides for height adjustment.</div><div class="mr-text">बेसला हेडशी जोडणारा एकच गोल उभा खांब (व्यास 74.30 मिमी, लांबी 1170 मिमी); टेबल त्यावर क्लॅम्प होऊन उंची अ‍ॅडजस्टमेंटसाठी सरकते.</div></div>
+    <div class="op-item"><div class="op-title">Table <span class="mr-sub2">/ टेबल</span></div><div class="en-text">The 260 × 260 mm work surface that clamps to the column, with 200 mm of vertical travel to suit different job heights.</div><div class="mr-text">कॉलमला क्लॅम्प होणारा 260 × 260 मिमी कामाचा पृष्ठभाग, वेगवेगळ्या जॉब उंचीसाठी 200 मिमी उभा प्रवास.</div></div>
+    <div class="op-item"><div class="op-title">Base <span class="mr-sub2">/ बेस</span></div><div class="en-text">The heavy 470 × 320 mm cast foundation supporting the entire machine and keeping it stable during drilling.</div><div class="mr-text">संपूर्ण मशीनला आधार देणारा व ड्रिलिंगदरम्यान स्थिर ठेवणारा जड 470 × 320 मिमी कास्ट पाया.</div></div>
+    <div class="op-item"><div class="op-title">Rack &amp; Pinion Feed Mechanism <span class="mr-sub2">/ रॅक व पिनियन फीड यंत्रणा</span></div><div class="en-text">Converts the rotary motion of the hand feed lever into the smooth, controllable linear feed of the spindle/quill into the workpiece.</div><div class="mr-text">हँड फीड लिव्हरच्या गोल हालचालीचे स्पिंडल/क्विलच्या वर्कपीसमधील सुरळीत, नियंत्रित रेखीय फीडमध्ये रूपांतर करते.</div></div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">⚡</span> Motor, Drive System &amp; Speed Selection <span class="mr-sub">/ मोटर, ड्राईव्ह सिस्टम व स्पीड निवड</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Motor &amp; Drive System <span class="mr-sub2">/ मोटर व ड्राईव्ह सिस्टम</span></div><div class="en-text">A 1 HP, 1440 RPM, 3-phase motor drives an 8-step cone pulley connected by a V-belt (A-44″) to a matching pulley on the spindle.</div><div class="mr-text">1 HP, 1440 RPM, 3-फेज मोटर व्ही-बेल्टद्वारे (A-44″) स्पिंडलवरील जुळणाऱ्या पुलीला जोडलेली 8-स्टेप कोन पुली चालवते.</div></div>
+    <div class="op-item"><div class="op-title">Speed Selection <span class="mr-sub2">/ स्पीड निवड</span></div><div class="en-text">With the machine switched off, the V-belt is moved to a different matching step on the motor and spindle cone pulleys to select one of 8 speeds from 80–3500 RPM.</div><div class="mr-text">मशीन बंद असताना, 80–3500 आरपीएम मधील 8 स्पीडपैकी एक निवडण्यासाठी व्ही-बेल्ट मोटर व स्पिंडल कोन पुलीवरील वेगळ्या जुळणाऱ्या स्टेपवर हलवला जातो.</div></div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🌀</span> Drill Chuck, Spindle &amp; Quill <span class="mr-sub">/ ड्रिल चक, स्पिंडल व क्विल</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Drill Chuck / Taper-Shank Tooling <span class="mr-sub2">/ ड्रिल चक / टेपर-शँक टूलिंग</span></div><div class="en-text">Straight-shank drills are held in a keyed drill chuck fitted with an MT-2 arbor; taper-shank drills of matching size can be fitted directly into the MT-2 spindle nose.</div><div class="mr-text">सरळ-शँक ड्रिल्स MT-2 अर्बर बसवलेल्या की-ऑपरेटेड ड्रिल चकमध्ये धरले जातात; जुळणाऱ्या आकाराचे टेपर-शँक ड्रिल्स थेट MT-2 स्पिंडल नोजमध्ये बसवता येतात.</div></div>
+    <div class="op-item"><div class="op-title">Spindle Travel <span class="mr-sub2">/ स्पिंडल प्रवास</span></div><div class="en-text">The spindle/quill has 130 mm of vertical travel per stroke of the feed lever, enough for most standard drilling depths.</div><div class="mr-text">फीड लिव्हरच्या प्रत्येक स्ट्रोकमध्ये स्पिंडल/क्विलला 130 मिमी उभा प्रवास असतो, बहुतांश मानक ड्रिलिंग खोलीसाठी पुरेसा.</div></div>
+  </section>
+
+  <section class="card op-block" id="setting">
+    <h2><span class="icon-badge">🗂️</span> Table Adjustment, Drill-Bit Selection &amp; Work-Holding <span class="mr-sub">/ टेबल अ‍ॅडजस्टमेंट, ड्रिल-बिट निवड व वर्क-होल्डिंग</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Table Adjustment <span class="mr-sub2">/ टेबल अ‍ॅडजस्टमेंट</span></div><div class="en-text">Loosen the table clamp on the column, slide the table up/down through its 200 mm travel to the required height, then re-lock firmly before drilling.</div><div class="mr-text">कॉलमवरील टेबल क्लॅम्प सैल करा, टेबल त्याच्या 200 मिमी प्रवासात आवश्यक उंचीपर्यंत वर/खाली सरकवा, नंतर ड्रिलिंगपूर्वी घट्ट पुन्हा लॉक करा.</div></div>
+    <div class="op-item"><div class="op-title">Drill-Bit Selection <span class="mr-sub2">/ ड्रिल-बिट निवड</span></div><div class="en-text">Choose a drill of the correct diameter (up to 20 mm capacity in mild steel) and the correct shank type (straight or MT-2 taper) for the job.</div><div class="mr-text">जॉबसाठी योग्य व्यासाचा (माइल्ड स्टीलमध्ये कमाल 20 मिमी क्षमता) व योग्य शँक प्रकाराचा (सरळ किंवा MT-2 टेपर) ड्रिल निवडा.</div></div>
+    <div class="op-item"><div class="op-title">Work-Holding <span class="mr-sub2">/ वर्क-होल्डिंग</span></div><div class="en-text">Clamp the workpiece in a machine vice bolted to the table, or clamp it directly with T-bolts and step blocks for larger flat parts.</div><div class="mr-text">वर्कपीस टेबलवर बोल्ट केलेल्या मशीन वाइसमध्ये क्लॅम्प करा, किंवा मोठ्या सपाट भागांसाठी थेट T-बोल्ट व स्टेप ब्लॉकने क्लॅम्प करा.</div></div>
+  </section>
+
+  <section class="card formula-block" id="calculations">
+    <h2><span class="icon-badge">🧮</span> RPM Calculation <span class="mr-sub">/ आरपीएम गणना</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="en-text" style="font-weight:600">Spindle Speed (RPM)</div>
+    <div class="mr-text">स्पिंडल स्पीड (आरपीएम)</div>
+    <div class="formula-box">N = (1000 × V) / (π × D)</div>
+    <div class="en-text" style="font-size:13px;color:#78716c">N = RPM, V = cutting speed (m/min) for the drill material, D = drill diameter (mm). Select the nearest of the 8 available speeds (80–3500 RPM).</div>
+    <div class="mr-text" style="font-size:12.5px">N = आरपीएम, V = ड्रिल मटेरियलसाठी कटिंग स्पीड (मी/मिनिट), D = ड्रिल व्यास (मिमी). उपलब्ध 8 स्पीडपैकी (80–3500 आरपीएम) सर्वात जवळचा निवडा.</div>
+  </section>
+
+  <section class="card op-block" id="operations">
+    <h2><span class="icon-badge">⚙️</span> Drilling Procedure &amp; Operations <span class="mr-sub">/ ड्रिलिंग प्रक्रिया व ऑपरेशन्स</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">General Drilling Procedure <span class="mr-sub2">/ सर्वसाधारण ड्रिलिंग प्रक्रिया</span></div><div class="en-text">Mark and centre-punch the hole location, clamp the job, select the correct spindle speed, start the machine, and feed the drill in steadily using the hand lever.</div><div class="mr-text">छिद्राचे स्थान मार्क करून सेंटर-पंच करा, जॉब क्लॅम्प करा, योग्य स्पिंडल स्पीड निवडा, मशीन सुरू करा, व हँड लिव्हरने ड्रिल स्थिरपणे फीड करा.</div></div>
+    <div class="op-item"><div class="op-title">Centre Drilling <span class="mr-sub2">/ सेंटर ड्रिलिंग</span></div><div class="en-text">A short, stiff centre drill is used first to create an accurate starting dimple, preventing the main drill from wandering off-location.</div><div class="mr-text">मुख्य ड्रिल जागेवरून सरकू नये म्हणून प्रथम एक लहान, कडक सेंटर ड्रिल वापरून अचूक सुरुवातीचा खड्डा तयार करतात.</div></div>
+    <div class="op-item"><div class="op-title">Through-Hole Drilling <span class="mr-sub2">/ थ्रू-होल ड्रिलिंग</span></div><div class="en-text">The drill is fed all the way through the material; feed pressure is reduced just before breakthrough to avoid a rough exit burr.</div><div class="mr-text">ड्रिल मटेरियलमधून पूर्णपणे फीड केला जातो; बाहेर पडण्यापूर्वी खरखरीत बर्ऱ्स टाळण्यासाठी फीड दाब कमी केला जातो.</div></div>
+    <div class="op-item"><div class="op-title">Blind-Hole Drilling <span class="mr-sub2">/ ब्लाइंड-होल ड्रिलिंग</span></div><div class="en-text">A hole is drilled to a specific depth without breaking through, using the spindle travel scale to control depth (up to 130 mm per stroke).</div><div class="mr-text">स्पिंडल प्रवास स्केल वापरून (प्रत्येक स्ट्रोकमध्ये कमाल 130 मिमी) खोली नियंत्रित करून, बाहेर न पडता ठराविक खोलीपर्यंत छिद्र पाडले जाते.</div></div>
+    <div class="op-item"><div class="op-title">Countersinking <span class="mr-sub2">/ काउंटर-सिंकिंग</span></div><div class="en-text">A cone-shaped countersink tool, fitted the same way as a drill, cuts a tapered recess at the top of a hole for a flat-head screw.</div><div class="mr-text">ड्रिलप्रमाणेच बसवलेले शंकू-आकाराचे काउंटरसिंक टूल फ्लॅट-हेड स्क्रूसाठी छिद्राच्या वरील बाजूला टेपर्ड खाच कापते.</div></div>
+    <div class="op-item"><div class="op-title">Counterboring <span class="mr-sub2">/ काउंटर-बोअरिंग</span></div><div class="en-text">A counterbore tool enlarges the top of a hole to a flat-bottomed, larger diameter so a socket-head bolt head sits below the surface.</div><div class="mr-text">काउंटरबोअर टूल छिद्राचा वरील भाग सपाट-तळाच्या मोठ्या व्यासात मोठे करते जेणेकरून सॉकेट-हेड बोल्टचे डोके पृष्ठभागाखाली बसते.</div></div>
+    <div class="op-item"><div class="op-title">Reaming <span class="mr-sub2">/ रीमिंग</span></div><div class="en-text">A reamer is run through an already-drilled hole at a low spindle speed to bring it to a precise, smooth-finished final diameter.</div><div class="mr-text">आधीच ड्रिल केलेल्या छिद्रातून रीमर कमी स्पिंडल स्पीडवर फिरवून त्याला अचूक, गुळगुळीत फिनिश अंतिम व्यास दिला जातो.</div></div>
+    <div class="op-item"><div class="op-title">Light Tapping <span class="mr-sub2">/ हलके टॅपिंग</span></div><div class="en-text">A tap is turned into a pilot hole, by hand or at very low spindle speed, to cut internal screw threads for bolting.</div><div class="mr-text">बोल्टिंगसाठी अंतर्गत स्क्रू थ्रेड कापण्यासाठी पायलट छिद्रात टॅप हाताने किंवा अतिशय कमी स्पिंडल स्पीडवर फिरवला जातो.</div></div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">💧</span> Coolant <span class="mr-sub">/ कूलंट</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Coolant <span class="mr-sub2">/ कूलंट</span></div><div class="en-text">This machine has no built-in coolant pump; for deeper holes or harder material, cutting oil is applied by hand/brush to reduce heat and extend drill life.</div><div class="mr-text">या मशीनमध्ये अंगभूत कूलंट पंप नाही; खोल छिद्रे किंवा कठीण मटेरियलसाठी, उष्णता कमी करण्यासाठी व ड्रिलचे आयुष्य वाढवण्यासाठी कटिंग तेल हाताने/ब्रशने लावले जाते.</div></div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🛠️</span> Maintenance Schedule <span class="mr-sub">/ देखभाल वेळापत्रक</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="table-scroll"><table class="info-table">
+      <thead><tr><th>Frequency<br><span class="mr-text">वारंवारता</span></th><th>Task (EN)</th><th>Task (MR)</th></tr></thead>
+      <tbody>
+        <tr><td>Daily / दैनंदिन</td><td>Clean chips from table, column &amp; base; check chuck grips firmly</td><td class="mr-text">टेबल, कॉलम व बेसवरील चिप्स साफ करा; चक घट्ट पकडतो का तपासा</td></tr>
+        <tr><td>Daily / दैनंदिन</td><td>Oil the quill/rack-and-pinion feed mechanism lightly</td><td class="mr-text">क्विल/रॅक-अँड-पिनियन फीड यंत्रणा हलके तेलाने वंगण करा</td></tr>
+        <tr><td>Weekly / साप्ताहिक</td><td>Check V-belt (A-44″) tension &amp; condition; check cone-pulley alignment</td><td class="mr-text">व्ही-बेल्ट (A-44″) टेन्शन व स्थिती तपासा; कोन-पुली अलाइनमेंट तपासा</td></tr>
+        <tr><td>Weekly / साप्ताहिक</td><td>Check table clamp and column for firm locking at all heights</td><td class="mr-text">सर्व उंचीवर टेबल क्लॅम्प व कॉलम घट्ट लॉक होतो का तपासा</td></tr>
+        <tr><td>Monthly / मासिक</td><td>Check spindle/MT-2 taper for wear; inspect motor wiring &amp; earthing</td><td class="mr-text">स्पिंडल/MT-2 टेपरची झीज तपासा; मोटर वायरिंग व अर्थिंग तपासा</td></tr>
+        <tr><td>Yearly / वार्षिक</td><td>Full inspection and belt replacement if worn, by a qualified technician</td><td class="mr-text">पात्र तंत्रज्ञाकडून संपूर्ण तपासणी व झिजलेला असल्यास बेल्ट बदलणे</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">🔍</span> Troubleshooting <span class="mr-sub">/ समस्यानिवारण</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="table-scroll"><table class="info-table">
+      <thead><tr><th>Problem<br><span class="mr-text">समस्या</span></th><th>Likely Cause<br><span class="mr-text">संभाव्य कारण</span></th><th>Remedy<br><span class="mr-text">उपाय</span></th></tr></thead>
+      <tbody>
+        <tr><td>Drill wanders off-centre <span class="mr-text">/ ड्रिल केंद्रापासून सरकतो</span></td><td>No centre punch mark, blunt drill point <span class="mr-text">/ सेंटर पंच मार्क नाही, बोथट ड्रिल पॉइंट</span></td><td>Centre-punch first, re-sharpen drill <span class="mr-text">/ प्रथम सेंटर-पंच करा, ड्रिल पुन्हा धार लावा</span></td></tr>
+        <tr><td>Belt slipping/squealing <span class="mr-text">/ बेल्ट घसरतो/आवाज करतो</span></td><td>Loose belt tension, worn A-44″ belt <span class="mr-text">/ सैल बेल्ट टेन्शन, झिजलेला A-44″ बेल्ट</span></td><td>Re-tension or replace the V-belt <span class="mr-text">/ व्ही-बेल्ट पुन्हा टेन्शन करा किंवा बदला</span></td></tr>
+        <tr><td>Table won't stay locked at height <span class="mr-text">/ टेबल उंचीवर लॉक राहत नाही</span></td><td>Worn or loose table clamp <span class="mr-text">/ झिजलेला किंवा सैल टेबल क्लॅम्प</span></td><td>Tighten or replace the table clamp mechanism <span class="mr-text">/ टेबल क्लॅम्प यंत्रणा घट्ट करा किंवा बदला</span></td></tr>
+        <tr><td>Drill breaks in hole <span class="mr-text">/ छिद्रात ड्रिल तुटतो</span></td><td>Excess feed force, job not clamped firmly, wrong speed <span class="mr-text">/ जास्त फीड फोर्स, जॉब घट्ट क्लॅम्प नाही, चुकीचा स्पीड</span></td><td>Reduce feed pressure, re-clamp job securely, select correct speed <span class="mr-text">/ फीड दाब कमी करा, जॉब सुरक्षितपणे पुन्हा क्लॅम्प करा, योग्य स्पीड निवडा</span></td></tr>
+        <tr><td>Motor not starting <span class="mr-text">/ मोटर सुरू होत नाही</span></td><td>Tripped overload, loose 3-phase wiring <span class="mr-text">/ ट्रिप झालेला ओव्हरलोड, सैल 3-फेज वायरिंग</span></td><td>Reset overload, check wiring, call electrician <span class="mr-text">/ ओव्हरलोड रीसेट करा, वायरिंग तपासा, इलेक्ट्रिशियनला बोलवा</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="card dos-donts">
+    <h2><span class="icon-badge">✅</span> Dos and Don'ts <span class="mr-sub">/ करा आणि करू नका</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="dd-col">
+      <div class="dd-head do">✔ DO / करा</div>
+      <div class="dd-item do"><span class="en-text">Always wear safety goggles/face shield while drilling</span> <span class="mr-text">— ड्रिलिंग करताना नेहमी सेफ्टी गॉगल्स/फेस शील्ड घाला</span></div>
+      <div class="dd-item do"><span class="en-text">Clamp the job firmly in a vice or fixture before starting</span> <span class="mr-text">— सुरू करण्यापूर्वी जॉब वाइस किंवा फिक्श्चरमध्ये घट्ट क्लॅम्प करा</span></div>
+      <div class="dd-item do"><span class="en-text">Centre-punch the hole location before drilling</span> <span class="mr-text">— ड्रिलिंगपूर्वी छिद्राचे स्थान सेंटर-पंच करा</span></div>
+      <div class="dd-item do"><span class="en-text">Remove the chuck key immediately after tightening</span> <span class="mr-text">— घट्ट केल्यानंतर लगेच चक की काढा</span></div>
+      <div class="dd-item do"><span class="en-text">Select the correct spindle speed for the drill size and material</span> <span class="mr-text">— ड्रिल आकार व मटेरियलनुसार योग्य स्पिंडल स्पीड निवडा</span></div>
+    </div>
+    <div class="dd-col">
+      <div class="dd-head dont">✘ DON'T / करू नका</div>
+      <div class="dd-item dont"><span class="en-text">Don't hold the workpiece by hand</span> <span class="mr-text">— वर्कपीस हाताने धरू नका</span></div>
+      <div class="dd-item dont"><span class="en-text">Don't wear loose clothing, ties, or gloves near the chuck</span> <span class="mr-text">— चकजवळ सैल कपडे, टाय किंवा हातमोजे घालू नका</span></div>
+      <div class="dd-item dont"><span class="en-text">Don't touch the rotating chuck or spindle</span> <span class="mr-text">— फिरणारा चक किंवा स्पिंडल स्पर्श करू नका</span></div>
+      <div class="dd-item dont"><span class="en-text">Don't exceed the machine's 20 mm drilling capacity</span> <span class="mr-text">— मशीनच्या 20 मिमी ड्रिलिंग क्षमतेपेक्षा जास्त जाऊ नका</span></div>
+      <div class="dd-item dont"><span class="en-text">Don't leave the machine running unattended</span> <span class="mr-text">— मशीन लक्ष न देता चालू ठेवू नका</span></div>
+    </div>
+  </section>
+
+  <section class="card op-block">
+    <h2><span class="icon-badge">📋</span> Student Practical Task <span class="mr-sub">/ विद्यार्थी सराव कार्य</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="op-item"><div class="op-title">Task 1 <span class="mr-sub2">/ कार्य 1</span></div><div class="en-text">Mark, centre-punch, and drill 5 through-holes of 10 mm diameter on a 100 × 100 mm MS plate at given coordinates.</div><div class="mr-text">दिलेल्या निर्देशांकांवर 100 × 100 मिमी MS प्लेटवर 10 मिमी व्यासाची 5 थ्रू-होल मार्क, सेंटर-पंच व ड्रिल करा.</div></div>
+    <div class="op-item"><div class="op-title">Task 2 <span class="mr-sub2">/ कार्य 2</span></div><div class="en-text">Drill a blind hole of 12 mm diameter to 20 mm depth using the spindle travel scale.</div><div class="mr-text">स्पिंडल प्रवास स्केल वापरून 12 मिमी व्यासाचे व 20 मिमी खोलीचे ब्लाइंड होल ड्रिल करा.</div></div>
+    <div class="op-item"><div class="op-title">Task 3 <span class="mr-sub2">/ कार्य 3</span></div><div class="en-text">Countersink a drilled hole to suit an M8 flat-head screw.</div><div class="mr-text">M8 फ्लॅट-हेड स्क्रूसाठी ड्रिल केलेले छिद्र काउंटर-सिंक करा.</div></div>
+    <div class="op-item"><div class="op-title">Task 4 <span class="mr-sub2">/ कार्य 4</span></div><div class="en-text">Drill and hand-tap an M10 blind hole to correct depth.</div><div class="mr-text">M10 ब्लाइंड होल ड्रिल करून योग्य खोलीपर्यंत हाताने टॅप करा.</div></div>
+  </section>
+
+  <section class="card viva" id="revision">
+    <h2><span class="icon-badge">❓</span> Viva Questions <span class="mr-sub">/ व्हायवा प्रश्न</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="viva-item"><div class="viva-q">Q: What is the drilling capacity of the PS-20 in mild steel? <span class="mr-sub2">/ PS-20 ची माइल्ड स्टीलमधील ड्रिलिंग क्षमता किती आहे?</span></div><div class="viva-a en-text"><b>A:</b> 20 mm.</div><div class="viva-a mr-text">20 मिमी.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: What type of taper is used at the spindle nose? <span class="mr-sub2">/ स्पिंडल नोजवर कोणत्या प्रकारचा टेपर वापरला आहे?</span></div><div class="viva-a en-text"><b>A:</b> MT-2 (Morse Taper 2).</div><div class="viva-a mr-text">MT-2 (मोर्स टेपर 2).</div></div>
+    <div class="viva-item"><div class="viva-q">Q: How many spindle speeds does this machine offer, and what is the range? <span class="mr-sub2">/ या मशीनला किती स्पिंडल स्पीड्स आहेत व त्यांची रेंज किती आहे?</span></div><div class="viva-a en-text"><b>A:</b> 8-step speeds, from 80 to 3500 RPM.</div><div class="viva-a mr-text">8-स्टेप स्पीड्स, 80 ते 3500 आरपीएम.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: What mechanism converts the feed lever's rotation into spindle movement? <span class="mr-sub2">/ फीड लिव्हरच्या फिरण्याचे स्पिंडल हालचालीत रूपांतर कोणती यंत्रणा करते?</span></div><div class="viva-a en-text"><b>A:</b> The rack and pinion feed mechanism.</div><div class="viva-a mr-text">रॅक व पिनियन फीड यंत्रणा.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: How is spindle speed changed on this machine? <span class="mr-sub2">/ या मशीनवर स्पिंडल स्पीड कसा बदलतात?</span></div><div class="viva-a en-text"><b>A:</b> By moving the V-belt to a different step on the motor/spindle cone pulleys, with the machine off.</div><div class="viva-a mr-text">मशीन बंद असताना व्ही-बेल्ट मोटर/स्पिंडल कोन पुलीवरील वेगळ्या स्टेपवर हलवून.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: What is the maximum spindle travel per stroke? <span class="mr-sub2">/ प्रत्येक स्ट्रोकमध्ये कमाल स्पिंडल प्रवास किती आहे?</span></div><div class="viva-a en-text"><b>A:</b> 130 mm.</div><div class="viva-a mr-text">130 मिमी.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: Why is centre-punching important before drilling? <span class="mr-sub2">/ ड्रिलिंगपूर्वी सेंटर-पंचिंग का महत्त्वाचे आहे?</span></div><div class="viva-a en-text"><b>A:</b> It creates a starting point so the drill does not wander off-location.</div><div class="viva-a mr-text">सुरुवातीचा बिंदू तयार करते जेणेकरून ड्रिल जागेवरून सरकणार नाही.</div></div>
+    <div class="viva-item"><div class="viva-q">Q: What is the table size and its vertical travel? <span class="mr-sub2">/ टेबलचा आकार व त्याचा उभा प्रवास किती आहे?</span></div><div class="viva-a en-text"><b>A:</b> 260 × 260 mm table with 200 mm of vertical travel.</div><div class="viva-a mr-text">260 × 260 मिमी टेबल, 200 मिमी उभा प्रवास.</div></div>
+  </section>
+
+  <section class="card mcq-section" id="mcq">
+    <h2><span class="icon-badge">📝</span> MCQ Questions (30) <span class="mr-sub">/ बहुपर्यायी प्रश्न (30)</span></h2>
+    <div class="section-intro-line"></div>
+    <div class="mcq-score-bar">
+      <span>📊 Score: <span class="mcq-score-val">0</span> / <span class="mcq-score-total">0</span></span>
+      <button type="button" class="mcq-reset-btn">↺ Reset Quiz / रीसेट</button>
+    </div>
+    <div id="mcqList"></div>
+  </section>
+
+  <footer>
+    Generated info sheet for workshop/lab use • Verify nameplate data periodically for accuracy
+    <span class="mr">वर्कशॉप/लॅब वापरासाठी तयार केलेली माहिती पत्रक • अचूकतेसाठी नेमप्लेटवरील माहिती वेळोवेळी तपासा</span>
+  </footer>
+</div>
+
+<script>
+/* ===== MCQ data: [question EN, question MR, [[opt EN, opt MR] x4], correct index] ===== */
+var MCQ=[
+["What is the drilling capacity of the PS-20 in mild steel?","PS-20 ची माइल्ड स्टीलमधील ड्रिलिंग क्षमता किती आहे?",[["10 mm","10 मिमी"],["20 mm","20 मिमी"],["30 mm","30 मिमी"],["50 mm","50 मिमी"]],1],
+["What type of taper does the spindle nose use?","स्पिंडल नोज कोणत्या प्रकारचा टेपर वापरतो?",[["MT-1","MT-1"],["MT-2","MT-2"],["MT-4","MT-4"],["No taper","टेपर नाही"]],1],
+["How many spindle speed steps does this machine have?","या मशीनला किती स्पिंडल स्पीड स्टेप्स आहेत?",[["4","4"],["6","6"],["8","8"],["12","12"]],2],
+["What is the spindle speed range?","स्पिंडल स्पीड रेंज किती आहे?",[["10-500 RPM","10-500 RPM"],["80-3500 RPM","80-3500 RPM"],["1000-5000 RPM","1000-5000 RPM"],["2800-3000 RPM","2800-3000 RPM"]],1],
+["Which mechanism drives the spindle feed?","स्पिंडल फीड कोणती यंत्रणा चालवते?",[["Hydraulic cylinder","हायड्रॉलिक सिलिंडर"],["Rack and pinion","रॅक व पिनियन"],["Chain drive","चेन ड्राईव्ह"],["Pneumatic cylinder","न्यूमॅटिक सिलिंडर"]],1],
+["What is the maximum spindle travel per stroke?","प्रत्येक स्ट्रोकमध्ये कमाल स्पिंडल प्रवास किती आहे?",[["50 mm","50 मिमी"],["130 mm","130 मिमी"],["200 mm","200 मिमी"],["500 mm","500 मिमी"]],1],
+["What is the table size of this machine?","या मशीनचा टेबल आकार किती आहे?",[["100 × 100 mm","100 × 100 मिमी"],["260 × 260 mm","260 × 260 मिमी"],["500 × 500 mm","500 × 500 मिमी"],["1000 × 1000 mm","1000 × 1000 मिमी"]],1],
+["What drives the spindle pulley on this machine?","या मशीनवरील स्पिंडल पुली कशामुळे चालते?",[["Direct motor coupling","थेट मोटर कपलिंग"],["V-belt (A-44″) from an 8-step cone pulley","8-स्टेप कोन पुलीवरून व्ही-बेल्ट (A-44″)"],["Chain","चेन"],["Gearbox only","फक्त गिअरबॉक्स"]],1],
+["What should be done before drilling a hole?","छिद्र पाडण्यापूर्वी काय करावे?",[["Apply paint","रंग लावा"],["Centre-punch the location","स्थान सेंटर-पंच करा"],["Remove the table","टेबल काढा"],["Disconnect the motor","मोटर डिस्कनेक्ट करा"]],1],
+["Which operation creates a tapered recess for a flat-head screw?","फ्लॅट-हेड स्क्रूसाठी टेपर्ड खाच कोणते ऑपरेशन तयार करते?",[["Reaming","रीमिंग"],["Countersinking","काउंटर-सिंकिंग"],["Tapping","टॅपिंग"],["Counterboring","काउंटर-बोअरिंग"]],1],
+["Which operation creates a flat-bottomed recess for a socket-head bolt?","सॉकेट-हेड बोल्टसाठी सपाट-तळाची खाच कोणते ऑपरेशन तयार करते?",[["Counterboring","काउंटर-बोअरिंग"],["Countersinking","काउंटर-सिंकिंग"],["Reaming","रीमिंग"],["Centre drilling","सेंटर ड्रिलिंग"]],0],
+["Reaming is done mainly to achieve:","रीमिंग प्रामुख्याने कशासाठी करतात?",[["A rough large hole","खरखरीत मोठे छिद्र"],["A precise, smooth finished diameter","अचूक, गुळगुळीत फिनिश व्यास"],["Internal threads","अंतर्गत थ्रेड"],["A tapered recess","टेपर्ड खाच"]],1],
+["What material is the machine's base made of?","मशीनचा बेस कशाचा बनलेला आहे?",[["Wood","लाकूड"],["Cast iron","कास्ट आयर्न"],["Plastic","प्लास्टिक"],["Rubber","रबर"]],1],
+["What is the pillar (column) diameter of this machine?","या मशीनच्या पिलर (कॉलम) चा व्यास किती आहे?",[["25 mm","25 मिमी"],["74.30 mm","74.30 मिमी"],["150 mm","150 मिमी"],["300 mm","300 मिमी"]],1],
+["What should be used to hold a small flat workpiece?","लहान सपाट वर्कपीस धरण्यासाठी काय वापरावे?",[["Bare hand","उघडा हात"],["Machine vice or clamps","मशीन वाइस किंवा क्लॅम्प्स"],["No holding needed","धरण्याची गरज नाही"],["Chuck key","चक की"]],1],
+["What is the correct formula for drilling RPM?","ड्रिलिंग आरपीएमचे योग्य सूत्र कोणते?",[["N = πDV/1000","N = πDV/1000"],["N = 1000V/πD","N = 1000V/πD"],["N = V/1000D","N = V/1000D"],["N = D/V","N = D/V"]],1],
+["What should be checked immediately if the belt squeals?","बेल्टने आवाज केल्यास लगेच काय तपासावे?",[["Table height","टेबलची उंची"],["Belt tension","बेल्ट टेन्शन"],["Chuck key","चक की"],["Coolant colour","कूलंटचा रंग"]],1],
+["Does this machine have a built-in coolant pump?","या मशीनला अंगभूत कूलंट पंप आहे का?",[["Yes, always on","होय, नेहमी चालू"],["No — cutting oil is applied by hand if needed","नाही — गरज असल्यास कटिंग तेल हाताने लावतात"],["Only for aluminium","फक्त अ‍ॅल्युमिनियमसाठी"],["Only above 15 mm holes","फक्त 15 मिमीपेक्षा मोठ्या छिद्रांसाठी"]],1],
+["What must be done before adjusting the table height?","टेबलची उंची अ‍ॅडजस्ट करण्यापूर्वी काय करावे?",[["Increase spindle speed","स्पिंडल स्पीड वाढवा"],["Loosen the table clamp","टेबल क्लॅम्प सैल करा"],["Remove the chuck","चक काढा"],["Start the motor","मोटर सुरू करा"]],1],
+["What is the danger of leaving the chuck key in the chuck?","चक की चकमध्ये सोडण्याचा धोका काय आहे?",[["It can fly out when the machine starts","मशीन सुरू झाल्यावर बाहेर उडू शकते"],["It rusts the chuck","चक गंजते"],["It slows the drill","ड्रिल हळू होतो"],["No danger","धोका नाही"]],0],
+["What safety gear is essential while drilling?","ड्रिलिंग करताना कोणते सेफ्टी साधन आवश्यक आहे?",[["Neck tie","नेकटाय"],["Safety goggles","सेफ्टी गॉगल्स"],["Loose gloves","सैल हातमोजे"],["Wrist watch","हाताचे घड्याळ"]],1],
+["Which of the following is NOT an operation performed on this machine?","यापैकी कोणते ऑपरेशन या मशीनवर केले जात नाही?",[["Countersinking","काउंटर-सिंकिंग"],["Reaming","रीमिंग"],["Turning","टर्निंग"],["Tapping","टॅपिंग"]],2],
+["What should you do if the drill breaks inside the hole?","ड्रिल छिद्रात तुटल्यास काय करावे?",[["Continue drilling","ड्रिलिंग चालू ठेवा"],["Stop, switch off, and report/remove safely","थांबा, बंद करा, व सुरक्षितपणे कळवा/काढा"],["Increase feed","फीड वाढवा"],["Ignore it","दुर्लक्ष करा"]],1],
+["What is the recommended action before changing the drill bit?","ड्रिल बिट बदलण्यापूर्वी काय करण्याची शिफारस आहे?",[["Keep motor running","मोटर चालू ठेवा"],["Switch off the machine","मशीन बंद करा"],["Increase speed","स्पीड वाढवा"],["Remove the table","टेबल काढा"]],1],
+["Where is P. Parmar Machine Tools located?","पी. परमार मशीन टूल्स कुठे आहे?",[["Ahmedabad, Gujarat","अहमदाबाद, गुजरात"],["Bhavnagar, Gujarat","भावनगर, गुजरात"],["Mumbai, Maharashtra","मुंबई, महाराष्ट्र"],["Rajkot, Gujarat","राजकोट, गुजरात"]],1],
+["What is the purpose of a centre drill before main drilling?","मुख्य ड्रिलिंगपूर्वी सेंटर ड्रिलचा उद्देश काय आहे?",[["To finish the hole","छिद्र फिनिश करण्यासाठी"],["To create an accurate starting point","अचूक सुरुवातीचा बिंदू तयार करण्यासाठी"],["To thread the hole","छिद्राला थ्रेड देण्यासाठी"],["To cool the drill","ड्रिल थंड करण्यासाठी"]],1],
+["What should be reduced just before the drill breaks through in through-hole drilling?","थ्रू-होल ड्रिलिंगमध्ये ड्रिल बाहेर पडण्यापूर्वी काय कमी करावे?",[["Spindle speed","स्पिंडल स्पीड"],["Feed pressure","फीड दाब"],["Table height","टेबलची उंची"],["Belt tension","बेल्ट टेन्शन"]],1],
+["Weekly maintenance should include checking:","साप्ताहिक देखभालीत काय तपासावे?",[["Only the paint","फक्त रंग"],["V-belt tension and table clamp","व्ही-बेल्ट टेन्शन व टेबल क्लॅम्प"],["The office record","ऑफिस नोंद"],["Nothing extra","काहीही अतिरिक्त नाही"]],1],
+["What should never be done while the spindle is rotating?","स्पिंडल फिरत असताना काय कधीही करू नये?",[["Watch from a safe distance","सुरक्षित अंतरावरून पहा"],["Touch the chuck or drill","चक किंवा ड्रिलला स्पर्श करा"],["Wear goggles","गॉगल्स घाला"],["Stand to the side","बाजूला उभे रहा"]],1],
+["What is the first step in the general drilling procedure?","सर्वसाधारण ड्रिलिंग प्रक्रियेतील पहिली पायरी कोणती?",[["Start the motor","मोटर सुरू करा"],["Mark and centre-punch the location","स्थान मार्क करून सेंटर-पंच करा"],["Remove the guard","गार्ड काढा"],["Apply coolant","कूलंट लावा"]],1]
+];
+(function(){var L=document.getElementById('mcqList'),h='';
+MCQ.forEach(function(m,i){h+='<div class="mcq-item" data-answer="'+m[3]+'"><div class="mcq-q">'+(i+1)+'. '+m[0]+' <span class="mr-sub2">/ '+m[1]+'</span></div><div class="mcq-opts">';
+m[2].forEach(function(o,j){h+='<button type="button" class="mcq-opt" data-idx="'+j+'">'+'ABCD'[j]+') '+o[0]+' <span class="mr-text" style="font-size:12px">/ '+o[1]+'</span></button>';});
+h+='</div><div class="mcq-feedback"></div></div>';});
+L.innerHTML=h;})();
+</script>
+
+<script>
+/* ===== Page behaviour ===== */
+(function(){
+ var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+ var sections=$$('.card');
+ var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+ // progress checkboxes
+ sections.forEach(function(card,i){
+   if(!card.querySelector('h2'))return;
+   var row=document.createElement('label');row.className='checkrow';
+   var cb=document.createElement('input');cb.type='checkbox';cb.dataset.lesson=i;
+   var sp=document.createElement('span');sp.textContent='Mark this lesson as completed / हा धडा पूर्ण झाला म्हणून चिन्हांकित करा';
+   row.appendChild(cb);row.appendChild(sp);card.appendChild(row);
+ });
+ var boxes=$$('input[data-lesson]');
+ function update(){var n=boxes.filter(function(b){return b.checked}).length,p=boxes.length?Math.round(n*100/boxes.length):0;
+   $('#progressText').textContent=p+'% complete';$('#progressBar').style.width=p+'%';
+   store.set('fitterQRProgress_ps20',JSON.stringify(boxes.map(function(b,i){return b.checked?i:null}).filter(function(x){return x!==null})));}
+ var done=[];try{done=JSON.parse(store.get('fitterQRProgress_ps20')||'[]')}catch(e){}
+ boxes.forEach(function(b,i){b.checked=done.indexOf(i)>-1;b.closest('.card').classList.toggle('completed',b.checked);
+   b.addEventListener('change',function(){b.closest('.card').classList.toggle('completed',b.checked);update()});});
+ update();
+
+ // search
+ $('#topicSearch').addEventListener('input',function(e){var q=e.target.value.trim().toLowerCase();
+   sections.forEach(function(c){c.classList.remove('search-hit')});if(!q)return;
+   sections.forEach(function(c){if(c.textContent.toLowerCase().indexOf(q)>-1){c.classList.add('search-hit');c.classList.remove('collapsed')}});
+   var hit=sections.filter(function(c){return c.classList.contains('search-hit')})[0];
+   if(hit){hit.classList.add('fade-in');hit.scrollIntoView({behavior:'smooth',block:'center'})}});
+
+ // language
+ $('#langSelect').addEventListener('change',function(e){document.body.classList.remove('english-only','marathi-only');
+   if(e.target.value==='en')document.body.classList.add('english-only');if(e.target.value==='mr')document.body.classList.add('marathi-only')});
+
+ // nav
+ $$('.navbtn').forEach(function(b){b.onclick=function(){var t=$('#'+b.dataset.target);
+   if(t){t.classList.remove('collapsed');t.classList.add('fade-in');t.scrollIntoView({behavior:'smooth',block:'start'})}
+   $$('.navbtn').forEach(function(x){x.classList.remove('active')});b.classList.add('active')}});
+ $$('.map-card').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=$(a.getAttribute('href'));
+   if(t){t.classList.remove('collapsed');t.classList.add('fade-in');t.scrollIntoView({behavior:'smooth',block:'start'})}})});
+
+ // back to top (right side)
+ var bt=document.createElement('button');bt.className='backtop';bt.textContent='↑';bt.title='Back to top';
+ bt.onclick=function(){scrollTo({top:0,behavior:'smooth'})};document.body.appendChild(bt);
+
+ // collapsible
+ sections.forEach(function(card){var h2=card.querySelector('h2');if(h2)h2.addEventListener('click',function(){card.classList.toggle('collapsed')})});
+
+ // fade-in
+ function reveal(){var vh=window.innerHeight;sections.forEach(function(c){if(c.classList.contains('fade-in'))return;
+   var r=c.getBoundingClientRect();if(r.top<vh*1.3&&r.bottom>-100)c.classList.add('fade-in')})}
+ reveal();window.addEventListener('scroll',reveal,{passive:true});window.addEventListener('resize',reveal);
+ setTimeout(reveal,400);setTimeout(reveal,1200);
+ setTimeout(function(){sections.forEach(function(c){c.classList.add('fade-in')})},4000);
+
+ // MCQs
+ var sec=$('.mcq-section'),items=$$('.mcq-item'),sv=sec.querySelector('.mcq-score-val'),st=sec.querySelector('.mcq-score-total'),score=0;
+ st.textContent=items.length;
+ items.forEach(function(item){var ci=parseInt(item.dataset.answer,10),opts=[].slice.call(item.querySelectorAll('.mcq-opt')),fb=item.querySelector('.mcq-feedback');
+   opts.forEach(function(opt,idx){opt.addEventListener('click',function(){
+     if(item.classList.contains('answered'))return;item.classList.add('answered');
+     if(idx===ci){opt.classList.add('opt-correct');score++;fb.textContent='✔ Correct! / बरोबर!';fb.classList.add('correct')}
+     else{opt.classList.add('opt-wrong');opts[ci].classList.add('opt-correct');fb.textContent='✘ Incorrect — correct answer highlighted / चूक — योग्य उत्तर हिरव्यात दाखवले आहे';fb.classList.add('wrong')}
+     sv.textContent=score;})});});
+ sec.querySelector('.mcq-reset-btn').addEventListener('click',function(){score=0;sv.textContent=0;
+   items.forEach(function(item){item.classList.remove('answered');
+     item.querySelectorAll('.mcq-opt').forEach(function(o){o.classList.remove('opt-correct','opt-wrong')});
+     var fb=item.querySelector('.mcq-feedback');fb.textContent='';fb.classList.remove('correct','wrong')})});
+})();
+</script>
+
+<script>
+/* ===== Content protection + full screen + install app + offline ===== */
+(function(){
+ 'use strict';
+ var isEditable=function(t){return t&&t.closest&&t.closest('input,textarea,select,[contenteditable="true"]')};
+ var isStandalone=function(){return window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||window.navigator.standalone===true};
+
+ /* offline */
+ if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+
+ /* watermark */
+ var WM='Dinesh@Fitter',wm=document.createElement('div');wm.className='protect-watermark';wm.setAttribute('aria-hidden','true');document.body.appendChild(wm);
+ function paint(){wm.innerHTML='';var sx=300,w=innerWidth+sx,h=innerHeight,rows=[h*.38,h*.9];
+   rows.forEach(function(y){for(var x=-sx;x<w;x+=sx){var s=document.createElement('span');s.textContent=WM;s.style.left=x+'px';s.style.top=y+'px';wm.appendChild(s)}})
+   /* extra mark over the search box (same text, size, colour) */
+   var e=document.createElement('span');e.textContent=WM;e.style.left=Math.round(innerWidth*.37)+'px';e.style.top=Math.round(h*.572)+'px';wm.appendChild(e)}
+ paint();addEventListener('resize',paint);
+
+ /* copy / select / right-click / long-press / save / print blocking (search box stays usable) */
+ ['contextmenu','selectstart','dragstart','copy','cut'].forEach(function(ev){document.addEventListener(ev,function(e){if(!isEditable(e.target))e.preventDefault()})});
+ document.addEventListener('keydown',function(e){
+   var k=(e.key||'').toLowerCase(),mod=e.ctrlKey||e.metaKey;
+   if(isEditable(e.target)&&!(mod&&(k==='s'||k==='p'||k==='u')))return;
+   if((mod&&['s','p','u','c','x','a'].indexOf(k)>-1)||e.key==='F12'||(mod&&e.shiftKey&&['i','j','c'].indexOf(k)>-1)){e.preventDefault();e.stopPropagation()}
+ },true);
+ addEventListener('beforeprint',function(){document.documentElement.style.display='none'});
+ addEventListener('afterprint',function(){document.documentElement.style.display=''});
+
+ /* buttons */
+ var de=document.documentElement;
+ var canFS=!!(de.requestFullscreen||de.webkitRequestFullscreen);
+ var inFS=function(){return!!(document.fullscreenElement||document.webkitFullscreenElement)};
+ var fab=document.createElement('div');fab.className='pwa-fab';
+ var fs=document.createElement('button');fs.type='button';fs.className='pwa-btn';
+ function paintFS(){fs.textContent=inFS()?'✕ Exit full screen / बाहेर पडा':'⛶ Full screen / पूर्ण स्क्रीन'}paintFS();
+ fs.onclick=function(){try{if(inFS())(document.exitFullscreen||document.webkitExitFullscreen).call(document);else(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}};
+ document.addEventListener('fullscreenchange',paintFS);document.addEventListener('webkitfullscreenchange',paintFS);
+ /* first tap anywhere -> full screen (once per visit, Android Chrome etc.) */
+ if(canFS&&!isStandalone()){
+   var armed=true;
+   var go=function(){
+     if(!armed)return;armed=false;
+     document.removeEventListener('click',go,true);document.removeEventListener('touchend',go,true);
+     try{if(!inFS())(de.requestFullscreen||de.webkitRequestFullscreen).call(de)}catch(e){}
+   };
+   document.addEventListener('click',go,true);
+   document.addEventListener('touchend',go,true);
+ }
+
+ function sync(){fab.style.display=isStandalone()?'none':''}
+ try{matchMedia('(display-mode: standalone)').addEventListener('change',sync)}catch(e){}
+ if(canFS)fab.appendChild(fs);
+ document.body.appendChild(fab);sync();
+})();
+</script>
+</body>
+</html>
