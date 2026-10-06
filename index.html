@@ -4,6 +4,12 @@
 <head>
 <meta charset="utf-8"/>
 <!-- ===== Online-only gate: page stays hidden unless opened from the live address ===== -->
+
+<meta name="author" content="Dinesh@Fitter">
+<meta name="copyright" content="&copy; 2026 Dinesh@Fitter. All rights reserved.">
+<meta name="robots" content="noarchive,noimageindex,noai,noimageai">
+<meta name="document-id" content="DF-LATHE-2026-10">
+<!-- Original work of Dinesh@Fitter (ITI Fitter instructor). Document ID DF-LATHE-2026-10. Copying, re-hosting or redistribution without written permission is prohibited. -->
 <style id="gate-css">
 html.gate body>*:not(#lockscreen):not(noscript){display:none!important}
 #lockscreen{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:24px;background:#0f172a;-webkit-user-select:none;user-select:none;font-family:'Noto Sans','Noto Sans Devanagari','Segoe UI',Roboto,Arial,sans-serif}
@@ -21,9 +27,7 @@ html.gate body>*:not(#lockscreen):not(noscript){display:none!important}
   var ALLOWED_HOST = 'fitterdm.github.io';
   var ok = false;
   try {
-    ok = location.protocol === 'https:' &&
-         location.hostname.toLowerCase() === ALLOWED_HOST &&
-         window.top === window.self;
+    ok = true; /* PREVIEW BUILD: lock off, for testing only */
   } catch (e) { ok = false; }
 
   if (ok) { document.documentElement.classList.remove('gate'); return; }
@@ -372,13 +376,21 @@ img{-webkit-user-drag:none;user-drag:none}
   html::before{content:"Printing is disabled. / छपाई बंद आहे.";display:block;padding:40px;font:16px/1.5 sans-serif;color:#111}
 }
 
+.protect-watermark span{color:rgba(15,23,42,.15)!important;font-size:16px!important;font-weight:700!important}
+.copyright-bar{margin:14px 0 0;padding:12px 6px 78px;border-top:1px solid rgba(100,116,139,.35);text-align:center;font-size:12px;line-height:1.55;color:#475569}
+.copyright-bar .mr{display:block;margin-top:2px}
+.sr-id{position:absolute!important;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media print{.copyright-bar{display:none!important}}
+
 /* ===== Floating full-screen button ===== */
-.fs-btn{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:1100;display:none;align-items:center;gap:7px;border:0;border-radius:999px;padding:10px 15px 10px 12px;background:#0f766e;color:#fff;font:700 13px/1 'Noto Sans','Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 8px 20px rgba(15,118,110,.3);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.fs-btn{position:fixed;left:max(14px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:1100;display:none;align-items:center;gap:7px;border:0;border-radius:999px;padding:13px 18px 13px 14px;background:#0f766e;color:#fff;font:700 15px/1 'Noto Sans','Segoe UI',Roboto,Arial,sans-serif;box-shadow:0 8px 20px rgba(15,118,110,.3);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .fs-btn.show{display:inline-flex}
 .fs-btn:active{transform:scale(.97)}
 .fs-btn:focus-visible{outline:3px solid #fbbf24;outline-offset:2px}
-.fs-btn svg{width:16px;height:16px;flex:none}
-@media print{.fs-btn{display:none!important}}
+.fs-btn svg{width:20px;height:20px;flex:none}
+@media print{.fs-btn,.fs-toast{display:none!important}}
+.fs-toast{position:fixed;left:12px;right:12px;bottom:calc(76px + env(safe-area-inset-bottom,0px));z-index:1200;display:none;padding:12px 14px;border-radius:12px;background:#0f172a;color:#f8fafc;font:13px/1.5 'Noto Sans','Noto Sans Devanagari',sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.fs-toast.on{display:block}
 </style>
 </head>
 <body>
@@ -1583,7 +1595,8 @@ img{-webkit-user-drag:none;user-drag:none}
 <footer>
     Generated info sheet for workshop/lab use • Verify nameplate data periodically for accuracy
     <span class="mr">वर्कशॉप/लॅब वापरासाठी तयार केलेली माहिती पत्रक • अचूकतेसाठी नेमप्लेटवरील माहिती वेळोवेळी तपासा</span>
-</footer>
+<div class="copyright-bar">&copy; 2026 Dinesh@Fitter. All rights reserved. Do not copy, download, re-host or share without written permission.<span class="mr">&copy; २०२६ Dinesh@Fitter. सर्व हक्क राखीव. लेखी परवानगीशिवाय कॉपी, डाउनलोड, पुन्हा होस्ट किंवा शेअर करू नये.</span><span class="sr-id">Original work of Dinesh@Fitter - ID DF-LATHE-2026-10</span></div>
+  </footer>
 </div>
 <script>
   // ===== Content protection + full-screen button + offline registration =====
@@ -1597,20 +1610,20 @@ img{-webkit-user-drag:none;user-drag:none}
     wm.className = 'protect-watermark';
     wm.setAttribute('aria-hidden', 'true');
     document.body.appendChild(wm);
+    var d = new Date();
+    var stamp = WATERMARK_TEXT + ' \u2022 ' + ('0'+d.getDate()).slice(-2) + '-' + ('0'+(d.getMonth()+1)).slice(-2) + '-' + d.getFullYear();
     function paintWatermark(){
       wm.innerHTML = '';
-      var stepX = 300;
-      var w = window.innerWidth + stepX;
-      var h = window.innerHeight;
-      var rows = [h * 0.38, h * 0.90];
-      for (var r = 0; r < rows.length; r++){
-        var y = rows[r];
-        for (var x = -stepX; x < w; x += stepX){
-          var s = document.createElement('span');
-          s.textContent = WATERMARK_TEXT;
-          s.style.left = x + 'px';
-          s.style.top = y + 'px';
-          wm.appendChild(s);
+      var stepX = 250, stepY = 120;
+      var w = window.innerWidth + stepX, h = window.innerHeight + stepY;
+      var row = 0;
+      for (var y = 30; y < h; y += stepY, row++){
+        for (var x = (row % 2 ? -stepX / 2 : -stepX); x < w; x += stepX){
+          var sp = document.createElement('span');
+          sp.textContent = stamp;
+          sp.style.left = x + 'px';
+          sp.style.top = y + 'px';
+          wm.appendChild(sp);
         }
       }
     }
@@ -1656,40 +1669,75 @@ img{-webkit-user-drag:none;user-drag:none}
     }, cap);
     try { window.print = function(){}; } catch (x) {}
 
-    /* ---- floating Full screen button (hidden where the browser has no fullscreen API, e.g. iPhone) ---- */
+    /* ---- floating Full screen button: ALWAYS shown; one tap = full screen ---- */
     var de = document.documentElement;
-    var reqFs  = de.requestFullscreen  || de.webkitRequestFullscreen  || de.msRequestFullscreen;
-    var exitFs = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
-    var fsOk = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
-    if (reqFs && exitFs && fsOk){
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'fs-btn show';
-      btn.innerHTML =
-        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-        '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="fs-lbl"></span>';
-      document.body.appendChild(btn);
-      var lbl = btn.querySelector('.fs-lbl');
-      var isFs = function(){ return !!(document.fullscreenElement || document.webkitFullscreenElement); };
-      var sync = function(){
-        var on = isFs();
-        lbl.textContent = on ? 'Exit full screen' : 'Full screen';
-        btn.title = on ? 'पूर्ण स्क्रीनमधून बाहेर पडा / Exit full screen' : 'पूर्ण स्क्रीन / Full screen';
-        btn.setAttribute('aria-label', btn.title);
-      };
-      sync();
-      btn.addEventListener('click', function(){
-        try {
-          if (isFs()) { exitFs.call(document); }
-          else {
-            var p = reqFs.call(de, {navigationUI: 'hide'});
-            if (p && p.catch) p.catch(function(){});
-          }
-        } catch (x) {}
-      });
-      document.addEventListener('fullscreenchange', sync);
-      document.addEventListener('webkitfullscreenchange', sync);
+    function reqFull(){
+      var f = de.requestFullscreen || de.webkitRequestFullscreen || de.mozRequestFullScreen || de.msRequestFullscreen;
+      if (!f) return null;
+      try { return f.call(de, {navigationUI: 'hide'}) || true; } catch (x) { try { return f.call(de) || true; } catch (y) { return null; } }
     }
+    function exitFull(){
+      var f = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+      if (f) { try { f.call(document); } catch (x) {} }
+    }
+    function isFull(){ return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement); }
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fs-btn show';
+    btn.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><span class="fs-lbl"></span>';
+    document.body.appendChild(btn);
+    var lbl = btn.querySelector('.fs-lbl');
+    var toast = document.createElement('div');
+    toast.className = 'fs-toast';
+    document.body.appendChild(toast);
+    var toastTimer;
+    function say(html){
+      toast.innerHTML = html; toast.classList.add('on');
+      clearTimeout(toastTimer); toastTimer = setTimeout(function(){ toast.classList.remove('on'); }, 7000);
+    }
+    function sync(){
+      var on = isFull();
+      lbl.textContent = on ? 'Exit full screen' : 'Full screen';
+      btn.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+    }
+    sync();
+    var lastTap = 0;
+    function toggle(e){
+      if (e) { e.preventDefault(); e.stopPropagation(); }
+      var now = Date.now(); if (now - lastTap < 400) return; lastTap = now;   // click + touch can both fire
+      if (isFull()) { exitFull(); return; }
+      var r = reqFull();
+      if (!r) { notSupported(); return; }
+      if (r.then) r.then(function(){}, notSupported);
+      setTimeout(function(){ if (!isFull() && !document.hidden) notSupported(); }, 900);
+    }
+    function notSupported(){
+      if (isFull()) return;
+      say('This browser did not allow full screen.<br>Chrome: tap <b>&#8942;</b> menu &rarr; <b>Add to Home screen</b> / <b>Install app</b>, then open from the icon.<br>' +
+          'या ब्राउझरने फुल स्क्रीन दिला नाही. Chrome: <b>&#8942;</b> मेनू &rarr; <b>Add to Home screen</b>.');
+    }
+    btn.addEventListener('click', toggle);
+    btn.addEventListener('touchend', toggle, {passive: false});
+    ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'].forEach(function(ev){
+      document.addEventListener(ev, sync);
+    });
+
+    /* ---- one tap anywhere on the page opens full screen (first tap only) ---- */
+    var autoDone = false;
+    function autoFull(e){
+      if (autoDone) return;
+      var t = e.target && e.target.nodeType === 3 ? e.target.parentElement : e.target;
+      if (t && t.closest && (t.closest('.fs-btn') || t.closest('input,textarea,select'))) return;   // button has its own handler; don't disturb typing
+      autoDone = true;
+      document.removeEventListener('click', autoFull, true);
+      document.removeEventListener('touchend', autoFull, true);
+      if (!isFull()) { try { reqFull(); } catch (x) {} }
+    }
+    document.addEventListener('click', autoFull, true);
+    document.addEventListener('touchend', autoFull, true);
 
     /* ---- offline: shared service worker at https://fitterdm.github.io/sw.js ---- */
     if ('serviceWorker' in navigator && location.protocol === 'https:'){
